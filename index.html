@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover" />
+    <!-- Browser Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Disable automatic scroll restoration so reload always starts at top -->
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      window.addEventListener('beforeunload', function() {
+        window.scrollTo(0, 0);
+      });
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Rent a tuk tuk Sri Lanka and explore the island freely. Affordable self drive tuk tuk rental, motorbikes, cars with driver, beach ATVs, and guided tours with unlimited KM, insurance, and license assistance by Pick & Go Travels Negombo." />
+    <meta name="keywords" content="rent a tuk tuk sri lanka, self drive tuk tuk sri lanka, tuk tuk rental negombo, motorbike rental sri lanka, scooter rental sri lanka, car rental with driver sri lanka, pick and go travels, sri lanka tours" />
+    <link rel="canonical" href="https://pickandgotravels.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pickandgotravels.com/" />
+    <meta property="og:title" content="Rent a Tuk Tuk Sri Lanka | Self Drive Tuk Tuk Rental | Pick & Go Travels" />
+    <meta property="og:description" content="Explore Sri Lanka freely with unlimited KMs, 24/7 breakdown service, full insurance, and official Sri Lankan driving license arrangement." />
+    <meta property="og:image" content="https://pickandgotravels.com/wp-content/uploads/2024/05/Explore-the-beauties-of-nature-with-your-own-TukTuk.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://pickandgotravels.com/wp-content/uploads/2024/05/Icon-N-150x150.png" />
+    <link rel="apple-touch-icon" href="https://pickandgotravels.com/wp-content/uploads/2024/05/Icon-N-300x300.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
