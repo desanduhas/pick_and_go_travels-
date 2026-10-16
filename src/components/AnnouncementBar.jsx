@@ -7,15 +7,15 @@ export default function AnnouncementBar() {
 
   return (
     <div className="announcement-bar">
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+      <div className="container announcement-wrapper">
         <div className="announcement-content">
           <span className="announcement-badge">SPECIAL OFFER</span>
-          <span>Book Your TukTuk Online Now &amp; Get A Free 1-on-1 Driving Training Session!</span>
+          <span className="announcement-text">Book Your TukTuk Online Now &amp; Get A Free 1-on-1 Driving Training Session!</span>
         </div>
         <div className="announcement-contact">
           <a href={`tel:${company.phone1.replace(/\s+/g, '')}`} className="announcement-link">
             <Phone size={14} />
-            {company.phone1}
+            <span>{company.phone1}</span>
           </a>
           <a
             href={`https://wa.me/${company.whatsapp}`}
@@ -25,7 +25,7 @@ export default function AnnouncementBar() {
             style={{ color: '#25d366' }}
           >
             <MessageCircle size={14} />
-            WhatsApp Live
+            <span>WhatsApp Live</span>
           </a>
         </div>
       </div>

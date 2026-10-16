@@ -19,43 +19,20 @@ export default function ContactPage({ initialService, initialMessage }) {
         </div>
 
         {/* 4 iOS Contact Cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '1.25rem',
-          marginBottom: '3rem'
-        }}>
+        <div className="contact-cards-grid">
           {/* Card 1: WhatsApp */}
           <a
             href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent('Hi Rocky, I want to inquire about a vehicle rental / tour.')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="ios-card"
-            style={{
-              padding: '1.75rem',
-              textDecoration: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              cursor: 'pointer'
-            }}
+            className="ios-card contact-quick-card"
           >
             <div>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: 'var(--radius-sm)',
-                background: '#dcfce7',
-                color: '#15803d',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
+              <div className="contact-quick-icon contact-icon-green">
                 <MessageCircle size={24} />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>WhatsApp (Fastest)</h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+              <h3 className="contact-quick-title">WhatsApp (Fastest)</h3>
+              <p className="contact-quick-desc">
                 Instant replies directly from Rocky for quick questions, availability, and quotes.
               </p>
             </div>
@@ -65,23 +42,13 @@ export default function ContactPage({ initialService, initialMessage }) {
           </a>
 
           {/* Card 2: Phone */}
-          <div className="ios-card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="ios-card contact-quick-card">
             <div>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: 'var(--radius-sm)',
-                background: 'var(--accent-blue-soft)',
-                color: 'var(--accent-blue)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
+              <div className="contact-quick-icon contact-icon-blue">
                 <Phone size={24} />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Call Us Directly</h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+              <h3 className="contact-quick-title">Call Us Directly</h3>
+              <p className="contact-quick-desc">
                 Available 24 hours a day for airport arrivals, driving support, and emergencies.
               </p>
             </div>
@@ -100,32 +67,14 @@ export default function ContactPage({ initialService, initialMessage }) {
             href={company.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="ios-card"
-            style={{
-              padding: '1.75rem',
-              textDecoration: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              cursor: 'pointer'
-            }}
+            className="ios-card contact-quick-card"
           >
             <div>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: 'var(--radius-sm)',
-                background: 'var(--accent-gold-soft)',
-                color: '#b45309',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
+              <div className="contact-quick-icon contact-icon-gold">
                 <MapPin size={24} />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Negombo Office</h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+              <h3 className="contact-quick-title">Negombo Office</h3>
+              <p className="contact-quick-desc">
                 {company.address}
               </p>
             </div>
@@ -135,23 +84,13 @@ export default function ContactPage({ initialService, initialMessage }) {
           </a>
 
           {/* Card 4: Email */}
-          <div className="ios-card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="ios-card contact-quick-card">
             <div>
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: 'var(--radius-sm)',
-                background: '#f1f5f9',
-                color: 'var(--text-secondary)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem'
-              }}>
+              <div className="contact-quick-icon contact-icon-gray">
                 <Mail size={24} />
               </div>
-              <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Email Inquiries</h3>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+              <h3 className="contact-quick-title">Email Inquiries</h3>
+              <p className="contact-quick-desc">
                 For detailed group itineraries, commercial agreements, and custom quotes.
               </p>
             </div>
@@ -162,48 +101,38 @@ export default function ContactPage({ initialService, initialMessage }) {
         </div>
 
         {/* Airport & Location Advisory Strip */}
-        <div style={{
-          background: '#ffffff',
-          border: '1px solid var(--border-light)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '1.75rem 2rem',
-          marginBottom: '3rem',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem',
-          boxShadow: 'var(--shadow-xs)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--bg-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#b45309', flexShrink: 0 }}>
+        <div className="contact-advisory-strip">
+          <div className="contact-advisory-item">
+            <div className="contact-advisory-icon">
               <Plane size={20} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>15 Mins from CMB Airport</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              <h4 className="advisory-title">15 Mins from CMB Airport</h4>
+              <p className="advisory-desc">
                 We provide round-the-clock airport meet &amp; greet or drop-off directly to our depot or your hotel.
               </p>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--bg-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#b45309', flexShrink: 0 }}>
+          <div className="contact-advisory-item">
+            <div className="contact-advisory-icon">
               <Clock size={20} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Open 24/7 Everyday</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              <h4 className="advisory-title">Open 24/7 Everyday</h4>
+              <p className="advisory-desc">
                 Late flights or early morning departures are seamlessly accommodated with our 24/7 staff.
               </p>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--bg-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#b45309', flexShrink: 0 }}>
+          <div className="contact-advisory-item">
+            <div className="contact-advisory-icon">
               <Compass size={20} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Free Luggage Storage</h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              <h4 className="advisory-title">Free Luggage Storage</h4>
+              <p className="advisory-desc">
                 Traveling light around the island? Leave your big hard-shell suitcases safely in our secure depot for free.
               </p>
             </div>

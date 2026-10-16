@@ -29,35 +29,30 @@ export default function PricingPage({ selectedVehicleId, onBookPackage }) {
         <PricingTable />
 
         {/* Pricing Inclusions & Policies */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '1.5rem',
-          marginTop: '3.5rem'
-        }}>
-          <div className="ios-card" style={{ padding: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+        <div className="pricing-inclusions-grid">
+          <div className="ios-card pricing-inclusion-card">
+            <h3 className="inclusion-title">
               100% Unlimited Kilometers
             </h3>
-            <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            <p className="inclusion-desc">
               There are no distance caps or mileage surcharges. Explore anywhere in Sri Lanka from northern Jaffna to southern beaches with peace of mind.
             </p>
           </div>
 
-          <div className="ios-card" style={{ padding: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+          <div className="ios-card pricing-inclusion-card">
+            <h3 className="inclusion-title">
               No Security Deposit Required
             </h3>
-            <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            <p className="inclusion-desc">
               Unlike other rental agencies that hold massive credit card bonds, Pick &amp; Go Travels offers zero deposit options with our comprehensive insurance package.
             </p>
           </div>
 
-          <div className="ios-card" style={{ padding: '2rem' }}>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+          <div className="ios-card pricing-inclusion-card">
+            <h3 className="inclusion-title">
               Official AAC Driving Permits ($40)
             </h3>
-            <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+            <p className="inclusion-desc">
               We legally endorse your international license with the Automobile Association of Ceylon (AAC) before you land, keeping you fully compliant with Sri Lankan traffic police.
             </p>
           </div>

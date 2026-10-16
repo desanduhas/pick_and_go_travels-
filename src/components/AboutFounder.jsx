@@ -30,14 +30,14 @@ export default function AboutFounder() {
               Under the personal guidance of <strong>Rocky</strong>, our team has helped thousands of tourists navigate the island safely. From securing official local permits before your flight lands, to delivering thoroughly inspected vehicles with comprehensive insurance, to coordinating emergency roadside mechanics in distant mountain passes—we treat every traveler like family.
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '2rem' }}>
-              <div style={{ background: 'var(--bg-card)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                <h4 style={{ color: 'var(--accent-gold)', fontSize: '1.5rem', marginBottom: '0.25rem' }}>1,000+</h4>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>International Travelers Hosted Annually</p>
+            <div className="about-stats-grid">
+              <div className="about-stat-card">
+                <h4 className="about-stat-number">1,000+</h4>
+                <p className="about-stat-label">International Travelers Hosted Annually</p>
               </div>
-              <div style={{ background: 'var(--bg-card)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                <h4 style={{ color: 'var(--accent-gold)', fontSize: '1.5rem', marginBottom: '0.25rem' }}>100%</h4>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Legal AAC License &amp; Police Compliance</p>
+              <div className="about-stat-card">
+                <h4 className="about-stat-number">100%</h4>
+                <p className="about-stat-label">Legal AAC License &amp; Police Compliance</p>
               </div>
             </div>
 

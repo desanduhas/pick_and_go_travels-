@@ -46,7 +46,7 @@ export default function ToursPage({ initialCategory }) {
         </div>
 
         {/* Segmented Control Bar */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}>
+        <div className="segmented-wrapper">
           <div className="segmented-control">
             {categories.map((cat) => (
               <button

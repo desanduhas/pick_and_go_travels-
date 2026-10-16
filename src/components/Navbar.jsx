@@ -135,13 +135,13 @@ export default function Navbar({ currentPage, onNavigate }) {
           {/* Header CTAs */}
           <div className="header-cta-group">
             <button
-              className="btn btn-outline btn-sm"
+              className="btn btn-outline btn-sm desktop-only-btn"
               onClick={() => handleNav('pricing')}
             >
               Calculator
             </button>
             <button
-              className="btn btn-primary btn-sm"
+              className="btn btn-primary btn-sm header-book-btn"
               onClick={() => handleNav('contact')}
             >
               Book Now

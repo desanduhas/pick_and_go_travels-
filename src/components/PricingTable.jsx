@@ -16,6 +16,10 @@ export default function PricingTable() {
           </p>
         </div>
 
+        <div className="table-scroll-hint">
+          <span>👈 Swipe horizontally to view full price matrix 👉</span>
+        </div>
+
         <div className="table-responsive">
           <table className="pricing-table">
             <thead>

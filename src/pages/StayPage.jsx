@@ -24,49 +24,44 @@ export default function StayPage({ onNavigate }) {
         </div>
 
         {/* Feature Highlights Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-          gap: '1.25rem',
-          marginBottom: '3rem'
-        }}>
-          <div className="ios-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-sm)', background: 'var(--accent-blue-soft)', color: 'var(--accent-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+        <div className="stay-features-grid">
+          <div className="ios-card stay-feature-item">
+            <div className="stay-feature-icon stay-icon-blue">
               <Plane size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>15 Min from Airport</h4>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Swift pickup &amp; drop-off to CMB</p>
+              <h4 className="stay-feature-title">15 Min from Airport</h4>
+              <p className="stay-feature-desc">Swift pickup &amp; drop-off to CMB</p>
             </div>
           </div>
 
-          <div className="ios-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-sm)', background: 'var(--accent-gold-soft)', color: '#b45309', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div className="ios-card stay-feature-item">
+            <div className="stay-feature-icon stay-icon-gold">
               <Luggage size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>Free Luggage Storage</h4>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Safe storage during your tour</p>
+              <h4 className="stay-feature-title">Free Luggage Storage</h4>
+              <p className="stay-feature-desc">Safe storage during your tour</p>
             </div>
           </div>
 
-          <div className="ios-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-sm)', background: 'var(--accent-emerald-soft)', color: 'var(--accent-emerald)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div className="ios-card stay-feature-item">
+            <div className="stay-feature-icon stay-icon-emerald">
               <Wifi size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>High-Speed Wi-Fi</h4>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Fast connection in every room</p>
+              <h4 className="stay-feature-title">High-Speed Wi-Fi</h4>
+              <p className="stay-feature-desc">Fast connection in every room</p>
             </div>
           </div>
 
-          <div className="ios-card" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ width: '44px', height: '44px', borderRadius: 'var(--radius-sm)', background: '#f1f5f9', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <div className="ios-card stay-feature-item">
+            <div className="stay-feature-icon stay-icon-gray">
               <Coffee size={22} />
             </div>
             <div>
-              <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.15rem' }}>5 Mins to Beach</h4>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Walk to cafes, pubs &amp; sea</p>
+              <h4 className="stay-feature-title">5 Mins to Beach</h4>
+              <p className="stay-feature-desc">Walk to cafes, pubs &amp; sea</p>
             </div>
           </div>
         </div>

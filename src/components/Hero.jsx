@@ -59,27 +59,29 @@ export default function Hero({ onNavigate }) {
 
         <div className="hero-actions">
           <button
-            className="btn btn-primary btn-lg"
+            className="btn btn-primary btn-lg hero-btn-primary"
             onClick={() => onNavigate && onNavigate('tuktuk')}
           >
             <Compass size={20} />
             Rent Your Tuk-Tuk
           </button>
-          <button
-            className="btn btn-outline btn-lg"
-            onClick={() => onNavigate && onNavigate('pricing')}
-          >
-            Calculate Price
-          </button>
-          <a
-            href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent('Hi Rocky! I want to rent a tuk tuk in Sri Lanka.')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-whatsapp btn-lg"
-          >
-            <MessageCircle size={20} />
-            Chat on WhatsApp
-          </a>
+          <div className="hero-sub-actions">
+            <button
+              className="btn btn-outline btn-lg hero-btn-secondary"
+              onClick={() => onNavigate && onNavigate('pricing')}
+            >
+              Calculate Price
+            </button>
+            <a
+              href={`https://wa.me/${company.whatsapp}?text=${encodeURIComponent('Hi Rocky! I want to rent a tuk tuk in Sri Lanka.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-whatsapp btn-lg hero-btn-whatsapp"
+            >
+              <MessageCircle size={20} />
+              WhatsApp
+            </a>
+          </div>
         </div>
 
         {/* Live Trust Statistics */}
