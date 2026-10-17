@@ -42,13 +42,14 @@ export const SITE_DATA = {
       luggage: 'Spacious Rear Luggage Rack & Lockable Box',
       fuelEconomy: '30-35 km/l (Extremely Economical)',
       prices: [
-        { range: '01 - 07 Days', price: '$18', period: 'per day', note: 'Best for short island sprints' },
-        { range: '08 - 14 Days', price: '$17', period: 'per day', note: 'Popular for 2-week vacations' },
-        { range: '15 - 30 Days', price: '€15 ($16)', period: 'per day', note: 'Maximum savings for full island circuit' }
+        { range: '01 - 10 Days', price: '$16', period: 'per day', note: 'Best for short island sprints' },
+        { range: '11 - 21 Days', price: '$15', period: 'per day', note: 'Popular for 2-week vacations' },
+        { range: '22 - 30 Days', price: '$14', period: 'per day', note: 'Maximum savings for full island circuit' }
       ],
       addons: [
         { name: 'Sri Lankan Local Driving License Endorsement', price: '$40', note: 'Compulsory legally. We handle all paperwork with AAC prior to your arrival.' },
-        { name: 'Comprehensive Full Insurance Coverage', price: '$60', note: 'Zero-worry coverage across Sri Lanka.' }
+        { name: 'Comprehensive Full Insurance Coverage', price: '$60', note: 'Zero-worry coverage across Sri Lanka.' },
+        { name: 'Scenic Train Vehicle Transfer Service', price: '$40', note: 'Ride the scenic train (Kandy → Nuwara Eliya → Ella) while we transport your vehicle and luggage to your destination.' }
       ],
       features: [
         'Unlimited Kilometers (No mileage caps)',

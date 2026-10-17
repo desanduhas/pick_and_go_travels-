@@ -99,7 +99,7 @@ export default function Hero({ onNavigate }) {
             <span className="stat-label">Google Verified Reviews</span>
           </div>
           <div className="stat-card">
-            <span className="stat-number">$15</span>
+            <span className="stat-number">$14</span>
             <span className="stat-label">Daily Rates Starting From</span>
           </div>
         </div>

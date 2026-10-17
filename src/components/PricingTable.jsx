@@ -26,17 +26,17 @@ export default function PricingTable() {
               <tr>
                 <th>Vehicle Type / Model</th>
                 <th>Category</th>
-                <th>01 - 07 / 10 Days</th>
-                <th>08 - 14 / 21 Days</th>
-                <th>15 - 30 Days</th>
+                <th>01 - 10 Days</th>
+                <th>11 - 21 Days</th>
+                <th>22 - 30 Days</th>
                 <th>Key Inclusions</th>
               </tr>
             </thead>
             <tbody>
               {fleet.map((v) => {
-                const p1 = v.prices && v.prices[0] ? `${v.prices[0].price} / ${v.prices[0].period}` : '$15 / day';
-                const p2 = v.prices && v.prices[1] ? `${v.prices[1].price} / ${v.prices[1].period}` : '$14 / day';
-                const p3 = v.prices && v.prices[2] ? `${v.prices[2].price} / ${v.prices[2].period}` : '$12 / day';
+                const p1 = v.prices && v.prices[0] ? `${v.prices[0].price} / ${v.prices[0].period}` : '$16 / day';
+                const p2 = v.prices && v.prices[1] ? `${v.prices[1].price} / ${v.prices[1].period}` : '$15 / day';
+                const p3 = v.prices && v.prices[2] ? `${v.prices[2].price} / ${v.prices[2].period}` : '$14 / day';
                 const inclusions = v.features ? v.features.slice(0, 3).join(', ') : 'Unlimited KMs, Tools';
 
                 return (

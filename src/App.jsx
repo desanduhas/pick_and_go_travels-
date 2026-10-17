@@ -138,7 +138,7 @@ export default function App() {
     setCalculatorVehicleId(vehicleId);
   };
 
-  const handleBookPackage = (vehicle, days, total) => {
+  const handleBookPackage = (vehicle, days, total, vehicleQty = 1, licenseCount = 1) => {
     let service = 'TukTuk Self Drive';
     if (vehicle.category === 'tuktuk') service = 'TukTuk Self Drive';
     else if (vehicle.category === 'motorbike' || vehicle.category === 'scooter') service = 'Motorbike Rental';
@@ -147,7 +147,9 @@ export default function App() {
     else if (vehicle.category === 'bicycle') service = 'Foot Bicycle';
 
     setBookingService(service);
-    setBookingMessage(`Hi Rocky, I want to book ${vehicle.name} for ${days} days (Estimated total: $${total}). Please confirm availability.`);
+    const vehicleText = vehicleQty > 1 ? `${vehicleQty}x ${vehicle.name}` : vehicle.name;
+    const licenseText = licenseCount > 0 ? `, ${licenseCount}x AAC License` : '';
+    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days with Full Insurance${licenseText} (Estimated total: $${total}). Please confirm availability.`);
     handleNavigate('contact');
   };
 

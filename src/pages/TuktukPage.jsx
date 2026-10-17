@@ -37,7 +37,7 @@ export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
                 <div className="tuktuk-hero-price-badge">
                   <div className="tuktuk-price-label">Starting from</div>
                   <div className="tuktuk-price-val">
-                    $15 - $18 <span className="tuktuk-price-unit">/ day</span>
+                    $14 - $16 <span className="tuktuk-price-unit">/ day</span>
                   </div>
                 </div>
               </div>

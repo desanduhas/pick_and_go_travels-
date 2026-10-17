@@ -11,7 +11,7 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
   const topReviews = reviews.slice(0, 3);
 
   const categories = [
-    { id: 'tuktuk', title: 'Self Drive Tuk Tuks', desc: 'Bajaj 205cc from $15/day', icon: '🛺', target: 'tuktuk' },
+    { id: 'tuktuk', title: 'Self Drive Tuk Tuks', desc: 'Bajaj 205cc from $14/day', icon: '🛺', target: 'tuktuk' },
     { id: 'motorbike', title: 'Adventure Motorbikes', desc: 'Honda NC700X, FMX, XR', icon: '🏍️', target: 'rentals', cat: 'motorbike' },
     { id: 'car', title: 'Car with Driver', desc: 'Chauffeured Toyota Voxy & KDH', icon: '🚗', target: 'rentals', cat: 'car-with-driver' },
     { id: 'tours', title: 'Epic Island Tours', desc: '6-12 Day Off-Road & Day Trips', icon: '🗺️', target: 'tours' },
@@ -131,7 +131,7 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
                     <div className="home-spotlight-price-tag">
                       <div className="spotlight-price-label">Starting from</div>
                       <div className="spotlight-price-value">
-                        $15 - $18 <span className="spotlight-price-period">/ day</span>
+                        $14 - $16 <span className="spotlight-price-period">/ day</span>
                       </div>
                     </div>
                   </div>
