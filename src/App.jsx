@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingActions from './components/FloatingActions';
 import SplashScreen from './components/SplashScreen';
+import BackgroundSlideshow from './components/BackgroundSlideshow';
 
 // Dedicated iOS Light Mode Pages
 import HomePage from './pages/HomePage';
@@ -29,6 +30,7 @@ export default function App() {
   const [calculatorVehicleId, setCalculatorVehicleId] = useState('tuktuk-bajaj');
   const [bookingService, setBookingService] = useState('TukTuk Self Drive');
   const [bookingMessage, setBookingMessage] = useState('');
+  const [bookingDates, setBookingDates] = useState({ start: '', end: '' });
 
   // Enforce scroll to top on initial page load / refresh and during splash screen
   useEffect(() => {
@@ -138,7 +140,7 @@ export default function App() {
     setCalculatorVehicleId(vehicleId);
   };
 
-  const handleBookPackage = (vehicle, days, total, vehicleQty = 1, licenseCount = 1) => {
+  const handleBookPackage = (vehicle, days, total, vehicleQty = 1, licenseCount = 1, dates = null) => {
     let service = 'TukTuk Self Drive';
     if (vehicle.category === 'tuktuk') service = 'TukTuk Self Drive';
     else if (vehicle.category === 'motorbike' || vehicle.category === 'scooter') service = 'Motorbike Rental';
@@ -147,14 +149,17 @@ export default function App() {
     else if (vehicle.category === 'bicycle') service = 'Foot Bicycle';
 
     setBookingService(service);
+    if (dates) setBookingDates(dates);
     const vehicleText = vehicleQty > 1 ? `${vehicleQty}x ${vehicle.name}` : vehicle.name;
     const licenseText = licenseCount > 0 ? `, ${licenseCount}x AAC License` : '';
-    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days with Full Insurance${licenseText} (Estimated total: $${total}). Please confirm availability.`);
+    const dateText = dates?.start && dates?.end ? ` (Travel Dates: ${dates.start} to ${dates.end})` : '';
+    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days${dateText} with Full Insurance${licenseText} (Estimated total: $${total}). Please confirm availability.`);
     handleNavigate('contact');
   };
 
   return (
     <div className="app-root">
+      <BackgroundSlideshow />
       <SplashScreen />
       <AnnouncementBar />
       <Navbar
@@ -215,6 +220,7 @@ export default function App() {
           <ContactPage
             initialService={bookingService}
             initialMessage={bookingMessage}
+            initialDates={bookingDates}
           />
         )}
       </main>

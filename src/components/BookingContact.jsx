@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Phone, MessageCircle, Mail } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
-export default function BookingContact({ initialService, initialMessage }) {
+export default function BookingContact({ initialService, initialMessage, initialDates }) {
   const { company } = SITE_DATA;
 
   const [formData, setFormData] = useState({
@@ -10,8 +10,8 @@ export default function BookingContact({ initialService, initialMessage }) {
     whatsapp: '',
     email: '',
     service: initialService || 'TukTuk Self Drive',
-    startDate: '',
-    endDate: '',
+    startDate: initialDates?.start || '',
+    endDate: initialDates?.end || '',
     message: initialMessage || ''
   });
 
@@ -21,7 +21,9 @@ export default function BookingContact({ initialService, initialMessage }) {
   React.useEffect(() => {
     if (initialService) setFormData((prev) => ({ ...prev, service: initialService }));
     if (initialMessage) setFormData((prev) => ({ ...prev, message: initialMessage }));
-  }, [initialService, initialMessage]);
+    if (initialDates?.start) setFormData((prev) => ({ ...prev, startDate: initialDates.start }));
+    if (initialDates?.end) setFormData((prev) => ({ ...prev, endDate: initialDates.end }));
+  }, [initialService, initialMessage, initialDates]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;

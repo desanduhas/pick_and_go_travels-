@@ -3,7 +3,7 @@ import BookingContact from '../components/BookingContact';
 import { SITE_DATA } from '../data/siteData';
 import { MapPin, Phone, MessageCircle, Mail, Clock, Plane, Compass } from 'lucide-react';
 
-export default function ContactPage({ initialService, initialMessage }) {
+export default function ContactPage({ initialService, initialMessage, initialDates }) {
   const { company } = SITE_DATA;
 
   return (
@@ -144,6 +144,7 @@ export default function ContactPage({ initialService, initialMessage }) {
           <BookingContact
             initialService={initialService}
             initialMessage={initialMessage}
+            initialDates={initialDates}
           />
         </div>
       </div>

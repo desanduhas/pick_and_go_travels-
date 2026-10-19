@@ -1,5 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { MessageCircle, Minus, Plus, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  MessageCircle,
+  Minus,
+  Plus,
+  ShieldCheck,
+  Calendar,
+  CalendarDays,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Check,
+  RotateCcw
+} from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
 const CATEGORY_NAMES = {
@@ -9,6 +21,83 @@ const CATEGORY_NAMES = {
   'car-with-driver': '🚗 Car with Private Driver',
   'atv': '🏎️ Quad Bike / Beach ATV',
   'bicycle': '🚲 Foot Bicycle'
+};
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const WEEKDAY_NAMES = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
+// Date utilities
+const getTodayStr = () => {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+};
+
+const addDays = (dateStr, daysCount) => {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  date.setDate(date.getDate() + daysCount);
+  const ry = date.getFullYear();
+  const rm = String(date.getMonth() + 1).padStart(2, '0');
+  const rd = String(date.getDate()).padStart(2, '0');
+  return `${ry}-${rm}-${rd}`;
+};
+
+const calculateDaysDiff = (startStr, endStr) => {
+  if (!startStr || !endStr) return 1;
+  const [y1, m1, d1] = startStr.split('-').map(Number);
+  const [y2, m2, d2] = endStr.split('-').map(Number);
+  const t1 = new Date(y1, m1 - 1, d1).getTime();
+  const t2 = new Date(y2, m2 - 1, d2).getTime();
+  const diff = Math.round((t2 - t1) / (1000 * 60 * 60 * 24));
+  return Math.max(1, diff);
+};
+
+const formatPrettyDate = (dateStr) => {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+};
+
+const formatSummaryDate = (dateStr) => {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric'
+  });
+};
+
+// Generate calendar days for a given year & month (Monday start)
+const getMonthCalendarDays = (year, month) => {
+  const firstDayOfWeek = new Date(year, month, 1).getDay(); // 0 = Sun, 1 = Mon ...
+  const startOffset = (firstDayOfWeek + 6) % 7; // Monday = 0
+  const totalDays = new Date(year, month + 1, 0).getDate();
+
+  const days = [];
+  for (let i = 0; i < startOffset; i++) {
+    days.push(null);
+  }
+  for (let d = 1; d <= totalDays; d++) {
+    const mStr = String(month + 1).padStart(2, '0');
+    const dStr = String(d).padStart(2, '0');
+    days.push(`${year}-${mStr}-${dStr}`);
+  }
+  return days;
 };
 
 export default function Calculator({ selectedVehicleId, onBookPackage }) {
@@ -22,14 +111,49 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     return 'tuktuk';
   };
 
+  const todayStr = getTodayStr();
   const [category, setCategory] = useState(getInitialCategory);
   const [vehicleId, setVehicleId] = useState(selectedVehicleId || 'tuktuk-bajaj');
   const [vehicleQty, setVehicleQty] = useState(1);
+
+  // Booking.com style dates state
+  const [startDate, setStartDate] = useState(() => addDays(todayStr, 1));
+  const [endDate, setEndDate] = useState(() => addDays(todayStr, 8));
   const [days, setDays] = useState(7);
+
+  // Calendar popover & interactive state
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectingField, setSelectingField] = useState('start'); // 'start' | 'end'
+  const [hoverDate, setHoverDate] = useState(null);
+
+  // Calendar view month & year (starts at current month)
+  const initialDateObj = new Date();
+  const [viewYear, setViewYear] = useState(initialDateObj.getFullYear());
+  const [viewMonth, setViewMonth] = useState(initialDateObj.getMonth());
+
   const [includeLicense, setIncludeLicense] = useState(false);
   const [licenseCount, setLicenseCount] = useState(1);
   const [includeTrainTransfer, setIncludeTrainTransfer] = useState(false);
 
+  const calendarRef = useRef(null);
+
+  // Close calendar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+        setCalendarOpen(false);
+        setHoverDate(null);
+      }
+    };
+    if (calendarOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [calendarOpen]);
+
+  // Sync with selected vehicle prop
   useEffect(() => {
     if (selectedVehicleId) {
       const found = SITE_DATA.fleet.find((v) => v.id === selectedVehicleId);
@@ -48,7 +172,79 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     }
   };
 
-  // When vehicle quantity changes, auto-sync license count
+  // Month navigation in calendar
+  const handlePrevMonth = (e) => {
+    e.stopPropagation();
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear(viewYear - 1);
+    } else {
+      setViewMonth(viewMonth - 1);
+    }
+  };
+
+  const handleNextMonth = (e) => {
+    e.stopPropagation();
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear(viewYear + 1);
+    } else {
+      setViewMonth(viewMonth + 1);
+    }
+  };
+
+  // Clicking a date in the calendar (Booking.com style flow)
+  const handleDateClick = (dateStr) => {
+    if (!dateStr || dateStr < todayStr) return;
+
+    if (selectingField === 'start') {
+      setStartDate(dateStr);
+      setEndDate('');
+      setSelectingField('end');
+    } else {
+      // Selecting Drop-off date
+      if (dateStr <= startDate) {
+        // If user clicks a date earlier than pickup, reset pickup date to clicked date
+        setStartDate(dateStr);
+        setEndDate('');
+        setSelectingField('end');
+      } else {
+        // Valid drop-off date selected
+        setEndDate(dateStr);
+        const newDays = calculateDaysDiff(startDate, dateStr);
+        setDays(newDays);
+        setSelectingField('start');
+        setCalendarOpen(false); // auto-close on selection completion like booking.com
+        setHoverDate(null);
+      }
+    }
+  };
+
+  // Quick Preset Selection (3 Days, 7 Days, 14 Days, etc.)
+  const handleSelectPreset = (numDays) => {
+    const baseStart = startDate || todayStr;
+    setStartDate(baseStart);
+    const newEnd = addDays(baseStart, numDays);
+    setEndDate(newEnd);
+    setDays(numDays);
+    setSelectingField('start');
+    setCalendarOpen(false);
+    setHoverDate(null);
+  };
+
+  // Reset dates
+  const handleResetDates = (e) => {
+    e.stopPropagation();
+    const defaultStart = addDays(todayStr, 1);
+    const defaultEnd = addDays(todayStr, 8);
+    setStartDate(defaultStart);
+    setEndDate(defaultEnd);
+    setDays(7);
+    setSelectingField('start');
+    setHoverDate(null);
+  };
+
+  // Vehicle quantity stepper
   const handleVehicleQtyChange = (delta) => {
     const nextQty = Math.max(1, Math.min(10, vehicleQty + delta));
     if (nextQty !== vehicleQty) {
@@ -100,14 +296,41 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const whatsappMessage = encodeURIComponent(
     `Hello Rocky! I calculated a rental package on your website:\n\n` +
     `• Vehicle: ${vehicleQty > 1 ? `${vehicleQty}x ` : ''}${vehicle.name}\n` +
-    `• Duration: ${days} Days ($${dailyRate}/day per vehicle)\n` +
+    `• Pick-up Date: ${formatPrettyDate(startDate)}\n` +
+    `• Drop-off Date: ${formatPrettyDate(endDate)}\n` +
+    `• Rental Duration: ${days} Day${days > 1 ? 's' : ''} ($${dailyRate}/day per vehicle)\n` +
     `• Vehicle Rental Subtotal: $${baseRentalTotal}\n` +
     `• Comprehensive Full Insurance (Mandatory): $${insuranceTotal} ($60 × ${vehicleQty})\n` +
     `• Sri Lanka AAC License Endorsement: ${includeLicense ? `${licenseCount}x Driver${licenseCount > 1 ? 's' : ''} ($${licenseTotal})` : 'Not Selected ($0)'}\n` +
     `• Scenic Train Vehicle Transfer (Kandy-Ella): ${includeTrainTransfer ? `Yes - $${trainTransferTotal} ($40 × ${vehicleQty})` : 'Not Selected ($0)'}\n` +
     `• Estimated Total: $${grandTotal}\n\n` +
-    `Please confirm vehicle availability for my dates!`
+    `Please confirm vehicle availability for these dates!`
   );
+
+  // Dual Month Views for Desktop Calendar (Current View Month + Next Month)
+  const nextMonth = viewMonth === 11 ? 0 : viewMonth + 1;
+  const nextYear = viewMonth === 11 ? viewYear + 1 : viewYear;
+
+  const month1Days = getMonthCalendarDays(viewYear, viewMonth);
+  const month2Days = getMonthCalendarDays(nextYear, nextMonth);
+
+  // Helper to determine day highlighting state
+  const getDayStatus = (dStr) => {
+    if (!dStr) return 'empty';
+    if (dStr < todayStr) return 'disabled';
+
+    const activeEnd = endDate || hoverDate;
+
+    if (dStr === startDate && dStr === activeEnd) return 'single-selected';
+    if (dStr === startDate) return 'range-start';
+    if (dStr === activeEnd) return 'range-end';
+
+    if (startDate && activeEnd && dStr > startDate && dStr < activeEnd) {
+      return 'in-range';
+    }
+
+    return 'selectable';
+  };
 
   return (
     <section className="section section-alt" id="calculator">
@@ -116,7 +339,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
           <span className="section-pill">Instant Quote</span>
           <h2 className="section-title">Live Rental Price Calculator</h2>
           <p className="section-subtitle">
-            Transparent, all-inclusive pricing with zero surprises. Choose your vehicle, quantity, duration, and optional perks.
+            Transparent, all-inclusive pricing with zero surprises. Choose your vehicle, pick-up and drop-off dates, quantity, and optional perks.
           </p>
         </div>
 
@@ -190,31 +413,238 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 </div>
               </div>
 
-              {/* Rental Duration Slider */}
-              <div className="form-group">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <label htmlFor="calcDays" className="form-label" style={{ margin: 0 }}>3. Rental Duration (Days)</label>
-                  <span style={{ fontWeight: 700, color: 'var(--accent-gold)', fontSize: '1.1rem' }}>
-                    {days} Day{days > 1 ? 's' : ''}
+              {/* Step 3: Booking.com Style Pick-up Date & Drop-off Date Calendar */}
+              <div className="form-group booking-calendar-wrapper" ref={calendarRef}>
+                <div className="booking-section-header">
+                  <label className="form-label" style={{ margin: 0 }}>
+                    3. Pick-up Date &amp; Drop-off Date
+                  </label>
+                  <span className="booking-pill-duration">
+                    <CalendarDays size={15} />
+                    {days} Day{days > 1 ? 's' : ''} ({dailyRate}/day)
                   </span>
                 </div>
-                <input
-                  type="range"
-                  id="calcDays"
-                  className="form-input"
-                  min="1"
-                  max="45"
-                  value={days}
-                  style={{ padding: '0.25rem 0' }}
-                  onChange={(e) => setDays(parseInt(e.target.value, 10))}
-                />
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                  <span>1 Day</span>
-                  <span>7 Days</span>
-                  <span>14 Days</span>
-                  <span>21 Days</span>
-                  <span>30+ Days</span>
+
+                {/* Booking.com Style Dual Input Box */}
+                <div className={`booking-search-bar ${calendarOpen ? 'is-focused' : ''}`}>
+                  {/* Pick-up Date Box */}
+                  <div
+                    className={`booking-date-box ${calendarOpen && selectingField === 'start' ? 'active-field' : ''}`}
+                    onClick={() => {
+                      setSelectingField('start');
+                      setCalendarOpen(true);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Select Pick-up Date"
+                  >
+                    <div className="booking-box-header">
+                      <Calendar size={15} className="booking-field-icon" />
+                      <span className="booking-box-label">Pick-up date</span>
+                    </div>
+                    <div className="booking-box-date">
+                      {formatPrettyDate(startDate)}
+                    </div>
+                    <div className="booking-box-sub">
+                      Pickup at Negombo Depot
+                    </div>
+                  </div>
+
+                  {/* Center Divider / Days Indicator */}
+                  <div className="booking-divider-col">
+                    <div className="booking-divider-line" />
+                    <span className="booking-divider-badge">
+                      {days} Night{days > 1 ? 's' : ''} / {days} Day{days > 1 ? 's' : ''}
+                    </span>
+                    <div className="booking-divider-line" />
+                  </div>
+
+                  {/* Drop-off Date Box */}
+                  <div
+                    className={`booking-date-box ${calendarOpen && selectingField === 'end' ? 'active-field' : ''}`}
+                    onClick={() => {
+                      setSelectingField('end');
+                      setCalendarOpen(true);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Select Drop-off Date"
+                  >
+                    <div className="booking-box-header">
+                      <Calendar size={15} className="booking-field-icon" />
+                      <span className="booking-box-label">Drop-off date</span>
+                    </div>
+                    <div className="booking-box-date">
+                      {endDate ? formatPrettyDate(endDate) : 'Choose date'}
+                    </div>
+                    <div className="booking-box-sub">
+                      Return vehicle handover
+                    </div>
+                  </div>
                 </div>
+
+                {/* Quick Presets Strip */}
+                <div className="booking-presets-strip">
+                  <span className="booking-presets-title">Popular Trips:</span>
+                  <div className="booking-presets-buttons">
+                    {[
+                      { label: '3 Days', count: 3 },
+                      { label: '7 Days (1 Wk)', count: 7 },
+                      { label: '10 Days', count: 10 },
+                      { label: '14 Days (2 Wks)', count: 14 },
+                      { label: '21 Days (3 Wks)', count: 21 },
+                      { label: '30 Days (1 Mo)', count: 30 }
+                    ].map((preset) => (
+                      <button
+                        key={preset.count}
+                        type="button"
+                        className={`booking-preset-chip ${days === preset.count ? 'is-selected' : ''}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSelectPreset(preset.count);
+                        }}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Booking.com Interactive Calendar Dropdown Modal */}
+                {calendarOpen && (
+                  <div className="booking-calendar-popup">
+                    <div className="calendar-popup-header">
+                      <div className="calendar-instruct-text">
+                        {selectingField === 'start' ? (
+                          <span>Select your <strong>Pick-up date</strong></span>
+                        ) : (
+                          <span>Select your <strong>Drop-off date</strong></span>
+                        )}
+                      </div>
+
+                      <div className="calendar-nav-controls">
+                        <button
+                          type="button"
+                          className="calendar-nav-btn"
+                          onClick={handlePrevMonth}
+                          aria-label="Previous month"
+                        >
+                          <ChevronLeft size={18} />
+                        </button>
+                        <button
+                          type="button"
+                          className="calendar-nav-btn"
+                          onClick={handleNextMonth}
+                          aria-label="Next month"
+                        >
+                          <ChevronRight size={18} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Dual Month Calendar Display */}
+                    <div className="calendar-months-grid">
+                      {/* Month 1 */}
+                      <div className="calendar-month-pane">
+                        <h4 className="calendar-month-title">
+                          {MONTH_NAMES[viewMonth]} {viewYear}
+                        </h4>
+                        <div className="calendar-weekdays-row">
+                          {WEEKDAY_NAMES.map((wd) => (
+                            <span key={wd} className="weekday-col">{wd}</span>
+                          ))}
+                        </div>
+                        <div className="calendar-days-grid">
+                          {month1Days.map((dStr, idx) => {
+                            if (!dStr) {
+                              return <span key={`empty-1-${idx}`} className="calendar-day-empty" />;
+                            }
+                            const status = getDayStatus(dStr);
+                            const dayNum = parseInt(dStr.split('-')[2], 10);
+                            return (
+                              <button
+                                key={dStr}
+                                type="button"
+                                className={`calendar-day-cell ${status}`}
+                                disabled={status === 'disabled'}
+                                onClick={() => handleDateClick(dStr)}
+                                onMouseEnter={() => selectingField === 'end' && setHoverDate(dStr)}
+                                onMouseLeave={() => setHoverDate(null)}
+                              >
+                                <span>{dayNum}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Month 2 */}
+                      <div className="calendar-month-pane month-pane-secondary">
+                        <h4 className="calendar-month-title">
+                          {MONTH_NAMES[nextMonth]} {nextYear}
+                        </h4>
+                        <div className="calendar-weekdays-row">
+                          {WEEKDAY_NAMES.map((wd) => (
+                            <span key={wd} className="weekday-col">{wd}</span>
+                          ))}
+                        </div>
+                        <div className="calendar-days-grid">
+                          {month2Days.map((dStr, idx) => {
+                            if (!dStr) {
+                              return <span key={`empty-2-${idx}`} className="calendar-day-empty" />;
+                            }
+                            const status = getDayStatus(dStr);
+                            const dayNum = parseInt(dStr.split('-')[2], 10);
+                            return (
+                              <button
+                                key={dStr}
+                                type="button"
+                                className={`calendar-day-cell ${status}`}
+                                disabled={status === 'disabled'}
+                                onClick={() => handleDateClick(dStr)}
+                                onMouseEnter={() => selectingField === 'end' && setHoverDate(dStr)}
+                                onMouseLeave={() => setHoverDate(null)}
+                              >
+                                <span>{dayNum}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Calendar Footer Controls */}
+                    <div className="calendar-popup-footer">
+                      <div className="calendar-summary-text">
+                        <strong>{days} Days selected:</strong> {formatPrettyDate(startDate)} → {endDate ? formatPrettyDate(endDate) : '...'}
+                        <span className="calendar-tier-badge">
+                          Rate Tier: ${dailyRate}/day
+                        </span>
+                      </div>
+                      <div className="calendar-footer-actions">
+                        <button
+                          type="button"
+                          className="calendar-reset-btn"
+                          onClick={handleResetDates}
+                        >
+                          <RotateCcw size={14} />
+                          Reset
+                        </button>
+                        <button
+                          type="button"
+                          className="calendar-done-btn"
+                          onClick={() => {
+                            setCalendarOpen(false);
+                            setHoverDate(null);
+                          }}
+                        >
+                          <Check size={16} />
+                          Done
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Mandatory Insurance (Compulsory Full Coverage) */}
@@ -242,17 +672,17 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 </div>
               </div>
 
-              {/* Optional Perks & Driver Endorsements */}
+              {/* Optional Add-ons & Perks Section */}
               <div className="form-group">
                 <label className="form-label">Optional Add-ons &amp; Travel Perks (Select with Tick)</label>
-                <div className="calc-addons-list">
-                  {/* AAC Driving License Checkbox & Stepper Card */}
-                  <div className={`calc-addon-item-card ${includeLicense ? 'is-active' : ''}`}>
-                    <div className="addon-checkbox-row">
+                <div className="checkbox-addon-group">
+                  {/* Addon 1: AAC License */}
+                  <div className={`addon-checkbox-card ${includeLicense ? 'is-selected' : ''}`}>
+                    <div className="addon-checkbox-label">
                       <input
                         type="checkbox"
                         id="calc-license-checkbox"
-                        className="calc-custom-checkbox"
+                        className="custom-checkbox"
                         checked={includeLicense}
                         onChange={(e) => handleToggleLicense(e.target.checked)}
                       />
@@ -267,43 +697,41 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                     </div>
                     <div className="addon-action-col">
                       {includeLicense && (
-                        <div className="stepper-control">
+                        <div className="stepper-control license-stepper">
                           <button
                             type="button"
-                            className="stepper-btn"
-                            id="btn-license-minus"
-                            aria-label="Decrease license count"
+                            className="stepper-btn stepper-btn-sm"
+                            aria-label="Decrease driver license count"
                             disabled={licenseCount <= 1}
                             onClick={() => handleLicenseCountChange(-1)}
                           >
-                            <Minus size={16} />
+                            <Minus size={14} />
                           </button>
-                          <span className="stepper-value" id="license-count-display">{licenseCount}</span>
+                          <span className="stepper-value">{licenseCount}</span>
                           <button
                             type="button"
-                            className="stepper-btn"
-                            id="btn-license-plus"
-                            aria-label="Increase license count"
+                            className="stepper-btn stepper-btn-sm"
+                            aria-label="Increase driver license count"
                             disabled={licenseCount >= 20}
                             onClick={() => handleLicenseCountChange(1)}
                           >
-                            <Plus size={16} />
+                            <Plus size={14} />
                           </button>
                         </div>
                       )}
                       <span className={`addon-computed-price ${!includeLicense ? 'is-inactive' : ''}`}>
-                        {includeLicense ? `$${licenseTotal}` : '+$40/ea'}
+                        {includeLicense ? `+$${licenseTotal}` : `+$${licensePrice}/ea`}
                       </span>
                     </div>
                   </div>
 
-                  {/* Scenic Train Vehicle Transfer Checkbox Card */}
-                  <div className={`calc-addon-item-card ${includeTrainTransfer ? 'is-active' : ''}`}>
-                    <div className="addon-checkbox-row">
+                  {/* Addon 2: Train Transfer */}
+                  <div className={`addon-checkbox-card ${includeTrainTransfer ? 'is-selected' : ''}`}>
+                    <div className="addon-checkbox-label">
                       <input
                         type="checkbox"
                         id="calc-train-transfer-checkbox"
-                        className="calc-custom-checkbox"
+                        className="custom-checkbox"
                         checked={includeTrainTransfer}
                         onChange={(e) => setIncludeTrainTransfer(e.target.checked)}
                       />
@@ -334,7 +762,19 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 <span>${dailyRate} / day {vehicleQty > 1 ? `(${vehicleQty} units)` : ''}</span>
               </div>
               <div className="summary-row">
-                <span>Rental Period</span>
+                <span>Pick-up Date</span>
+                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                  {formatSummaryDate(startDate)}
+                </span>
+              </div>
+              <div className="summary-row">
+                <span>Drop-off Date</span>
+                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                  {formatSummaryDate(endDate)}
+                </span>
+              </div>
+              <div className="summary-row">
+                <span>Rental Duration</span>
                 <span>{days} Day{days > 1 ? 's' : ''}</span>
               </div>
               <div className="summary-row">
@@ -367,7 +807,16 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                   className="btn btn-primary"
                   id="calc-book-package-btn"
                   onClick={() => {
-                    if (onBookPackage) onBookPackage(vehicle, days, grandTotal, vehicleQty, includeLicense ? licenseCount : 0);
+                    if (onBookPackage) {
+                      onBookPackage(
+                        vehicle,
+                        days,
+                        grandTotal,
+                        vehicleQty,
+                        includeLicense ? licenseCount : 0,
+                        { start: startDate, end: endDate }
+                      );
+                    }
                     const el = document.getElementById('booking');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
