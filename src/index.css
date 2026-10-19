@@ -1923,9 +1923,12 @@ textarea {
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.45);
 }
 
-@media (max-width: 680px) {
+@media (max-width: 768px) {
   .booking-search-bar {
     flex-direction: column;
+  }
+  .booking-date-box {
+    padding: 0.75rem 1rem;
   }
   .booking-divider-col {
     padding: 0.35rem;
@@ -1933,9 +1936,20 @@ textarea {
     border-right: none;
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
+    min-width: unset;
+    width: 100%;
+  }
+  .booking-calendar-popup {
+    padding: 1.1rem 0.85rem;
+    max-width: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
   }
   .calendar-months-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .month-pane-secondary {
     display: none;
@@ -1943,9 +1957,28 @@ textarea {
   .calendar-popup-footer {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
   }
   .calendar-footer-actions {
-    justify-content: flex-end;
+    justify-content: stretch;
+  }
+  .calendar-done-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-day-cell {
+    height: 36px;
+    font-size: 0.85rem;
+  }
+  .booking-box-date {
+    font-size: 0.95rem;
+  }
+  .booking-preset-chip {
+    font-size: 0.74rem;
+    padding: 0.25rem 0.6rem;
   }
 }
 

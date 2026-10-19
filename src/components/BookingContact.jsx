@@ -30,6 +30,8 @@ export default function BookingContact({ initialService, initialMessage, initial
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const [submittedMsg, setSubmittedMsg] = React.useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -44,10 +46,14 @@ export default function BookingContact({ initialService, initialMessage, initial
       `• Notes: ${formData.message || 'No additional note'}\n\n` +
       `Looking forward to confirming with you!`
     );
+    setSubmittedMsg(formattedMsg);
 
-    setTimeout(() => {
+    // Open WhatsApp directly in user-initiated click to prevent mobile popup blocking
+    try {
       window.open(`https://wa.me/${company.whatsapp}?text=${formattedMsg}`, '_blank', 'noopener,noreferrer');
-    }, 600);
+    } catch {
+      // Handled via the fallback button in the submitted card
+    }
   };
 
   const handleDirectWhatsapp = () => {
@@ -268,14 +274,27 @@ export default function BookingContact({ initialService, initialMessage, initial
               {submitted && (
                 <div style={{
                   marginTop: '1.25rem',
-                  padding: '1rem',
+                  padding: '1.25rem',
                   borderRadius: 'var(--radius-md)',
                   background: 'var(--accent-emerald-soft)',
                   border: '1px solid var(--accent-emerald)',
-                  color: '#065f46',
-                  fontWeight: 600
+                  color: '#065f46'
                 }}>
-                  Thank you, {formData.name}! Your inquiry has been prepared. Opening WhatsApp with Rocky now...
+                  <p style={{ fontWeight: 700, margin: '0 0 0.4rem 0', fontSize: '0.98rem' }}>
+                    ✓ Thank you, {formData.name}! Your reservation inquiry is ready.
+                  </p>
+                  <p style={{ fontSize: '0.86rem', margin: '0 0 0.75rem 0', color: '#047857' }}>
+                    If WhatsApp did not open automatically, click below to chat with Rocky immediately:
+                  </p>
+                  <a
+                    href={`https://wa.me/${company.whatsapp}?text=${submittedMsg}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-whatsapp btn-sm"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem' }}
+                  >
+                    <MessageCircle size={16} /> Open WhatsApp with Rocky
+                  </a>
                 </div>
               )}
             </form>

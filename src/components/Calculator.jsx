@@ -6,7 +6,6 @@ import {
   ShieldCheck,
   Calendar,
   CalendarDays,
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
   Check,
