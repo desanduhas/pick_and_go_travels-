@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Check, MessageCircle, Calculator, Users, Gauge, Settings, Fuel } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
+import { SkeletonImage } from './SkeletonLoader';
 
 export default function FleetShowcase({ activeCategory, onSelectCalculatorVehicle }) {
   const [selectedCategory, setSelectedCategory] = useState(activeCategory || 'all');
@@ -54,7 +55,7 @@ export default function FleetShowcase({ activeCategory, onSelectCalculatorVehicl
           {filteredFleet.map((item) => (
             <article key={item.id} className="vehicle-card" data-category={item.category}>
               <div className="vehicle-card-img">
-                <img src={item.image} alt={item.name} loading="lazy" />
+                <SkeletonImage src={item.image} alt={item.name} />
                 <span className="vehicle-badge-category">{item.category.replace('-', ' ')}</span>
                 <div className="vehicle-price-tag">
                   <div className="price-from-label">Rates from</div>

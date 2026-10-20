@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, MessageCircle, Calculator } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
+import { SkeletonImage } from './SkeletonLoader';
 
 export default function TuktukShowcase({ onSelectCalculatorVehicle }) {
   const tuktuk = SITE_DATA.fleet.find((item) => item.id === 'tuktuk-bajaj');
@@ -25,7 +26,7 @@ export default function TuktukShowcase({ onSelectCalculatorVehicle }) {
             {/* Visual Column */}
             <div>
               <div className="tuktuk-img-frame">
-                <img
+                <SkeletonImage
                   src={selectedImage}
                   alt={tuktuk.name}
                   className="tuktuk-main-img"

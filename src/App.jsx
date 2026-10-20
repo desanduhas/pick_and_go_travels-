@@ -15,6 +15,7 @@ import PricingPage from './pages/PricingPage';
 import StayPage from './pages/StayPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import PageSkeleton from './components/SkeletonLoader';
 
 export default function App() {
   // Parse initial page from URL hash if available
@@ -31,6 +32,7 @@ export default function App() {
   const [bookingService, setBookingService] = useState('TukTuk Self Drive');
   const [bookingMessage, setBookingMessage] = useState('');
   const [bookingDates, setBookingDates] = useState({ start: '', end: '' });
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
   // Enforce scroll to top on initial page load / refresh and during splash screen
   useEffect(() => {
@@ -69,10 +71,12 @@ export default function App() {
       const hash = window.location.hash.replace('#', '').toLowerCase();
       const validPages = ['home', 'tuktuk', 'rentals', 'tours', 'pricing', 'stay', 'about', 'contact'];
       if (validPages.includes(hash)) {
+        setIsPageLoading(true);
         setCurrentPage(hash);
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
+        setTimeout(() => setIsPageLoading(false), 300);
       }
     };
 
@@ -118,7 +122,7 @@ export default function App() {
     }, 60);
 
     return () => clearTimeout(timeoutId);
-  }, [currentPage, fleetCategory, tourCategory]);
+  }, [currentPage, fleetCategory, tourCategory, isPageLoading]);
 
   // Central Navigation Handler
   const handleNavigate = (page, category = null, service = null, message = null) => {
@@ -129,11 +133,19 @@ export default function App() {
     if (service) setBookingService(service);
     if (message) setBookingMessage(message);
 
-    setCurrentPage(page);
-    window.location.hash = page;
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    if (page !== currentPage) {
+      setIsPageLoading(true);
+      setCurrentPage(page);
+      window.location.hash = page;
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      setTimeout(() => setIsPageLoading(false), 300);
+    } else {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
   };
 
   const handleSelectCalculatorVehicle = (vehicleId) => {
@@ -168,60 +180,66 @@ export default function App() {
       />
 
       <main id="mainContent">
-        {currentPage === 'home' && (
-          <HomePage
-            onNavigate={handleNavigate}
-            onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
-          />
-        )}
+        {isPageLoading ? (
+          <PageSkeleton page={currentPage} />
+        ) : (
+          <>
+            {currentPage === 'home' && (
+              <HomePage
+                onNavigate={handleNavigate}
+                onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
+              />
+            )}
 
-        {currentPage === 'tuktuk' && (
-          <TuktukPage
-            onNavigate={handleNavigate}
-            onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
-          />
-        )}
+            {currentPage === 'tuktuk' && (
+              <TuktukPage
+                onNavigate={handleNavigate}
+                onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
+              />
+            )}
 
-        {currentPage === 'rentals' && (
-          <RentalsPage
-            initialCategory={fleetCategory}
-            onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
-            onNavigate={handleNavigate}
-          />
-        )}
+            {currentPage === 'rentals' && (
+              <RentalsPage
+                initialCategory={fleetCategory}
+                onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {currentPage === 'tours' && (
-          <ToursPage
-            initialCategory={tourCategory}
-            onNavigate={handleNavigate}
-          />
-        )}
+            {currentPage === 'tours' && (
+              <ToursPage
+                initialCategory={tourCategory}
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {currentPage === 'pricing' && (
-          <PricingPage
-            selectedVehicleId={calculatorVehicleId}
-            onBookPackage={handleBookPackage}
-          />
-        )}
+            {currentPage === 'pricing' && (
+              <PricingPage
+                selectedVehicleId={calculatorVehicleId}
+                onBookPackage={handleBookPackage}
+              />
+            )}
 
-        {currentPage === 'stay' && (
-          <StayPage
-            onNavigate={handleNavigate}
-          />
-        )}
+            {currentPage === 'stay' && (
+              <StayPage
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {currentPage === 'about' && (
-          <AboutPage
-            onNavigate={handleNavigate}
-          />
-        )}
+            {currentPage === 'about' && (
+              <AboutPage
+                onNavigate={handleNavigate}
+              />
+            )}
 
-        {currentPage === 'contact' && (
-          <ContactPage
-            initialService={bookingService}
-            initialMessage={bookingMessage}
-            initialDates={bookingDates}
-          />
+            {currentPage === 'contact' && (
+              <ContactPage
+                initialService={bookingService}
+                initialMessage={bookingMessage}
+                initialDates={bookingDates}
+              />
+            )}
+          </>
         )}
       </main>
 
