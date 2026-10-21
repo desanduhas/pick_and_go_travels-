@@ -283,14 +283,17 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     }
   }
 
+  const isCar = category === 'car-with-driver' || vehicle.category === 'car-with-driver';
   const baseRentalTotal = dailyRate * days * vehicleQty;
   const insurancePerVehicle = 60;
-  const insuranceTotal = insurancePerVehicle * vehicleQty; // Mandatory
+  const insuranceTotal = isCar ? 0 : insurancePerVehicle * vehicleQty; // $0 for cars
+  const depositPerVehicle = 500;
+  const depositTotal = isCar ? depositPerVehicle * vehicleQty : 0; // $500 per car
   const licensePrice = 40;
   const licenseTotal = includeLicense ? licensePrice * licenseCount : 0;
   const trainTransferPerVehicle = 40;
   const trainTransferTotal = includeTrainTransfer ? trainTransferPerVehicle * vehicleQty : 0;
-  const grandTotal = baseRentalTotal + insuranceTotal + licenseTotal + trainTransferTotal;
+  const grandTotal = baseRentalTotal + (isCar ? depositTotal : insuranceTotal) + licenseTotal + trainTransferTotal;
 
   const whatsappMessage = encodeURIComponent(
     `Hello Rocky! I calculated a rental package on your website:\n\n` +
@@ -299,7 +302,9 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     `• Drop-off Date: ${formatPrettyDate(endDate)}\n` +
     `• Rental Duration: ${days} Day${days > 1 ? 's' : ''} ($${dailyRate}/day per vehicle)\n` +
     `• Vehicle Rental Subtotal: $${baseRentalTotal}\n` +
-    `• Comprehensive Full Insurance (Mandatory): $${insuranceTotal} ($60 × ${vehicleQty})\n` +
+    (isCar
+      ? `• Refundable Security Deposit: $${depositTotal} ($500 × ${vehicleQty} - 100% Refundable upon vehicle return)\n`
+      : `• Comprehensive Full Insurance (Mandatory): $${insuranceTotal} ($60 × ${vehicleQty})\n`) +
     `• Sri Lanka AAC License Endorsement: ${includeLicense ? `${licenseCount}x Driver${licenseCount > 1 ? 's' : ''} ($${licenseTotal})` : 'Not Selected ($0)'}\n` +
     `• Scenic Train Vehicle Transfer (Kandy-Ella): ${includeTrainTransfer ? `Yes - $${trainTransferTotal} ($40 × ${vehicleQty})` : 'Not Selected ($0)'}\n` +
     `• Estimated Total: $${grandTotal}\n\n` +
@@ -646,30 +651,79 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 )}
               </div>
 
-              {/* Mandatory Insurance (Compulsory Full Coverage) */}
-              <div className="form-group">
-                <label className="form-label">Comprehensive Insurance (Mandatory)</label>
-                <div className="mandatory-insurance-card">
-                  <div className="mandatory-left">
-                    <div className="mandatory-icon">
-                      <ShieldCheck size={22} color="#15803d" />
-                    </div>
-                    <div>
-                      <div className="mandatory-title">
-                        <span>Full Comprehensive Insurance</span>
-                        <span className="mandatory-badge">Compulsory</span>
+              {/* Mandatory Insurance for Tuk-Tuks & Bikes OR $500 Refundable Deposit for Cars */}
+              {isCar ? (
+                <div className="form-group">
+                  <label className="form-label">Vehicle Security Deposit (Mandatory)</label>
+                  <div
+                    className="mandatory-insurance-card"
+                    style={{
+                      borderColor: 'rgba(245, 158, 11, 0.45)',
+                      background: 'linear-gradient(135deg, rgba(254, 243, 199, 0.4) 0%, rgba(255, 251, 235, 0.6) 100%)'
+                    }}
+                  >
+                    <div className="mandatory-left">
+                      <div
+                        className="mandatory-icon"
+                        style={{
+                          background: 'rgba(245, 158, 11, 0.15)',
+                          color: '#b45309'
+                        }}
+                      >
+                        <ShieldCheck size={22} color="#b45309" />
                       </div>
-                      <div className="mandatory-desc">
-                        100% peace of mind island-wide. Zero deposit needed. ($60 per vehicle)
+                      <div>
+                        <div className="mandatory-title">
+                          <span style={{ color: '#92400e' }}>Refundable Security Deposit</span>
+                          <span
+                            className="mandatory-badge"
+                            style={{
+                              background: '#fef3c7',
+                              color: '#b45309',
+                              borderColor: 'rgba(245, 158, 11, 0.3)'
+                            }}
+                          >
+                            100% Refundable
+                          </span>
+                        </div>
+                        <div className="mandatory-desc" style={{ color: '#78350f' }}>
+                          $500 security deposit required per car. 100% fully refunded upon safe vehicle return.
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="mandatory-price">
-                    ${insuranceTotal}
-                    <span className="mandatory-price-sub">${insurancePerVehicle} × {vehicleQty} unit{vehicleQty > 1 ? 's' : ''}</span>
+                    <div className="mandatory-price" style={{ color: '#b45309' }}>
+                      ${depositTotal}
+                      <span className="mandatory-price-sub" style={{ color: '#92400e' }}>
+                        ${depositPerVehicle} × {vehicleQty} unit{vehicleQty > 1 ? 's' : ''}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="form-group">
+                  <label className="form-label">Comprehensive Insurance (Mandatory)</label>
+                  <div className="mandatory-insurance-card">
+                    <div className="mandatory-left">
+                      <div className="mandatory-icon">
+                        <ShieldCheck size={22} color="#15803d" />
+                      </div>
+                      <div>
+                        <div className="mandatory-title">
+                          <span>Full Comprehensive Insurance</span>
+                          <span className="mandatory-badge">Compulsory</span>
+                        </div>
+                        <div className="mandatory-desc">
+                          100% peace of mind island-wide. Zero deposit needed. ($60 per vehicle)
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mandatory-price">
+                      ${insuranceTotal}
+                      <span className="mandatory-price-sub">${insurancePerVehicle} × {vehicleQty} unit{vehicleQty > 1 ? 's' : ''}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Optional Add-ons & Perks Section */}
               <div className="form-group">
@@ -780,10 +834,17 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 <span>Vehicle Rental Total</span>
                 <span>${baseRentalTotal}</span>
               </div>
-              <div className="summary-row">
-                <span>Full Insurance ({vehicleQty} {vehicleQty > 1 ? 'units' : 'unit'})</span>
-                <span>${insuranceTotal}</span>
-              </div>
+              {isCar ? (
+                <div className="summary-row">
+                  <span>Refundable Deposit ({vehicleQty} {vehicleQty > 1 ? 'units' : 'unit'})</span>
+                  <span style={{ fontWeight: 600, color: '#b45309' }}>${depositTotal}</span>
+                </div>
+              ) : (
+                <div className="summary-row">
+                  <span>Full Insurance ({vehicleQty} {vehicleQty > 1 ? 'units' : 'unit'})</span>
+                  <span>${insuranceTotal}</span>
+                </div>
+              )}
               {includeLicense && licenseCount > 0 && (
                 <div className="summary-row">
                   <span>License Endorsement ({licenseCount} {licenseCount > 1 ? 'drivers' : 'driver'})</span>

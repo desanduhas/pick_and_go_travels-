@@ -165,7 +165,9 @@ export default function App() {
     const vehicleText = vehicleQty > 1 ? `${vehicleQty}x ${vehicle.name}` : vehicle.name;
     const licenseText = licenseCount > 0 ? `, ${licenseCount}x AAC License` : '';
     const dateText = dates?.start && dates?.end ? ` (Travel Dates: ${dates.start} to ${dates.end})` : '';
-    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days${dateText} with Full Insurance${licenseText} (Estimated total: $${total}). Please confirm availability.`);
+    const isCar = vehicle.category === 'car-with-driver';
+    const coverageText = isCar ? ' with $500 Refundable Security Deposit' : ' with Full Insurance';
+    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days${dateText}${coverageText}${licenseText} (Estimated total: $${total}). Please confirm availability.`);
     handleNavigate('contact');
   };
 
