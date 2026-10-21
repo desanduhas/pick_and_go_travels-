@@ -204,45 +204,54 @@ export const SITE_DATA = {
       features: ['Light & Easy to Ride', 'Spacious Footboard', 'Great for Beach Hopping', 'Free Helmets']
     },
     {
-      id: 'car-toyota-voxy',
-      category: 'car-with-driver',
-      name: 'Toyota Voxy (Luxury MPV)',
-      tagline: 'Premium Chauffeured Travel with Spacious Luxury',
-      image: 'https://pickandgotravels.com/wp-content/uploads/2024/05/TOYOTA-VOXY-1.jpg',
-      capacity: '5 Passengers + Driver + Ample Luggage',
-      features: ['Professional English-Speaking Chauffeur', 'Dual Zone Climate Control Air-Con', 'Airport Pickup & Dropoff Included', 'Unlimited KMs', 'Comprehensive Insurance', 'No Deposit Required'],
-      prices: [
-        { range: '01 - 10 Days', price: '$118', period: 'per day' },
-        { range: '11 - 21 Days', price: '$88', period: 'per day' },
-        { range: '22 - 30 Days', price: '$78', period: 'per day' }
-      ]
-    },
-    {
       id: 'car-suzuki-wagon-r',
       category: 'car-with-driver',
-      name: 'Suzuki Wagon R (Comfort Car)',
-      tagline: 'Economical Chauffeured Travel for Couples & Small Groups',
+      name: 'Suzuki Wagon R Automatic',
+      tagline: 'Modern Fuel-Efficient Automatic Car (120 km/day Included)',
       image: 'https://pickandgotravels.com/wp-content/uploads/2024/05/SUZUKI-WAGON-R.jpg',
-      capacity: '3 Passengers + Driver',
-      features: ['Professional Driver', 'Full Air Conditioning', 'Airport Pickup & Dropoff', 'Unlimited KMs', 'Insurance Included'],
+      transmission: 'Fully Automatic',
+      capacity: '4 Passengers + Luggage',
+      mileage: '120 km / day included',
+      extraCharge: '$0.35 (35¢) per additional km',
+      deposit: '$500 Refundable Security Deposit',
+      features: [
+        '120 km/Day Included (Extra $0.35/km)',
+        'Fully Automatic Transmission & Dual Air-Con',
+        'Sri Lanka AAC Local License Permit Available ($40)',
+        'Train Transport Car Delivery (Kandy to Nuwara Eliya or Ella) $40',
+        '$500 Refundable Security Deposit',
+        '24/7 Island-Wide Breakdown Assistance'
+      ],
       prices: [
-        { range: '01 - 10 Days', price: '$45', period: 'per day' },
-        { range: '11 - 21 Days', price: '$40', period: 'per day' },
-        { range: '22 - 30 Days', price: '$35', period: 'per day' }
+        { range: '01 - 10 Days', price: '$30', period: 'per day' },
+        { range: '11 - 22 Days', price: '$28', period: 'per day' },
+        { range: '22 - 30 Days', price: '$26', period: 'per day' }
       ]
     },
     {
-      id: 'car-toyota-kdh',
+      id: 'car-suzuki-spacia',
       category: 'car-with-driver',
-      name: 'Toyota KDH High-Roof Van',
-      tagline: 'Executive Van for Family & Group Island Tours',
-      image: 'https://pickandgotravels.com/wp-content/uploads/2024/05/TOYOTA-KDH.jpg',
-      capacity: '9 - 14 Passengers + Driver + Big Luggage Space',
-      features: ['High-Roof Reclining Captain Seats', 'Dual Air Conditioning', 'Experienced Guide / Chauffeur', 'All Island Permit & Insurance'],
+      name: 'Suzuki Spacia Automatic',
+      tagline: 'Spacious Tall-Boy Automatic Mini-MPV with Dual Sliding Doors',
+      image: '/images/suzuki-spacia.jpg',
+      transmission: 'Fully Automatic',
+      capacity: '4 Passengers + Ample Luggage',
+      mileage: '120 km / day included',
+      extraCharge: '$0.35 (35¢) per additional km',
+      deposit: '$500 Refundable Security Deposit',
+      features: [
+        '120 km/Day Included (Extra $0.35/km)',
+        'Fully Automatic Transmission & Dual Sliding Doors',
+        'Spacious High-Roof Cabin & Premium Dual Air-Con',
+        'Sri Lanka AAC Local License Permit Available ($40)',
+        'Train Transport Car Delivery (Kandy to Nuwara Eliya or Ella) $40',
+        '$500 Refundable Security Deposit',
+        '24/7 Island-Wide Breakdown Assistance'
+      ],
       prices: [
-        { range: '01 - 10 Days', price: '$128', period: 'per day' },
-        { range: '11 - 21 Days', price: '$108', period: 'per day' },
-        { range: '22 - 30 Days', price: '$98', period: 'per day' }
+        { range: '01 - 10 Days', price: '$30', period: 'per day' },
+        { range: '11 - 22 Days', price: '$28', period: 'per day' },
+        { range: '22 - 30 Days', price: '$26', period: 'per day' }
       ]
     },
     {

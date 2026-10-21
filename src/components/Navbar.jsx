@@ -63,7 +63,7 @@ export default function Navbar({ currentPage, onNavigate }) {
                   🏍️ Motorbikes &amp; Scooters
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'car-with-driver')}>
-                  🚗 Car with Driver (Chauffeur)
+                  🚗 Rent-A-Car (Automatic)
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'atv')}>
                   🏖️ Beach Quad ATVs

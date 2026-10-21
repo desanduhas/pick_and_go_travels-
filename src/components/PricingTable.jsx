@@ -47,7 +47,7 @@ export default function PricingTable() {
                     </td>
                     <td>
                       <span className="vehicle-badge-category" style={{ position: 'static' }}>
-                        {v.category}
+                        {v.category === 'car-with-driver' ? 'Rent-A-Car' : v.category}
                       </span>
                     </td>
                     <td className="price-highlight">{p1}</td>

@@ -13,7 +13,7 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
   const categories = [
     { id: 'tuktuk', title: 'Self Drive Tuk Tuks', desc: 'Bajaj 205cc from $14/day', icon: '🛺', target: 'tuktuk' },
     { id: 'motorbike', title: 'Adventure Motorbikes', desc: 'Honda NC700X, FMX, XR', icon: '🏍️', target: 'rentals', cat: 'motorbike' },
-    { id: 'car', title: 'Car with Driver', desc: 'Chauffeured Toyota Voxy & KDH', icon: '🚗', target: 'rentals', cat: 'car-with-driver' },
+    { id: 'car', title: 'Rent-A-Car', desc: 'Suzuki Wagon R & Spacia Auto', icon: '🚗', target: 'rentals', cat: 'car-with-driver' },
     { id: 'tours', title: 'Epic Island Tours', desc: '6-12 Day Off-Road & Day Trips', icon: '🗺️', target: 'tours' },
     { id: 'stay', title: 'Whitehouse Stay', desc: 'Negombo Rooms from $18/night', icon: '🏡', target: 'stay' },
     { id: 'calculator', title: 'Live Price Calculator', desc: 'Get instant transparent quotes', icon: '🧮', target: 'pricing' }

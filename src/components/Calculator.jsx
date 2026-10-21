@@ -17,7 +17,7 @@ const CATEGORY_NAMES = {
   'tuktuk': '🛺 Tuk Tuk (Self Drive)',
   'motorbike': '🏍️ Adventure Motorbike',
   'scooter': '🛵 Automatic Scooter',
-  'car-with-driver': '🚗 Car with Private Driver',
+  'car-with-driver': '🚗 Rent-A-Car (Automatic)',
   'atv': '🏎️ Quad Bike / Beach ATV',
   'bicycle': '🚲 Foot Bicycle'
 };
@@ -267,11 +267,22 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const availableVehicles = SITE_DATA.fleet.filter((v) => v.category === category);
   const vehicle = availableVehicles.find((v) => v.id === vehicleId) || availableVehicles[0] || SITE_DATA.fleet[0];
 
+  const isCar = category === 'car-with-driver' || vehicle.category === 'car-with-driver';
+
   // Calculate daily price based on duration tiers
   let dailyRate = 16;
   if (vehicle.prices && vehicle.prices.length > 0) {
     if (vehicle.category === 'atv') {
       dailyRate = 40;
+    } else if (isCar) {
+      // Rent-A-Car tiers: 1-10 days: $30, 11-22 days: $28, 22-30+ days: $26
+      if (days <= 10) {
+        dailyRate = 30;
+      } else if (days <= 22) {
+        dailyRate = 28;
+      } else {
+        dailyRate = 26;
+      }
     } else {
       if (days <= 10) {
         dailyRate = parseInt(vehicle.prices[0].price.replace(/[^0-9]/g, ''), 10) || 16;
@@ -283,7 +294,6 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     }
   }
 
-  const isCar = category === 'car-with-driver' || vehicle.category === 'car-with-driver';
   const baseRentalTotal = dailyRate * days * vehicleQty;
   const insurancePerVehicle = 60;
   const insuranceTotal = isCar ? 0 : insurancePerVehicle * vehicleQty; // $0 for cars
@@ -298,6 +308,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const whatsappMessage = encodeURIComponent(
     `Hello Rocky! I calculated a rental package on your website:\n\n` +
     `• Vehicle: ${vehicleQty > 1 ? `${vehicleQty}x ` : ''}${vehicle.name}\n` +
+    (isCar ? `• Included Mileage: 120 km/day (${120 * days} km total for ${days} days, Extra: $0.35 / 35¢ per km)\n` : '') +
     `• Pick-up Date: ${formatPrettyDate(startDate)}\n` +
     `• Drop-off Date: ${formatPrettyDate(endDate)}\n` +
     `• Rental Duration: ${days} Day${days > 1 ? 's' : ''} ($${dailyRate}/day per vehicle)\n` +
@@ -306,7 +317,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
       ? `• Refundable Security Deposit: $${depositTotal} ($500 × ${vehicleQty} - 100% Refundable upon vehicle return)\n`
       : `• Comprehensive Full Insurance (Mandatory): $${insuranceTotal} ($60 × ${vehicleQty})\n`) +
     `• Sri Lanka AAC License Endorsement: ${includeLicense ? `${licenseCount}x Driver${licenseCount > 1 ? 's' : ''} ($${licenseTotal})` : 'Not Selected ($0)'}\n` +
-    `• Scenic Train Vehicle Transfer (Kandy-Ella): ${includeTrainTransfer ? `Yes - $${trainTransferTotal} ($40 × ${vehicleQty})` : 'Not Selected ($0)'}\n` +
+    `• ${isCar ? 'Train Transport Car Delivery (Kandy to Nuwara Eliya or Ella)' : 'Scenic Train Vehicle Transfer (Kandy-Ella)'}: ${includeTrainTransfer ? `Yes - $${trainTransferTotal} ($40 × ${vehicleQty})` : 'Not Selected ($0)'}\n` +
     `• Estimated Total: $${grandTotal}\n\n` +
     `Please confirm vehicle availability for these dates!`
   );
@@ -381,6 +392,25 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                     </option>
                   ))}
                 </select>
+                {isCar && (
+                  <div style={{
+                    marginTop: '0.65rem',
+                    background: 'rgba(245, 158, 11, 0.08)',
+                    border: '1px solid rgba(245, 158, 11, 0.25)',
+                    borderRadius: 'var(--radius-sm)',
+                    padding: '0.65rem 0.85rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.6rem',
+                    fontSize: '0.85rem',
+                    color: '#92400e'
+                  }}>
+                    <span style={{ fontSize: '1.1rem' }}>🛣️</span>
+                    <div>
+                      <strong>120 km/day Included</strong> • Additional 1 km extra charge: <strong>$0.35 (35¢)</strong>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Vehicle Quantity Stepper Section */}
@@ -790,10 +820,12 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                       />
                       <div className="addon-info-col">
                         <label htmlFor="calc-train-transfer-checkbox" className="addon-name" style={{ cursor: 'pointer' }}>
-                          Scenic Train Vehicle Transfer Service
+                          {isCar ? 'Train Transport Car Delivery (Kandy to Nuwara Eliya or Ella)' : 'Scenic Train Vehicle Transfer Service'}
                         </label>
                         <div className="addon-desc">
-                          Ride the iconic tea-country train (Kandy → Nuwara Eliya → Ella) while we transport your vehicle to your destination. ($40 per vehicle)
+                          {isCar
+                            ? 'Ride the scenic mountain train while we deliver your car to Nuwara Eliya or Ella station waiting for you. ($40 per car)'
+                            : 'Ride the iconic tea-country train (Kandy → Nuwara Eliya → Ella) while we transport your vehicle to your destination. ($40 per vehicle)'}
                         </div>
                       </div>
                     </div>
@@ -830,6 +862,12 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 <span>Rental Duration</span>
                 <span>{days} Day{days > 1 ? 's' : ''}</span>
               </div>
+              {isCar && (
+                <div className="summary-row">
+                  <span>Included Mileage</span>
+                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{120 * days} km ({120} km/day)</span>
+                </div>
+              )}
               <div className="summary-row">
                 <span>Vehicle Rental Total</span>
                 <span>${baseRentalTotal}</span>
@@ -853,7 +891,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
               )}
               {includeTrainTransfer && (
                 <div className="summary-row">
-                  <span>Train Vehicle Transfer ({vehicleQty} {vehicleQty > 1 ? 'units' : 'unit'})</span>
+                  <span>{isCar ? 'Car Train Delivery (Kandy-Ella)' : 'Train Vehicle Transfer'} ({vehicleQty} {vehicleQty > 1 ? 'units' : 'unit'})</span>
                   <span>${trainTransferTotal}</span>
                 </div>
               )}

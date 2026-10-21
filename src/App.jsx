@@ -156,7 +156,7 @@ export default function App() {
     let service = 'TukTuk Self Drive';
     if (vehicle.category === 'tuktuk') service = 'TukTuk Self Drive';
     else if (vehicle.category === 'motorbike' || vehicle.category === 'scooter') service = 'Motorbike Rental';
-    else if (vehicle.category === 'car-with-driver') service = 'Car with Driver';
+    else if (vehicle.category === 'car-with-driver') service = 'Rent-A-Car';
     else if (vehicle.category === 'atv') service = 'Beach ATV';
     else if (vehicle.category === 'bicycle') service = 'Foot Bicycle';
 
@@ -167,7 +167,8 @@ export default function App() {
     const dateText = dates?.start && dates?.end ? ` (Travel Dates: ${dates.start} to ${dates.end})` : '';
     const isCar = vehicle.category === 'car-with-driver';
     const coverageText = isCar ? ' with $500 Refundable Security Deposit' : ' with Full Insurance';
-    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days${dateText}${coverageText}${licenseText} (Estimated total: $${total}). Please confirm availability.`);
+    const mileageText = isCar ? ' (120 km/day included)' : '';
+    setBookingMessage(`Hi Rocky, I want to book ${vehicleText} for ${days} days${dateText}${coverageText}${mileageText}${licenseText} (Estimated total: $${total}). Please confirm availability.`);
     handleNavigate('contact');
   };
 

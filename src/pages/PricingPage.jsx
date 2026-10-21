@@ -41,10 +41,10 @@ export default function PricingPage({ selectedVehicleId, onBookPackage }) {
 
           <div className="ios-card pricing-inclusion-card">
             <h3 className="inclusion-title">
-              No Security Deposit Required
+              Clear &amp; Fair Deposit Policies
             </h3>
             <p className="inclusion-desc">
-              Unlike other rental agencies that hold massive credit card bonds, Pick &amp; Go Travels offers zero deposit options with our comprehensive insurance package.
+              Zero security deposit required for Tuk Tuks and Motorbikes with our full insurance. Car rentals require a simple $500 refundable deposit, 100% refunded upon vehicle return.
             </p>
           </div>
 

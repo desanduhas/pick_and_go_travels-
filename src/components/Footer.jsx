@@ -69,7 +69,7 @@ export default function Footer({ onNavigate }) {
               <li><button onClick={() => handleNav('rentals', 'motorbike')} className="footer-link-btn">Honda NC 700X Touring</button></li>
               <li><button onClick={() => handleNav('rentals', 'motorbike')} className="footer-link-btn">Honda FMX 650 &amp; XR Baja</button></li>
               <li><button onClick={() => handleNav('rentals', 'scooter')} className="footer-link-btn">Honda Dio &amp; TVS Scooters</button></li>
-              <li><button onClick={() => handleNav('rentals', 'car-with-driver')} className="footer-link-btn">Chauffeured Cars &amp; Vans</button></li>
+              <li><button onClick={() => handleNav('rentals', 'car-with-driver')} className="footer-link-btn">Rent-A-Car (Automatic)</button></li>
               <li><button onClick={() => handleNav('rentals', 'atv')} className="footer-link-btn">Negombo Beach Quad ATVs</button></li>
               <li><button onClick={() => handleNav('rentals', 'bicycle')} className="footer-link-btn">Foot Bicycles</button></li>
             </ul>

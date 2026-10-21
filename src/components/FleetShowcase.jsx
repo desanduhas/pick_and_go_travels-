@@ -15,9 +15,9 @@ export default function FleetShowcase({ activeCategory, onSelectCalculatorVehicl
   const categories = [
     { id: 'all', label: 'All Vehicles' },
     { id: 'tuktuk', label: 'Tuk Tuks' },
+    { id: 'car-with-driver', label: 'Rent-A-Car' },
     { id: 'motorbike', label: 'Motorbikes' },
     { id: 'scooter', label: 'Scooters' },
-    { id: 'car-with-driver', label: 'Car with Driver' },
     { id: 'atv', label: 'Beach ATVs' },
     { id: 'bicycle', label: 'Foot Bicycles' }
   ];
@@ -33,7 +33,7 @@ export default function FleetShowcase({ activeCategory, onSelectCalculatorVehicl
           <span className="section-pill">Our Entire Fleet</span>
           <h2 className="section-title">Explore All Vehicles for Rent</h2>
           <p className="section-subtitle">
-            From self-drive tuk tuks to adventure motorbikes, automatic scooters, luxury chauffeured cars, beach ATVs, and touring bicycles.
+            From self-drive tuk tuks to automatic rental cars, adventure motorbikes, scooters, beach ATVs, and touring bicycles.
           </p>
         </div>
 
