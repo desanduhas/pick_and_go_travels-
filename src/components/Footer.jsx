@@ -105,8 +105,11 @@ export default function Footer({ onNavigate }) {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Pick &amp; Go Travels. All Rights Reserved. {company.address}.</p>
-          <p>Licensed &amp; Registered Sri Lanka Vehicle Rental &amp; Tourism Service Provider.</p>
+          <p className="footer-copyright">&copy; {new Date().getFullYear()} Pick &amp; Go Travels. All Rights Reserved. {company.address}.</p>
+          <p className="footer-dev-credit">
+            Designed &amp; Developed by <span className="dev-name">Morphic DevS</span>
+          </p>
+          <p className="footer-license">Licensed &amp; Registered Sri Lanka Vehicle Rental &amp; Tourism Service Provider.</p>
         </div>
       </div>
     </footer>
