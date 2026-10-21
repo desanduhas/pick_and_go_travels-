@@ -56,7 +56,9 @@ export default function FleetShowcase({ activeCategory, onSelectCalculatorVehicl
             <article key={item.id} className="vehicle-card" data-category={item.category}>
               <div className="vehicle-card-img">
                 <SkeletonImage src={item.image} alt={item.name} />
-                <span className="vehicle-badge-category">{item.category.replace('-', ' ')}</span>
+                <span className="vehicle-badge-category">
+                  {item.category === 'car-with-driver' ? 'Rent-A-Car' : item.category.replace('-', ' ')}
+                </span>
                 <div className="vehicle-price-tag">
                   <div className="price-from-label">Rates from</div>
                   <span className="price-main">{item.prices ? item.prices[0].price : '$15'}</span>
@@ -96,7 +98,7 @@ export default function FleetShowcase({ activeCategory, onSelectCalculatorVehicl
                 </div>
 
                 <ul className="vehicle-features-bullets">
-                  {item.features.slice(0, 4).map((f, i) => (
+                  {item.features.map((f, i) => (
                     <li key={i}>
                       <Check size={14} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
                       <span>{f}</span>

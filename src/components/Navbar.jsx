@@ -29,7 +29,6 @@ export default function Navbar({ currentPage, onNavigate }) {
           <button
             onClick={() => handleNav('home')}
             className="brand-logo"
-            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
             aria-label="Pick & Go Travels Home"
           >
             <img src={company.logoDark} alt="Pick And Go Travels Logo" />
@@ -164,7 +163,9 @@ export default function Navbar({ currentPage, onNavigate }) {
       />
       <aside className={`mobile-drawer ${drawerOpen ? 'open' : ''}`} aria-label="Mobile Menu">
         <div className="drawer-header">
-          <img src={company.logoDark} alt="Pick and Go Travels" style={{ height: '38px' }} />
+          <div className="brand-logo" style={{ cursor: 'default' }}>
+            <img src={company.logoDark} alt="Pick and Go Travels" />
+          </div>
           <button
             className="drawer-close-btn"
             onClick={() => setDrawerOpen(false)}

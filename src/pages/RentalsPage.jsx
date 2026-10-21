@@ -65,7 +65,9 @@ export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle
                     e.currentTarget.src = 'https://pickandgotravels.com/wp-content/uploads/2024/05/IMG_20230603_141753_464.jpg';
                   }}
                 />
-                <span className="vehicle-badge-category">{item.category.replace('-', ' ')}</span>
+                <span className="vehicle-badge-category">
+                  {item.category === 'car-with-driver' ? 'Rent-A-Car' : item.category.replace('-', ' ')}
+                </span>
                 <div className="vehicle-price-tag">
                   <div className="price-from-label">Rates from</div>
                   <span className="price-main">{item.prices ? item.prices[0].price : '$15'}</span>
@@ -105,7 +107,7 @@ export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle
                 </div>
 
                 <ul className="vehicle-features-bullets">
-                  {item.features.slice(0, 4).map((f, i) => (
+                  {item.features.map((f, i) => (
                     <li key={i}>
                       <Check size={14} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
                       <span>{f}</span>

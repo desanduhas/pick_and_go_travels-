@@ -15,7 +15,7 @@ export const SITE_DATA = {
     address: 'No 79, St. Joseph Street, Ettukala, Negombo, Sri Lanka',
     googleMapsUrl: 'https://maps.google.com/?q=No+79,+St.+Joseph+Street,+Ettukala,+Negombo,+Sri+Lanka',
     logoTransparent: 'https://pickandgotravels.com/wp-content/uploads/2024/05/Logo-T.png',
-    logoDark: 'https://pickandgotravels.com/wp-content/uploads/2024/05/Logo-D.png',
+    logoDark: '/images/logo-d.png',
     favicon: 'https://pickandgotravels.com/wp-content/uploads/2024/05/Icon-N-150x150.png',
     social: {
       facebook: 'https://facebook.com/pickandgotravels',
@@ -214,6 +214,7 @@ export const SITE_DATA = {
       mileage: '120 km / day included',
       extraCharge: '$0.35 (35¢) per additional km',
       deposit: '$500 Refundable Security Deposit',
+      depositAmount: 500,
       features: [
         '120 km/Day Included (Extra $0.35/km)',
         'Fully Automatic Transmission & Dual Air-Con',
@@ -239,6 +240,7 @@ export const SITE_DATA = {
       mileage: '120 km / day included',
       extraCharge: '$0.35 (35¢) per additional km',
       deposit: '$500 Refundable Security Deposit',
+      depositAmount: 500,
       features: [
         '120 km/Day Included (Extra $0.35/km)',
         'Fully Automatic Transmission & Dual Sliding Doors',
@@ -252,6 +254,33 @@ export const SITE_DATA = {
         { range: '01 - 10 Days', price: '$30', period: 'per day' },
         { range: '11 - 22 Days', price: '$28', period: 'per day' },
         { range: '22 - 30 Days', price: '$26', period: 'per day' }
+      ]
+    },
+    {
+      id: 'car-toyota-kdh',
+      category: 'car-with-driver',
+      name: 'Toyota KDH Automatic',
+      tagline: 'Luxury High-Roof Automatic Touring Van (120 km/day Included)',
+      image: '/images/toyota-kdh.jpg',
+      transmission: 'Fully Automatic',
+      capacity: '9 - 14 Passengers + Luggage',
+      mileage: '120 km / day included',
+      extraCharge: '$0.35 (35¢) per additional km',
+      deposit: '$700 Refundable Security Deposit',
+      depositAmount: 700,
+      features: [
+        '120 km/Day Included (Extra $0.35/km)',
+        'Fully Automatic Transmission & Dual Line Air-Con',
+        'Spacious High-Roof Luxury Passenger Cabin',
+        'Sri Lanka AAC Local License Permit Available ($40)',
+        'Train Transport Car Delivery (Kandy to Nuwara Eliya or Ella) $40',
+        '$700 Refundable Security Deposit',
+        '24/7 Island-Wide Breakdown Assistance'
+      ],
+      prices: [
+        { range: '01 - 10 Days', price: '$60', period: 'per day' },
+        { range: '11 - 22 Days', price: '$56', period: 'per day' },
+        { range: '22 - 30 Days', price: '$52', period: 'per day' }
       ]
     },
     {

@@ -209,7 +209,7 @@ export default function BookingContact({ initialService, initialMessage, initial
                     onChange={handleChange}
                   >
                     <option value="TukTuk Self Drive">Bajaj RE 205cc Tuk Tuk (Self Drive)</option>
-                    <option value="Rent-A-Car">Rent-A-Car (Suzuki Wagon R / Spacia Auto)</option>
+                    <option value="Rent-A-Car">Rent-A-Car &amp; Van (Wagon R / Spacia / Toyota KDH Auto)</option>
                     <option value="Motorbike Rental">Motorbike / Scooter Rental</option>
                     <option value="Car with Driver">Private Car / Van with Driver</option>
                     <option value="Beach ATV">Beach Quad ATV Ride</option>

@@ -657,14 +657,33 @@ textarea {
 }
 
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  background: #ffffff;
+  border: 1.5px solid rgba(234, 88, 12, 0.38);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(234, 88, 12, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.brand-logo:hover {
+  border-color: #ea580c;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.22);
+  transform: translateY(-1px);
+}
+
+.brand-logo:active {
+  transform: translateY(0);
 }
 
 .brand-logo img {
-  height: 44px;
+  height: 38px;
   width: auto;
   object-fit: contain;
+  display: block;
 }
 
 .desktop-nav {
@@ -4132,8 +4151,13 @@ textarea {
     height: 62px;
   }
 
+  .brand-logo {
+    padding: 3px 8px;
+    border-radius: 9px;
+  }
+
   .brand-logo img {
-    height: 36px;
+    height: 32px;
   }
 
   .desktop-only-btn {

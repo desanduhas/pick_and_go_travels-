@@ -275,13 +275,18 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     if (vehicle.category === 'atv') {
       dailyRate = 40;
     } else if (isCar) {
-      // Rent-A-Car tiers: 1-10 days: $30, 11-22 days: $28, 22-30+ days: $26
-      if (days <= 10) {
-        dailyRate = 30;
-      } else if (days <= 22) {
-        dailyRate = 28;
+      if (vehicle.prices && vehicle.prices.length >= 3) {
+        if (days <= 10) {
+          dailyRate = parseInt(vehicle.prices[0].price.replace(/[^0-9]/g, ''), 10) || 30;
+        } else if (days <= 22) {
+          dailyRate = parseInt(vehicle.prices[1].price.replace(/[^0-9]/g, ''), 10) || 28;
+        } else {
+          dailyRate = parseInt(vehicle.prices[2].price.replace(/[^0-9]/g, ''), 10) || 26;
+        }
       } else {
-        dailyRate = 26;
+        if (days <= 10) dailyRate = 30;
+        else if (days <= 22) dailyRate = 28;
+        else dailyRate = 26;
       }
     } else {
       if (days <= 10) {
@@ -297,8 +302,8 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const baseRentalTotal = dailyRate * days * vehicleQty;
   const insurancePerVehicle = 60;
   const insuranceTotal = isCar ? 0 : insurancePerVehicle * vehicleQty; // $0 for cars
-  const depositPerVehicle = 500;
-  const depositTotal = isCar ? depositPerVehicle * vehicleQty : 0; // $500 per car
+  const depositPerVehicle = vehicle.depositAmount || (vehicle.deposit ? parseInt(vehicle.deposit.replace(/[^0-9]/g, ''), 10) : 500) || 500;
+  const depositTotal = isCar ? depositPerVehicle * vehicleQty : 0;
   const licensePrice = 40;
   const licenseTotal = includeLicense ? licensePrice * licenseCount : 0;
   const trainTransferPerVehicle = 40;
@@ -314,7 +319,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     `• Rental Duration: ${days} Day${days > 1 ? 's' : ''} ($${dailyRate}/day per vehicle)\n` +
     `• Vehicle Rental Subtotal: $${baseRentalTotal}\n` +
     (isCar
-      ? `• Refundable Security Deposit: $${depositTotal} ($500 × ${vehicleQty} - 100% Refundable upon vehicle return)\n`
+      ? `• Refundable Security Deposit: $${depositTotal} ($${depositPerVehicle} × ${vehicleQty} - 100% Refundable upon vehicle return)\n`
       : `• Comprehensive Full Insurance (Mandatory): $${insuranceTotal} ($60 × ${vehicleQty})\n`) +
     `• Sri Lanka AAC License Endorsement: ${includeLicense ? `${licenseCount}x Driver${licenseCount > 1 ? 's' : ''} ($${licenseTotal})` : 'Not Selected ($0)'}\n` +
     `• ${isCar ? 'Train Transport Car Delivery (Kandy to Nuwara Eliya or Ella)' : 'Scenic Train Vehicle Transfer (Kandy-Ella)'}: ${includeTrainTransfer ? `Yes - $${trainTransferTotal} ($40 × ${vehicleQty})` : 'Not Selected ($0)'}\n` +
@@ -717,7 +722,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                           </span>
                         </div>
                         <div className="mandatory-desc" style={{ color: '#78350f' }}>
-                          $500 security deposit required per car. 100% fully refunded upon safe vehicle return.
+                          ${depositPerVehicle} security deposit required per vehicle. 100% fully refunded upon safe vehicle return.
                         </div>
                       </div>
                     </div>

@@ -18,9 +18,11 @@ export default function Footer({ onNavigate }) {
           <div className="footer-brand">
             <button
               onClick={() => handleNav('home')}
-              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }}
+              className="brand-logo"
+              style={{ marginBottom: '1.25rem', border: '1.5px solid rgba(234, 88, 12, 0.3)' }}
+              aria-label="Pick & Go Travels Home"
             >
-              <img src={company.logoDark} alt="Pick & Go Travels" style={{ height: '44px' }} />
+              <img src={company.logoDark} alt="Pick & Go Travels" />
             </button>
             <p>
               Pick &amp; Go Travels is one of the most trusted Sri Lanka tuk tuk and vehicle rental companies based in Negombo. We specialize in self-drive tuk tuks, motorbikes, private chauffeurs, guest house accommodation, and unforgettable island adventures.
