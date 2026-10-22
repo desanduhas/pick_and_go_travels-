@@ -3297,7 +3297,7 @@ textarea {
 
 /* Home Spotlight Tuk Tuk Card */
 .home-spotlight-section {
-  padding: 2.5rem 0 3.5rem;
+  padding: 1.75rem 0 1.25rem;
 }
 
 .home-spotlight-card {
@@ -3472,14 +3472,14 @@ textarea {
 
 /* Home Tours Section */
 .home-tours-section {
-  padding: 3.5rem 0 4.5rem;
+  padding: 1.25rem 0 2.75rem;
 }
 
 .home-section-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.35rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -3518,7 +3518,7 @@ textarea {
 
 /* Home Reviews Section */
 .home-reviews-section {
-  padding: 2rem 0 5rem;
+  padding: 1.5rem 0 3.5rem;
 }
 
 .home-reviews-card {
@@ -4417,7 +4417,7 @@ textarea {
 
   /* Spotlight Tuk Tuk Card */
   .home-spotlight-section {
-    padding: 1.5rem 0 2.5rem;
+    padding: 1rem 0 1.15rem;
   }
 
   .home-spotlight-card {
@@ -4500,7 +4500,7 @@ textarea {
 
   .home-tours-section,
   .home-reviews-section {
-    padding: 2.5rem 0;
+    padding: 1.35rem 0;
   }
 
   .home-reviews-card {
