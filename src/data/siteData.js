@@ -518,6 +518,173 @@ export const SITE_DATA = {
     ]
   },
 
+  carWithDriverPackages: [
+    {
+      id: 'driver-suzuki-spacia-wagon-r',
+      name: 'Suzuki Spacia Automatic Hybrid | Suzuki Wagon R',
+      shortName: 'Suzuki Spacia / Wagon R',
+      badge: 'Best for Couples & Small Families',
+      type: 'Automatic Hybrid / Hatchback',
+      image: '/images/suzuki-spacia.jpg',
+      secondaryImage: 'https://pickandgotravels.com/wp-content/uploads/2024/05/SUZUKI-WAGON-R.jpg',
+      capacity: '3 Passengers + Luggage',
+      passengers: '3 Passengers',
+      luggage: 'Included Luggage Capacity',
+      freeKmDaily: 130,
+      extraKmRate: 0.40,
+      extraKmText: '$0.40 cent per additional km',
+      fuelInfo: {
+        type: 'Petrol 92 Octane',
+        priceLkr: 'LKR 414 / 1L',
+        note: 'Not included (Paid at pump)'
+      },
+      prices: [
+        { range: '1 to 14 Days', daysMin: 1, daysMax: 14, price: 49, priceDisplay: '$49', period: 'per day' },
+        { range: '15 to 30 Days', daysMin: 15, daysMax: 30, price: 44, priceDisplay: '$44', period: 'per day' }
+      ],
+      inclusions: [
+        'Driver | guiding | accommodation | meals',
+        'Car full insurance | 3 passenger | luggage',
+        'Free 130 KM per day',
+        'Additional 1 kilometer $0.40 cent'
+      ],
+      exclusions: [
+        '⛽ Petrol 92 octane LKR 414 1L',
+        '🛣️ Highway ticket (Expressway tolls)',
+        '🅿️ Parking ticket'
+      ],
+      highlights: [
+        'Experienced English-speaking chauffeur & tour guide',
+        'Driver meals & driver accommodation 100% included (no extra cost to you)',
+        'Full comprehensive vehicle insurance',
+        'Dual air conditioning & clean comfortable interior'
+      ]
+    },
+    {
+      id: 'driver-toyota-kdh-flat-roof',
+      name: 'Toyota KDH Flat Roof',
+      shortName: 'Toyota KDH Flat Roof',
+      badge: 'Spacious Group & Family Touring Van',
+      type: 'Touring Van (Flat Roof)',
+      image: '/images/toyota-kdh.jpg',
+      secondaryImage: '/images/toyota-kdh.jpg',
+      capacity: '5 Passengers + Luggage',
+      passengers: '5 Passengers',
+      luggage: 'Spacious Luggage Area',
+      freeKmDaily: 130,
+      extraKmRate: 0.40,
+      extraKmText: '$0.40 cent per additional km',
+      fuelInfo: {
+        type: 'Petrol 92 Octane',
+        priceLkr: 'LKR 414 / 1L',
+        note: 'Not included (Paid at pump)'
+      },
+      prices: [
+        { range: '1 to 14 Days', daysMin: 1, daysMax: 14, price: 87, priceDisplay: '$87', period: 'per day' },
+        { range: '15 to 30 Days', daysMin: 15, daysMax: 30, price: 82, priceDisplay: '$82', period: 'per day' }
+      ],
+      inclusions: [
+        'Driver | guiding | accommodation | meals',
+        'Car full insurance | 5 passenger | luggage',
+        'Free 130 KM per day',
+        'Additional 1 kilometer $0.40 cent'
+      ],
+      exclusions: [
+        '⛽ Petrol 92 octane LKR 414 1L',
+        '🛣️ Highway ticket (Expressway tolls)',
+        '🅿️ Parking ticket'
+      ],
+      highlights: [
+        'Spacious passenger cabin with high comfort for long island journeys',
+        'Driver meals & driver room included (zero hidden charges)',
+        'Full passenger & vehicle comprehensive insurance',
+        'Dual AC, tinted privacy glass & generous luggage room'
+      ]
+    },
+    {
+      id: 'driver-toyota-voxy-hybrid',
+      name: 'Toyota Voxy Hybrid Automatic',
+      shortName: 'Toyota Voxy Hybrid Automatic',
+      badge: 'Premium Luxury Comfort & Hybrid Tech',
+      type: 'Luxury Hybrid Automatic MPV',
+      image: '/images/toyota-voxy.jpg',
+      secondaryImage: '/images/toyota-voxy.jpg',
+      capacity: '5 Passengers + Luggage',
+      passengers: '5 Passengers',
+      luggage: 'Large Luggage Boot',
+      freeKmDaily: 130,
+      extraKmRate: 0.40,
+      extraKmText: '$0.40 cent per additional km',
+      fuelInfo: {
+        type: 'Petrol 95 Octane',
+        priceLkr: 'LKR 475 / 1L',
+        note: 'Not included (Paid at pump)'
+      },
+      prices: [
+        { range: '1 to 15 Days', daysMin: 1, daysMax: 15, price: 80, priceDisplay: '$80', period: 'per day' },
+        { range: '16 to 30 Days', daysMin: 16, daysMax: 30, price: 76, priceDisplay: '$76', period: 'per day' }
+      ],
+      inclusions: [
+        'Driver | guiding | accommodation | meals',
+        'Car full insurance | 5 passenger | luggage',
+        'Free 130 KM per day',
+        'Additional 1 kilometer $0.40 cent'
+      ],
+      exclusions: [
+        '⛽ Petrol 95 octane LKR 475 1L',
+        '🛣️ Highway ticket (Expressway tolls)',
+        '🅿️ Parking ticket'
+      ],
+      highlights: [
+        'Ultra-smooth quiet Hybrid powertrain with luxurious captain seating',
+        'Driver meals & driver accommodation fully included',
+        'Comprehensive full insurance coverage',
+        'Dual automatic sliding doors, supreme air-con & modern tech'
+      ]
+    },
+    {
+      id: 'driver-honda-shuttle-hybrid',
+      name: 'Honda Shuttle Hybrid Automatic',
+      shortName: 'Honda Shuttle Hybrid',
+      badge: 'Spacious Station Wagon & Touring Comfort',
+      type: 'Station Wagon Hybrid Automatic',
+      image: '/images/honda-shuttle.jpg',
+      secondaryImage: '/images/honda-shuttle.jpg',
+      capacity: '4 Passengers + Luggage',
+      passengers: '4 Passengers',
+      luggage: 'Extra Large Luggage Boot',
+      freeKmDaily: 130,
+      extraKmRate: 0.40,
+      extraKmText: '$0.40 cent per additional km',
+      fuelInfo: {
+        type: 'Petrol 95 Octane',
+        priceLkr: 'LKR 475 / 1L',
+        note: 'Not included (Paid at pump)'
+      },
+      prices: [
+        { range: '1 to 15 Days', daysMin: 1, daysMax: 15, price: 60, priceDisplay: '$60', period: 'per day' },
+        { range: '16 to 30 Days', daysMin: 16, daysMax: 30, price: 57, priceDisplay: '$57', period: 'per day' }
+      ],
+      inclusions: [
+        'Driver | guiding | accommodation | meals',
+        'Car full insurance | 4 passenger | luggage',
+        'Free 130 KM per day',
+        'Additional 1 kilometer $0.40 cent'
+      ],
+      exclusions: [
+        '⛽ Petrol 95 octane LKR 475 1L',
+        '🛣️ Highway ticket (Expressway tolls)',
+        '🅿️ Parking ticket'
+      ],
+      highlights: [
+        'Smooth Japanese hybrid station wagon with exceptional ride comfort',
+        'Driver meals & driver accommodation 100% included in package',
+        'Full passenger and comprehensive vehicle insurance',
+        'Extra spacious luggage boot ideal for 4 travelers with large suitcases'
+      ]
+    }
+  ],
+
   reviews: [
     {
       name: 'T. Voster',

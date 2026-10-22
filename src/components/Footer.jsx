@@ -68,6 +68,7 @@ export default function Footer({ onNavigate }) {
             <h4>Vehicle Rentals</h4>
             <ul className="footer-menu">
               <li><button onClick={() => handleNav('tuktuk')} className="footer-link-btn">Self Drive Tuk Tuk Rental</button></li>
+              <li><button onClick={() => handleNav('driver')} className="footer-link-btn">Rent A Car with Driver (Chauffeur)</button></li>
               <li><button onClick={() => handleNav('rentals', 'motorbike')} className="footer-link-btn">Honda NC 700X Touring</button></li>
               <li><button onClick={() => handleNav('rentals', 'motorbike')} className="footer-link-btn">Honda FMX 650 &amp; XR Baja</button></li>
               <li><button onClick={() => handleNav('rentals', 'scooter')} className="footer-link-btn">Honda Dio &amp; TVS Scooters</button></li>

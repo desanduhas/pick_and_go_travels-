@@ -50,6 +50,13 @@ export default function Navbar({ currentPage, onNavigate }) {
               Rent a TukTuk
             </button>
 
+            <button
+              className={`nav-link ${currentPage === 'driver' ? 'active' : ''}`}
+              onClick={() => handleNav('driver')}
+            >
+              Car with Driver
+            </button>
+
             <div className="nav-dropdown">
               <button
                 className={`nav-link ${currentPage === 'rentals' ? 'active' : ''}`}
@@ -58,11 +65,11 @@ export default function Navbar({ currentPage, onNavigate }) {
                 Other Rentals <ChevronDown size={14} style={{ marginLeft: '4px' }} />
               </button>
               <div className="dropdown-menu">
-                <div className="dropdown-item" onClick={() => handleNav('rentals', 'motorbike')}>
-                  🏍️ Motorbikes &amp; Scooters
+                <div className="dropdown-item" onClick={() => handleNav('driver')}>
+                  🚗 <strong>Rent A Car with Driver</strong> <span className="badge-new">NEW</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'car-with-driver')}>
-                  🚗 Rent-A-Car (Automatic)
+                  🚗 Rent-A-Car (Self Drive)
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'atv')}>
                   🏖️ Beach Quad ATVs
@@ -189,6 +196,14 @@ export default function Navbar({ currentPage, onNavigate }) {
               onClick={() => handleNav('tuktuk')}
             >
               🛺 Rent a TukTuk (Self Drive)
+            </button>
+          </li>
+          <li className="mobile-nav-item">
+            <button
+              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'driver' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              onClick={() => handleNav('driver')}
+            >
+              🚗 Rent A Car with Driver (Chauffeur)
             </button>
           </li>
           <li className="mobile-nav-item">

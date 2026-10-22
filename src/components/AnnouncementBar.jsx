@@ -10,7 +10,7 @@ export default function AnnouncementBar() {
       <div className="container announcement-wrapper">
         <div className="announcement-content">
           <span className="announcement-badge">SPECIAL OFFER</span>
-          <span className="announcement-text">Book Your TukTuk Online Now &amp; Get A Free 1-on-1 Driving Training Session!</span>
+          <span className="announcement-text">Book your TukTuk &amp; Cars online Now &amp; Get A Free 1-on-1 TukTuk driving training lesson</span>
         </div>
         <div className="announcement-contact">
           <a href={`tel:${company.phone1.replace(/\s+/g, '')}`} className="announcement-link">

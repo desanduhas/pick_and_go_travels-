@@ -229,7 +229,7 @@ export default function PageSkeleton({ page = 'home' }) {
           </div>
         )}
 
-        {page === 'stay' && (
+        {(page === 'stay' || page === 'driver') && (
           <div className="skeleton-cards-grid">
             <SkeletonVehicleCard />
             <SkeletonVehicleCard />

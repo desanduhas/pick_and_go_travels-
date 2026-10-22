@@ -316,7 +316,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     (isCar ? `• Included Mileage: 120 km/day (${120 * days} km total for ${days} days, Extra: $0.35 / 35¢ per km)\n` : '') +
     `• Pick-up Date: ${formatPrettyDate(startDate)}\n` +
     `• Drop-off Date: ${formatPrettyDate(endDate)}\n` +
-    `• Rental Duration: ${days} Day${days > 1 ? 's' : ''} ($${dailyRate}/day per vehicle)\n` +
+    `• Rental Duration: ${days} Day${days > 1 ? 's' : ''}${days > 1 ? ` (${days - 1} Night${days - 1 > 1 ? 's' : ''})` : ''} ($${dailyRate}/day per vehicle)\n` +
     `• Vehicle Rental Subtotal: $${baseRentalTotal}\n` +
     (isCar
       ? `• Refundable Security Deposit: $${depositTotal} ($${depositPerVehicle} × ${vehicleQty} - 100% Refundable upon vehicle return)\n`
@@ -493,7 +493,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                   <div className="booking-divider-col">
                     <div className="booking-divider-line" />
                     <span className="booking-divider-badge">
-                      {days} Night{days > 1 ? 's' : ''} / {days} Day{days > 1 ? 's' : ''}
+                      {days > 1 ? `${days - 1} Night${days - 1 > 1 ? 's' : ''} / ${days} Days` : '1 Day Rental'}
                     </span>
                     <div className="booking-divider-line" />
                   </div>
@@ -865,7 +865,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
               </div>
               <div className="summary-row">
                 <span>Rental Duration</span>
-                <span>{days} Day{days > 1 ? 's' : ''}</span>
+                <span>{days} Day{days > 1 ? 's' : ''}{days > 1 ? ` (${days - 1} Night${days - 1 > 1 ? 's' : ''})` : ''}</span>
               </div>
               {isCar && (
                 <div className="summary-row">

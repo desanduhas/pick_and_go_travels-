@@ -12,11 +12,11 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
 
   const categories = [
     { id: 'tuktuk', title: 'Self Drive Tuk Tuks', desc: 'Bajaj 205cc from $14/day', icon: '🛺', target: 'tuktuk' },
+    { id: 'driver', title: 'Rent A Car with Driver', desc: 'Chauffeur, Room & Meals Included', icon: '🚗', target: 'driver' },
     { id: 'motorbike', title: 'Adventure Motorbikes', desc: 'Honda NC700X, FMX, XR', icon: '🏍️', target: 'rentals', cat: 'motorbike' },
-    { id: 'car', title: 'Rent-A-Car & Vans', desc: 'Wagon R, Spacia & Toyota KDH Auto', icon: '🚗', target: 'rentals', cat: 'car-with-driver' },
+    { id: 'car', title: 'Self Drive Cars & Vans', desc: 'Wagon R, Spacia & Toyota KDH Auto', icon: '🚙', target: 'rentals', cat: 'car-with-driver' },
     { id: 'tours', title: 'Epic Island Tours', desc: '6-12 Day Off-Road & Day Trips', icon: '🗺️', target: 'tours' },
-    { id: 'stay', title: 'Whitehouse Stay', desc: 'Negombo Rooms from $18/night', icon: '🏡', target: 'stay' },
-    { id: 'calculator', title: 'Live Price Calculator', desc: 'Get instant transparent quotes', icon: '🧮', target: 'pricing' }
+    { id: 'stay', title: 'Whitehouse Stay', desc: 'Negombo Rooms from $18/night', icon: '🏡', target: 'stay' }
   ];
 
   return (

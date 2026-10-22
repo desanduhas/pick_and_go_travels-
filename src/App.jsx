@@ -15,13 +15,15 @@ import PricingPage from './pages/PricingPage';
 import StayPage from './pages/StayPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import CarWithDriverPage from './pages/CarWithDriverPage';
 import PageSkeleton from './components/SkeletonLoader';
 
 export default function App() {
   // Parse initial page from URL hash if available
   const getInitialPage = () => {
-    const hash = window.location.hash.replace('#', '').toLowerCase();
-    const validPages = ['home', 'tuktuk', 'rentals', 'tours', 'pricing', 'stay', 'about', 'contact'];
+    let hash = window.location.hash.replace('#', '').toLowerCase();
+    if (hash === 'car-with-driver' || hash === 'rent-a-car-with-driver') hash = 'driver';
+    const validPages = ['home', 'tuktuk', 'driver', 'rentals', 'tours', 'pricing', 'stay', 'about', 'contact'];
     return validPages.includes(hash) ? hash : 'home';
   };
 
@@ -68,8 +70,9 @@ export default function App() {
   // Synchronize browser history (Back / Forward buttons) and reset scroll to top
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      const validPages = ['home', 'tuktuk', 'rentals', 'tours', 'pricing', 'stay', 'about', 'contact'];
+      let hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'car-with-driver' || hash === 'rent-a-car-with-driver') hash = 'driver';
+      const validPages = ['home', 'tuktuk', 'driver', 'rentals', 'tours', 'pricing', 'stay', 'about', 'contact'];
       if (validPages.includes(hash)) {
         setIsPageLoading(true);
         setCurrentPage(hash);
@@ -86,7 +89,7 @@ export default function App() {
 
   // Apple iOS Scroll Reveal Observer
   useEffect(() => {
-    const selector = '.ios-card, .vehicle-card, .tour-card, .stat-card, .room-card, .review-card, .faq-card, .feature-item, .page-header, .pricing-table-card, .about-img-box, .contact-info-card, .booking-form-card';
+    const selector = '.ios-card, .vehicle-card, .driver-card, .driver-highlight-card, .driver-step-card, .driver-calculator-card, .tour-card, .stat-card, .room-card, .review-card, .faq-card, .feature-item, .page-header, .pricing-table-card, .about-img-box, .contact-info-card, .booking-form-card';
     
     const timeoutId = setTimeout(() => {
       const elements = document.querySelectorAll(selector);
@@ -198,6 +201,12 @@ export default function App() {
               <TuktukPage
                 onNavigate={handleNavigate}
                 onSelectCalculatorVehicle={handleSelectCalculatorVehicle}
+              />
+            )}
+
+            {currentPage === 'driver' && (
+              <CarWithDriverPage
+                onNavigate={handleNavigate}
               />
             )}
 
