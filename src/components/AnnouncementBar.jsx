@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone, MessageCircle, Sparkles } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
 export default function AnnouncementBar() {
@@ -9,8 +9,14 @@ export default function AnnouncementBar() {
     <div className="announcement-bar">
       <div className="container announcement-wrapper">
         <div className="announcement-content">
-          <span className="announcement-badge">SPECIAL OFFER</span>
-          <span className="announcement-text">Book your TukTuk &amp; Cars online Now &amp; Get A Free 1-on-1 TukTuk driving training lesson</span>
+          <span className="announcement-badge">
+            <Sparkles size={12} style={{ marginRight: '4px' }} />
+            SPECIAL OFFER
+          </span>
+          <span className="announcement-text">
+            Book your TukTuk &amp; Cars online Now &amp; Get A{' '}
+            <span className="announcement-highlight">Free 1-on-1 TukTuk driving training lesson!</span>
+          </span>
         </div>
         <div className="announcement-contact">
           <a href={`tel:${company.phone1.replace(/\s+/g, '')}`} className="announcement-link">

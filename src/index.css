@@ -580,33 +580,57 @@ textarea {
    iOS Top Announcement Bar
    =================================================================== */
 .announcement-bar {
-  background: #ffffff;
-  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(90deg, #fffbeb 0%, #ffffff 40%, #f8fafc 100%);
+  border-bottom: 1.5px solid rgba(245, 158, 11, 0.28);
   padding: 0.55rem 1rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  font-size: 0.86rem;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   position: relative;
   z-index: 1001;
+  box-shadow: 0 1px 6px rgba(245, 158, 11, 0.05);
 }
 
 .announcement-content {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
   font-weight: 500;
+  flex-wrap: wrap;
 }
 
 .announcement-badge {
-  background: var(--accent-gold);
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
   color: #ffffff;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.72rem;
-  padding: 0.15rem 0.6rem;
+  padding: 0.2rem 0.65rem;
   border-radius: var(--radius-full);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.32);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.announcement-text {
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.announcement-highlight {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.16);
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: inline-block;
 }
 
 .announcement-contact {
