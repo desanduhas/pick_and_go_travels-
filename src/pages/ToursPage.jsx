@@ -14,8 +14,15 @@ import {
   Truck,
   MapPin,
   Compass,
-  Award
+  Award,
+  DollarSign,
+  Plane,
+  Wrench,
+  Smartphone,
+  Zap,
+  Palmtree
 } from 'lucide-react';
+import { TukTukIcon, MotorbikeIcon, TrainIcon, LicenseCardIcon } from '../components/Icons';
 
 export default function ToursPage({ initialCategory, onNavigate }) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || 'all');
@@ -34,12 +41,39 @@ export default function ToursPage({ initialCategory, onNavigate }) {
 
   const categories = [
     { id: 'all', label: 'All Tours' },
-    { id: 'group-tour', label: '🛺 TukTuk Group Tour' },
-    { id: 'motorcycle-tour', label: '🏍️ Off-Road Classic (6-12 Days)' },
-    { id: 'day-tour', label: '🗺️ Day Excursions' },
-    { id: 'exploration-tour', label: '🌿 Cultural & Nature' },
-    { id: 'custom-tour', label: '✨ Tailor-Made' }
+    { id: 'group-tour', label: 'TukTuk Group Tour', icon: <TukTukIcon size={15} /> },
+    { id: 'motorcycle-tour', label: 'Off-Road Classic (6-12 Days)', icon: <MotorbikeIcon size={15} /> },
+    { id: 'day-tour', label: 'Day Excursions', icon: <MapPin size={15} /> },
+    { id: 'exploration-tour', label: 'Cultural & Nature', icon: <Palmtree size={15} /> },
+    { id: 'custom-tour', label: 'Tailor-Made', icon: <Sparkles size={15} /> }
   ];
+
+  const renderWhyIcon = (key) => {
+    switch (key) {
+      case 'price':
+        return <DollarSign size={20} />;
+      case 'airport':
+        return <Plane size={20} />;
+      case 'mechanic':
+        return <Wrench size={20} />;
+      case 'tuktuk':
+        return <TukTukIcon size={20} strokeWidth={2} />;
+      case 'permit':
+        return <LicenseCardIcon size={20} />;
+      case 'insurance':
+        return <ShieldCheck size={20} />;
+      case 'train':
+        return <TrainIcon size={20} />;
+      case 'usb':
+        return <Smartphone size={20} />;
+      case 'fast':
+        return <Zap size={20} />;
+      case 'discount':
+        return <Tag size={20} />;
+      default:
+        return <Check size={20} />;
+    }
+  };
 
   const filteredTours = selectedCategory === 'all'
     ? SITE_DATA.tours
@@ -86,7 +120,8 @@ export default function ToursPage({ initialCategory, onNavigate }) {
                 className={`segmented-btn ${selectedCategory === cat.id ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(cat.id)}
               >
-                {cat.label}
+                {cat.icon && <span className="segmented-btn-icon">{cat.icon}</span>}
+                <span>{cat.label}</span>
               </button>
             ))}
           </div>
@@ -206,7 +241,9 @@ export default function ToursPage({ initialCategory, onNavigate }) {
               <div className="group-tour-why-grid">
                 {tuktukGroupTour.whyChoose.map((why, idx) => (
                   <div key={idx} className="group-tour-why-card">
-                    <div className="group-why-icon">{why.icon}</div>
+                    <div className={`group-why-icon why-icon-${why.iconKey}`}>
+                      {renderWhyIcon(why.iconKey)}
+                    </div>
                     <h3 className="group-why-title">{why.title}</h3>
                     <p className="group-why-desc">{why.desc}</p>
                   </div>

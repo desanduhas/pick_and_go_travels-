@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, CreditCard } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
 export default function Footer({ onNavigate }) {
@@ -106,7 +106,10 @@ export default function Footer({ onNavigate }) {
 
         <div className="footer-payment-strip">
           <div className="footer-payment-inner">
-            <span className="footer-payment-title">💳 Accepted Payment Methods:</span>
+            <span className="footer-payment-title">
+              <CreditCard size={16} style={{ display: 'inline-block', verticalAlign: 'text-bottom', marginRight: '6px' }} />
+              Accepted Payment Methods:
+            </span>
             <span className="footer-payment-desc">
               Cash (USD, EUR, GBP, LKR) &amp; Card Payments • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>
             </span>

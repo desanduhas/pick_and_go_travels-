@@ -799,6 +799,25 @@ textarea {
   background: var(--accent-blue-soft);
 }
 
+.dropdown-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-primary);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.dropdown-item:hover .dropdown-icon-wrap {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--accent-blue);
+  transform: scale(1.08);
+}
+
 .badge-new {
   background: #ef4444;
   color: #fff;
@@ -941,6 +960,16 @@ textarea {
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.segmented-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
 }
 
 .segmented-btn:hover {
@@ -951,6 +980,11 @@ textarea {
   background: #ffffff;
   color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.segmented-btn.active .segmented-btn-icon {
+  opacity: 1;
+  color: var(--accent-orange);
 }
 
 /* Category Filter Tabs (Apple Pill Style) */
@@ -2863,8 +2897,81 @@ textarea {
 }
 
 .group-why-icon {
-  font-size: 1.85rem;
-  line-height: 1;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(249, 115, 22, 0.1);
+  color: var(--accent-orange);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  transition: transform var(--transition-fast);
+}
+
+.group-tour-why-card:hover .group-why-icon {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.group-why-icon.why-icon-price {
+  background: rgba(5, 150, 105, 0.1);
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.2);
+}
+
+.group-why-icon.why-icon-airport {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.group-why-icon.why-icon-mechanic {
+  background: rgba(217, 119, 6, 0.1);
+  color: #d97706;
+  border-color: rgba(217, 119, 6, 0.2);
+}
+
+.group-why-icon.why-icon-tuktuk {
+  background: rgba(249, 115, 22, 0.1);
+  color: #ea580c;
+  border-color: rgba(249, 115, 22, 0.2);
+}
+
+.group-why-icon.why-icon-permit {
+  background: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+.group-why-icon.why-icon-insurance {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.group-why-icon.why-icon-train {
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+.group-why-icon.why-icon-usb {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+  border-color: rgba(14, 165, 233, 0.2);
+}
+
+.group-why-icon.why-icon-fast {
+  background: rgba(234, 179, 8, 0.12);
+  color: #ca8a04;
+  border-color: rgba(234, 179, 8, 0.25);
+}
+
+.group-why-icon.why-icon-discount {
+  background: rgba(236, 72, 153, 0.1);
+  color: #db2777;
+  border-color: rgba(236, 72, 153, 0.2);
 }
 
 .group-why-title {
@@ -4293,6 +4400,47 @@ textarea {
   cursor: pointer;
 }
 
+.mobile-nav-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.85rem !important;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.65rem 0.85rem !important;
+  font-family: var(--font-heading);
+  font-size: 1rem !important;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-btn:hover {
+  background: var(--bg-subtle);
+}
+
+.mobile-nav-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-btn:hover .mobile-nav-icon,
+.mobile-nav-btn[style*="var(--accent-blue)"] .mobile-nav-icon {
+  background: var(--accent-blue-soft);
+  color: var(--accent-blue);
+}
+
 .mobile-nav-item button:hover,
 .mobile-nav-item button.active {
   color: var(--accent-blue);
@@ -4346,15 +4494,55 @@ textarea {
 }
 
 .home-category-icon {
-  font-size: 2.2rem;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-sm);
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
   background: var(--bg-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.home-category-card:hover .home-category-icon {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.home-category-icon.cat-theme-tuktuk {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.14), rgba(249, 115, 22, 0.05));
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  color: #ea580c;
+}
+
+.home-category-icon.cat-theme-driver {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(37, 99, 235, 0.05));
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  color: #2563eb;
+}
+
+.home-category-icon.cat-theme-bike {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.14), rgba(220, 38, 38, 0.05));
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #dc2626;
+}
+
+.home-category-icon.cat-theme-car {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.14), rgba(5, 150, 105, 0.05));
+  border: 1px solid rgba(5, 150, 105, 0.25);
+  color: #059669;
+}
+
+.home-category-icon.cat-theme-tours {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.14), rgba(124, 58, 237, 0.05));
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  color: #7c3aed;
+}
+
+.home-category-icon.cat-theme-stay {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(13, 148, 136, 0.05));
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  color: #0d9488;
 }
 
 .home-category-body {
@@ -4453,8 +4641,42 @@ textarea {
 }
 
 .badge-item-icon {
-  font-size: 1.25rem;
-  line-height: 1;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.home-spotlight-badge-item:hover .badge-item-icon {
+  transform: scale(1.08);
+}
+
+.badge-item-icon.badge-theme-orange {
+  background: rgba(249, 115, 22, 0.12);
+  color: #ea580c;
+  border: 1px solid rgba(249, 115, 22, 0.22);
+}
+
+.badge-item-icon.badge-theme-blue {
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+}
+
+.badge-item-icon.badge-theme-emerald {
+  background: rgba(5, 150, 105, 0.12);
+  color: #059669;
+  border: 1px solid rgba(5, 150, 105, 0.22);
+}
+
+.badge-item-icon.badge-theme-purple {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.22);
 }
 
 .badge-item-title {
@@ -4950,8 +5172,42 @@ textarea {
 }
 
 .pillar-icon {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.tuktuk-pillar-card:hover .pillar-icon {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.pillar-icon.pillar-theme-orange {
+  background: rgba(249, 115, 22, 0.12);
+  color: #ea580c;
+  border: 1px solid rgba(249, 115, 22, 0.22);
+}
+
+.pillar-icon.pillar-theme-blue {
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+}
+
+.pillar-icon.pillar-theme-purple {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.22);
+}
+
+.pillar-icon.pillar-theme-emerald {
+  background: rgba(5, 150, 105, 0.12);
+  color: #059669;
+  border: 1px solid rgba(5, 150, 105, 0.22);
 }
 
 .pillar-title {
@@ -6422,12 +6678,43 @@ textarea {
 }
 
 .driver-highlight-icon {
-  font-size: 2rem;
-  line-height: 1;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  padding: 0.6rem;
+  border-radius: 12px;
   background: var(--bg-subtle);
-  border-radius: var(--radius-sm);
+  transition: transform var(--transition-fast);
+}
+
+.driver-highlight-card:hover .driver-highlight-icon {
+  transform: scale(1.06);
+}
+
+.driver-highlight-icon.highlight-icon-driver {
+  background: rgba(37, 99, 235, 0.12);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+}
+
+.driver-highlight-icon.highlight-icon-bed {
+  background: rgba(245, 158, 11, 0.14);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.driver-highlight-icon.highlight-icon-shield {
+  background: rgba(5, 150, 105, 0.12);
+  color: #059669;
+  border: 1px solid rgba(5, 150, 105, 0.22);
+}
+
+.driver-highlight-icon.highlight-icon-gauge {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.22);
 }
 
 .driver-highlight-content h4 {

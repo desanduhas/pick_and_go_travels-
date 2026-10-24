@@ -1,5 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, MessageCircle } from 'lucide-react';
+import {
+  ChevronDown,
+  Menu,
+  X,
+  MessageCircle,
+  Home,
+  Calculator,
+  Star,
+  Phone,
+  Layers,
+  Sparkles,
+  MapPin,
+  Palmtree
+} from 'lucide-react';
+import {
+  TukTukIcon,
+  ChauffeurCarIcon,
+  MotorbikeIcon,
+  VanIcon,
+  BicycleIcon,
+  ExpeditionMapIcon,
+  VillaStayIcon
+} from './Icons';
 import { SITE_DATA } from '../data/siteData';
 
 export default function Navbar({ currentPage, onNavigate }) {
@@ -66,16 +88,21 @@ export default function Navbar({ currentPage, onNavigate }) {
               </button>
               <div className="dropdown-menu">
                 <div className="dropdown-item" onClick={() => handleNav('driver')}>
-                  🚗 <strong>Rent A Car with Driver</strong> <span className="badge-new">NEW</span>
+                  <span className="dropdown-icon-wrap"><ChauffeurCarIcon size={16} /></span>
+                  <span className="dropdown-item-text"><strong>Rent A Car with Driver</strong></span>
+                  <span className="badge-new">NEW</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'car-with-driver')}>
-                  🚗 Rent-A-Car (Self Drive)
+                  <span className="dropdown-icon-wrap"><VanIcon size={16} /></span>
+                  <span className="dropdown-item-text">Rent-A-Car (Self Drive)</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'bicycle')}>
-                  🚲 Foot Bicycles
+                  <span className="dropdown-icon-wrap"><BicycleIcon size={16} /></span>
+                  <span className="dropdown-item-text">Foot Bicycles</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'all')}>
-                  📋 View All Vehicles
+                  <span className="dropdown-icon-wrap"><Layers size={16} /></span>
+                  <span className="dropdown-item-text">View All Vehicles</span>
                 </div>
               </div>
             </div>
@@ -89,19 +116,25 @@ export default function Navbar({ currentPage, onNavigate }) {
               </button>
               <div className="dropdown-menu">
                 <div className="dropdown-item" onClick={() => handleNav('tours', 'group-tour')}>
-                  🛺 TukTuk Group Tour <span className="badge-new">POPULAR</span>
+                  <span className="dropdown-icon-wrap"><TukTukIcon size={16} /></span>
+                  <span className="dropdown-item-text">TukTuk Group Tour</span>
+                  <span className="badge-new">POPULAR</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('tours', 'motorcycle-tour')}>
-                  🏍️ Off-Road Motorbike Tours (6-12 Days)
+                  <span className="dropdown-icon-wrap"><MotorbikeIcon size={16} /></span>
+                  <span className="dropdown-item-text">Off-Road Motorbike Tours (6-12 Days)</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('tours', 'day-tour')}>
-                  🗺️ Negombo Day Excursions
+                  <span className="dropdown-icon-wrap"><MapPin size={16} /></span>
+                  <span className="dropdown-item-text">Negombo Day Excursions</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('tours', 'exploration-tour')}>
-                  🌿 Cultural &amp; Nature Expeditions
+                  <span className="dropdown-icon-wrap"><Palmtree size={16} /></span>
+                  <span className="dropdown-item-text">Cultural &amp; Nature Expeditions</span>
                 </div>
                 <div className="dropdown-item" onClick={() => handleNav('tours', 'custom-tour')}>
-                  ✨ Tailor-Made Custom Tour
+                  <span className="dropdown-icon-wrap"><Sparkles size={16} /></span>
+                  <span className="dropdown-item-text">Tailor-Made Custom Tour</span>
                 </div>
               </div>
             </div>
@@ -181,74 +214,92 @@ export default function Navbar({ currentPage, onNavigate }) {
         <ul className="mobile-nav-list">
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'home' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'home' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('home')}
             >
-              🏠 Home
+              <span className="mobile-nav-icon"><Home size={18} /></span>
+              <span>Home</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'tuktuk' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'tuktuk' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('tuktuk')}
             >
-              🛺 Rent a TukTuk (Self Drive)
+              <span className="mobile-nav-icon"><TukTukIcon size={18} /></span>
+              <span>Rent a TukTuk (Self Drive)</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'driver' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'driver' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('driver')}
             >
-              🚗 Rent A Car with Driver (Chauffeur)
+              <span className="mobile-nav-icon"><ChauffeurCarIcon size={18} /></span>
+              <span>Rent A Car with Driver (Chauffeur)</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'rentals' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'rentals' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('rentals', 'all')}
             >
-              🏍️ All Rental Vehicles (Bikes, Cars, Scooters)
+              <span className="mobile-nav-icon"><MotorbikeIcon size={18} /></span>
+              <span>All Rental Vehicles (Bikes, Cars, Scooters)</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'tours' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'tours' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('tours', 'all')}
             >
-              🗺️ Island Tours &amp; Expeditions
+              <span className="mobile-nav-icon"><ExpeditionMapIcon size={18} /></span>
+              <span>Island Tours &amp; Expeditions</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'pricing' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'pricing' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('pricing')}
             >
-              🧮 Live Price Calculator &amp; Rates
+              <span className="mobile-nav-icon"><Calculator size={18} /></span>
+              <span>Live Price Calculator &amp; Rates</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'stay' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'stay' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('stay')}
             >
-              🏡 Pick &amp; Go Whitehouse (Negombo Stay)
+              <span className="mobile-nav-icon"><VillaStayIcon size={18} /></span>
+              <span>Pick &amp; Go Whitehouse (Negombo Stay)</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'about' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'about' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('about')}
             >
-              ⭐ About Rocky &amp; Reviews
+              <span className="mobile-nav-icon"><Star size={18} /></span>
+              <span>About Rocky &amp; Reviews</span>
             </button>
           </li>
           <li className="mobile-nav-item">
             <button
-              style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'contact' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
+              className="mobile-nav-btn"
+              style={{ color: currentPage === 'contact' ? 'var(--accent-blue)' : 'inherit' }}
               onClick={() => handleNav('contact')}
             >
-              📞 Contact &amp; Bookings
+              <span className="mobile-nav-icon"><Phone size={18} /></span>
+              <span>Contact &amp; Bookings</span>
             </button>
           </li>
         </ul>

@@ -467,16 +467,16 @@ export const SITE_DATA = {
     tagline: 'Explore paradise behind the wheel of your own Tuk Tuk with your friends, backed by a dedicated support van and expert team.',
     overview: 'Experience an unforgettable Sri Lanka tuk tuk group tour and explore the island with friends or fellow travelers. This exciting adventure combines scenic drives, cultural sites, wildlife parks, and breathtaking landscapes while following a carefully planned Sri Lanka tuk tuk itinerary. Travel more while spending less with our flexible durations and group-friendly pricing, backed by full nationwide road support and luggage transfers.',
     whyChoose: [
-      { icon: '💰', title: 'Starts at $20 / Day', desc: 'Our group packages start at just $20 per day per person with unmatched inclusions.' },
-      { icon: '🛬', title: 'Airport Pickup Service', desc: 'Complimentary on-arrival greeting and pickup service directly from CMB Bandaranaike International Airport.' },
-      { icon: '🛠️', title: '24/7 Breakdown Assistant', desc: 'Nationwide roadside mechanic network and rapid breakdown recovery anywhere on the island.' },
-      { icon: '🛺', title: 'Reliable Modern Tuk Tuks', desc: 'Top-tier, regularly inspected and fully serviced Bajaj RE 205cc three-wheelers.' },
-      { icon: '🪪', title: 'Valid Sri Lankan Permits', desc: 'Official Automobile Association of Ceylon (AAC) driving licenses arranged in advance for all drivers.' },
-      { icon: '🛡️', title: 'VIP Comprehensive Insurance', desc: 'Full collision damage waiver and third-party protection included with zero stress.' },
-      { icon: '🚂', title: 'Kandy to Ella Train Transit', desc: 'Ride the world’s most scenic blue train while our drivers safely transport your tuk-tuks over the mountain pass.' },
-      { icon: '📱', title: 'Chargers, USB & Speakers', desc: 'Equipped with dual USB fast chargers, phone mounts, and portable Bluetooth speakers for your tunes.' },
-      { icon: '⚡', title: 'Easy & Fast Booking', desc: 'Instant WhatsApp communication with owner Rocky, clear upfront pricing, and zero hidden costs.' },
-      { icon: '🎉', title: 'Attractive Group Discounts', desc: 'Special discounted group tiers for large squads of 10 to 22+ people.' }
+      { iconKey: 'price', title: 'Starts at $20 / Day', desc: 'Our group packages start at just $20 per day per person with unmatched inclusions.' },
+      { iconKey: 'airport', title: 'Airport Pickup Service', desc: 'Complimentary on-arrival greeting and pickup service directly from CMB Bandaranaike International Airport.' },
+      { iconKey: 'mechanic', title: '24/7 Breakdown Assistant', desc: 'Nationwide roadside mechanic network and rapid breakdown recovery anywhere on the island.' },
+      { iconKey: 'tuktuk', title: 'Reliable Modern Tuk Tuks', desc: 'Top-tier, regularly inspected and fully serviced Bajaj RE 205cc three-wheelers.' },
+      { iconKey: 'permit', title: 'Valid Sri Lankan Permits', desc: 'Official Automobile Association of Ceylon (AAC) driving licenses arranged in advance for all drivers.' },
+      { iconKey: 'insurance', title: 'VIP Comprehensive Insurance', desc: 'Full collision damage waiver and third-party protection included with zero stress.' },
+      { iconKey: 'train', title: 'Kandy to Ella Train Transit', desc: 'Ride the world’s most scenic blue train while our drivers safely transport your tuk-tuks over the mountain pass.' },
+      { iconKey: 'usb', title: 'Chargers, USB & Speakers', desc: 'Equipped with dual USB fast chargers, phone mounts, and portable Bluetooth speakers for your tunes.' },
+      { iconKey: 'fast', title: 'Easy & Fast Booking', desc: 'Instant WhatsApp communication with owner Rocky, clear upfront pricing, and zero hidden costs.' },
+      { iconKey: 'discount', title: 'Attractive Group Discounts', desc: 'Special discounted group tiers for large squads of 10 to 22+ people.' }
     ],
     standardPackages: {
       title: 'Standard Group Tour Packages',
@@ -676,9 +676,9 @@ export const SITE_DATA = {
         'Additional 1 kilometer $0.40 cent'
       ],
       exclusions: [
-        '⛽ Petrol 92 octane LKR 414 1L',
-        '🛣️ Highway ticket (Expressway tolls)',
-        '🅿️ Parking ticket'
+        'Petrol 92 octane (LKR 414 / 1L)',
+        'Highway expressway toll tickets',
+        'Parking fees & tickets'
       ],
       highlights: [
         'Experienced English-speaking chauffeur & tour guide',
@@ -717,9 +717,9 @@ export const SITE_DATA = {
         'Additional 1 kilometer $0.40 cent'
       ],
       exclusions: [
-        '⛽ Petrol 92 octane LKR 414 1L',
-        '🛣️ Highway ticket (Expressway tolls)',
-        '🅿️ Parking ticket'
+        'Petrol 92 octane (LKR 414 / 1L)',
+        'Highway expressway toll tickets',
+        'Parking fees & tickets'
       ],
       highlights: [
         'Spacious passenger cabin with high comfort for long island journeys',
@@ -758,9 +758,9 @@ export const SITE_DATA = {
         'Additional 1 kilometer $0.40 cent'
       ],
       exclusions: [
-        '⛽ Petrol 95 octane LKR 475 1L',
-        '🛣️ Highway ticket (Expressway tolls)',
-        '🅿️ Parking ticket'
+        'Petrol 95 octane (LKR 475 / 1L)',
+        'Highway expressway toll tickets',
+        'Parking fees & tickets'
       ],
       highlights: [
         'Ultra-smooth quiet Hybrid powertrain with luxurious captain seating',
@@ -799,9 +799,9 @@ export const SITE_DATA = {
         'Additional 1 kilometer $0.40 cent'
       ],
       exclusions: [
-        '⛽ Petrol 95 octane LKR 475 1L',
-        '🛣️ Highway ticket (Expressway tolls)',
-        '🅿️ Parking ticket'
+        'Petrol 95 octane (LKR 475 / 1L)',
+        'Highway expressway toll tickets',
+        'Parking fees & tickets'
       ],
       highlights: [
         'Smooth Japanese hybrid station wagon with exceptional ride comfort',

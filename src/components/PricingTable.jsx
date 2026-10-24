@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, ArrowLeftRight, CreditCard } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
 export default function PricingTable() {
@@ -17,7 +17,7 @@ export default function PricingTable() {
         </div>
 
         <div className="table-scroll-hint">
-          <span>👈 Swipe horizontally to view full price matrix 👉</span>
+          <span><ArrowLeftRight size={14} style={{ verticalAlign: 'middle', marginRight: '6px' }} /> Swipe horizontally to view full price matrix</span>
         </div>
 
         <div className="table-responsive">
@@ -63,7 +63,7 @@ export default function PricingTable() {
 
         <div className="pricing-payment-banner">
           <div className="pricing-payment-banner-content">
-            <span className="pricing-payment-icon">💳</span>
+            <span className="pricing-payment-icon"><CreditCard size={18} color="var(--accent-orange)" /></span>
             <div>
               <strong style={{ color: 'var(--text-primary)' }}>Accepted Payment Methods: </strong>
               <span style={{ color: 'var(--text-secondary)' }}>

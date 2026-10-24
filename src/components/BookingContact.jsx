@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, MessageCircle, Mail } from 'lucide-react';
+import { MapPin, Phone, MessageCircle, Mail, CreditCard, CheckCircle2 } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
 export default function BookingContact({ initialService, initialMessage, initialDates }) {
@@ -156,8 +156,8 @@ export default function BookingContact({ initialService, initialMessage, initial
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border-light)'
             }}>
-              <h5 style={{ color: 'var(--accent-orange)', marginBottom: '0.25rem', fontWeight: 700 }}>
-                💳 Accepted Payment Methods
+              <h5 style={{ color: 'var(--accent-orange)', marginBottom: '0.25rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <CreditCard size={16} /> Accepted Payment Methods
               </h5>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
                 Payment upon vehicle delivery: Cash (USD, EUR, GBP, LKR) or Card payments • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>.
@@ -295,8 +295,8 @@ export default function BookingContact({ initialService, initialMessage, initial
                   border: '1px solid var(--accent-emerald)',
                   color: '#065f46'
                 }}>
-                  <p style={{ fontWeight: 700, margin: '0 0 0.4rem 0', fontSize: '0.98rem' }}>
-                    ✓ Thank you, {formData.name}! Your reservation inquiry is ready.
+                  <p style={{ fontWeight: 700, margin: '0 0 0.4rem 0', fontSize: '0.98rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                    <CheckCircle2 size={18} /> Thank you, {formData.name}! Your reservation inquiry is ready.
                   </p>
                   <p style={{ fontSize: '0.86rem', margin: '0 0 0.75rem 0', color: '#047857' }}>
                     If WhatsApp did not open automatically, click below to chat with Rocky immediately:

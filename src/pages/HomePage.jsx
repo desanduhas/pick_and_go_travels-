@@ -2,7 +2,16 @@ import React from 'react';
 import Hero from '../components/Hero';
 import FeatureStrip from '../components/FeatureStrip';
 import { SITE_DATA } from '../data/siteData';
-import { ArrowRight, Compass, ShieldCheck, Star, Award, Check, Clock } from 'lucide-react';
+import { ArrowRight, Compass, ShieldCheck, Star, Award, Check, Clock, GraduationCap, Gauge, Wrench } from 'lucide-react';
+import {
+  TukTukIcon,
+  ChauffeurCarIcon,
+  MotorbikeIcon,
+  VanIcon,
+  ExpeditionMapIcon,
+  VillaStayIcon,
+  TrainIcon
+} from '../components/Icons';
 
 export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
   const { fleet, reviews, company } = SITE_DATA;
@@ -12,7 +21,8 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
   const signaturePackages = [
     {
       id: 'pkg-tuktuk',
-      badge: '🛺 Most Popular Travel',
+      badgeIcon: <TukTukIcon size={14} />,
+      badge: 'Most Popular Travel',
       title: 'Self-Drive Tuk Tuk Adventure',
       image: '/images/background/moment-04.jpg',
       duration: 'Flexible (1 to 30+ Days)',
@@ -29,7 +39,8 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
     },
     {
       id: 'pkg-driver',
-      badge: '🚗 Private Chauffeur & Guide',
+      badgeIcon: <ChauffeurCarIcon size={14} />,
+      badge: 'Private Chauffeur & Guide',
       title: 'Rent A Car with Driver (Chauffeured Tour)',
       image: '/images/honda-shuttle.jpg',
       duration: 'Custom Itinerary (1 to 30 Days)',
@@ -46,7 +57,8 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
     },
     {
       id: 'pkg-motorbike',
-      badge: '🏍️ Guided Off-Road Tour',
+      badgeIcon: <MotorbikeIcon size={14} />,
+      badge: 'Guided Off-Road Tour',
       title: '12-Day Off Road Classic Motorcycle Tour',
       image: '/images/background/moment-05.jpg',
       duration: '12 Days / 11 Nights',
@@ -64,12 +76,56 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
   ];
 
   const categories = [
-    { id: 'tuktuk', title: 'Self Drive Tuk Tuks', desc: 'Bajaj 205cc from $14/day', icon: '🛺', target: 'tuktuk' },
-    { id: 'driver', title: 'Rent A Car with Driver', desc: 'Chauffeur, Room & Meals Included', icon: '🚗', target: 'driver' },
-    { id: 'motorbike', title: 'Adventure Motorbikes', desc: 'Honda NC700X, FMX, XR', icon: '🏍️', target: 'rentals', cat: 'motorbike' },
-    { id: 'car', title: 'Self Drive Cars & Vans', desc: 'Wagon R, Spacia & Toyota KDH Auto', icon: '🚙', target: 'rentals', cat: 'car-with-driver' },
-    { id: 'tours', title: 'Epic Island Tours', desc: '6-12 Day Off-Road & Day Trips', icon: '🗺️', target: 'tours' },
-    { id: 'stay', title: 'Whitehouse Stay', desc: 'Negombo Rooms from $18/night', icon: '🏡', target: 'stay' }
+    {
+      id: 'tuktuk',
+      title: 'Self Drive Tuk Tuks',
+      desc: 'Bajaj 205cc from $14/day',
+      icon: <TukTukIcon size={26} />,
+      themeClass: 'cat-theme-tuktuk',
+      target: 'tuktuk'
+    },
+    {
+      id: 'driver',
+      title: 'Rent A Car with Driver',
+      desc: 'Chauffeur, Room & Meals Included',
+      icon: <ChauffeurCarIcon size={26} />,
+      themeClass: 'cat-theme-driver',
+      target: 'driver'
+    },
+    {
+      id: 'motorbike',
+      title: 'Adventure Motorbikes',
+      desc: 'Honda NC700X, FMX, XR',
+      icon: <MotorbikeIcon size={26} />,
+      themeClass: 'cat-theme-bike',
+      target: 'rentals',
+      cat: 'motorbike'
+    },
+    {
+      id: 'car',
+      title: 'Self Drive Cars & Vans',
+      desc: 'Wagon R, Spacia & Toyota KDH Auto',
+      icon: <VanIcon size={26} />,
+      themeClass: 'cat-theme-car',
+      target: 'rentals',
+      cat: 'car-with-driver'
+    },
+    {
+      id: 'tours',
+      title: 'Epic Island Tours',
+      desc: '6-12 Day Off-Road & Day Trips',
+      icon: <ExpeditionMapIcon size={26} />,
+      themeClass: 'cat-theme-tours',
+      target: 'tours'
+    },
+    {
+      id: 'stay',
+      title: 'Whitehouse Stay',
+      desc: 'Negombo Rooms from $18/night',
+      icon: <VillaStayIcon size={26} />,
+      themeClass: 'cat-theme-stay',
+      target: 'stay'
+    }
   ];
 
   return (
@@ -95,10 +151,10 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
             {categories.map((c) => (
               <div
                 key={c.id}
-                className="ios-card home-category-card"
+                className={`ios-card home-category-card ${c.themeClass}`}
                 onClick={() => onNavigate(c.target, c.cat)}
               >
-                <div className="home-category-icon">
+                <div className={`home-category-icon ${c.themeClass}`}>
                   {c.icon}
                 </div>
                 <div className="home-category-body">
@@ -123,7 +179,7 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
               <div className="home-spotlight-grid">
                 <div className="home-spotlight-content">
                   <span className="page-pill">
-                    ⭐ Sri Lanka’s #1 Experience
+                    <Award size={13} style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'text-top' }} /> Sri Lanka’s #1 Experience
                   </span>
                   <h2 className="home-spotlight-title">
                     Drive Your Own Tuk Tuk Across the Island
@@ -132,16 +188,16 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
                     A self-drive tuk tuk gives you total freedom to stop at roadside coconut stands, climb mountain switchbacks, and swim in secluded beaches at your own pace.
                   </p>
 
-                  {/* 4 Feature Badges in 2x2 Grid */}
+                  {/* 4 Feature Badges in 2x2 Grid with vector icons */}
                   <div className="home-spotlight-badges">
                     {[
-                      { title: 'Free Driving Lesson', desc: '1-on-1 Negombo training', icon: '🎓' },
-                      { title: 'Unlimited Kilometers', desc: 'No daily distance caps', icon: '🛣️' },
-                      { title: '24/7 Breakdown Help', desc: 'Island-wide mechanic net', icon: '🛠️' },
-                      { title: 'Kandy-to-Ella Train', desc: 'We drive your tuk tuk', icon: '🚂' }
+                      { title: 'Free Driving Lesson', desc: '1-on-1 Negombo training', icon: <GraduationCap size={18} />, theme: 'badge-theme-orange' },
+                      { title: 'Unlimited Kilometers', desc: 'No daily distance caps', icon: <Gauge size={18} />, theme: 'badge-theme-blue' },
+                      { title: '24/7 Breakdown Help', desc: 'Island-wide mechanic net', icon: <Wrench size={18} />, theme: 'badge-theme-emerald' },
+                      { title: 'Kandy-to-Ella Train', desc: 'We drive your tuk tuk', icon: <TrainIcon size={18} />, theme: 'badge-theme-purple' }
                     ].map((f, i) => (
                       <div key={i} className="home-spotlight-badge-item">
-                        <div className="badge-item-icon">{f.icon}</div>
+                        <div className={`badge-item-icon ${f.theme}`}>{f.icon}</div>
                         <div>
                           <div className="badge-item-title">{f.title}</div>
                           <div className="badge-item-desc">{f.desc}</div>
@@ -176,9 +232,10 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
                           'https://pickandgotravels.com/wp-content/uploads/2024/05/Explore-the-beauties-of-nature-with-your-own-TukTuk.jpg';
                       }}
                     />
-                    {/* Model Tag Pill */}
+                    {/* Model Tag Pill with vector icon */}
                     <div className="home-spotlight-model-tag">
-                      <span>🛺</span> Bajaj RE 205cc
+                      <TukTukIcon size={16} strokeWidth={2} />
+                      <span>Bajaj RE 205cc</span>
                     </div>
                     {/* Price Tag Badge */}
                     <div className="home-spotlight-price-tag">
@@ -226,7 +283,10 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
                     className="home-tour-img"
                     loading="lazy"
                   />
-                  <span className="home-tour-badge">{pkg.badge}</span>
+                  <span className="home-tour-badge">
+                    {pkg.badgeIcon}
+                    <span>{pkg.badge}</span>
+                  </span>
                   <span className="home-tour-price-pill">{pkg.price}</span>
                 </div>
                 <div className="home-tour-body">
@@ -273,7 +333,9 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
 
             <div style={{ position: 'relative', zIndex: 1 }}>
               <div className="page-header home-reviews-header">
-                <span className="page-pill">⭐ Google Verified (5.0 ★ · 120+ Reviews)</span>
+                <span className="page-pill">
+                  <Star size={13} fill="currentColor" style={{ display: 'inline-block', marginRight: '4px', verticalAlign: 'text-top' }} /> Google Verified (5.0 ★ · 120+ Reviews)
+                </span>
                 <h2 className="page-title">Loved by Travelers Worldwide</h2>
                 <p className="page-subtitle">Read real reviews from international adventurers who explored with Pick &amp; Go Travels.</p>
               </div>
@@ -293,7 +355,11 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
                         <span className="home-review-badge">✓ Verified Google Review</span>
                       </div>
                     </div>
-                    <div className="home-review-stars">★★★★★</div>
+                    <div className="home-review-stars">
+                      {[...Array(5)].map((_, sIdx) => (
+                        <Star key={sIdx} size={15} fill="#f59e0b" color="#f59e0b" style={{ display: 'inline-block', marginRight: '2px' }} />
+                      ))}
+                    </div>
                     <p className="home-review-text">
                       “{r.text}”
                     </p>

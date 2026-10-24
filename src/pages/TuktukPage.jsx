@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SITE_DATA } from '../data/siteData';
-import { Check, ShieldCheck, Award, Train, HelpCircle, MessageCircle, Calculator, Users, ArrowRight } from 'lucide-react';
+import { Check, ShieldCheck, Award, HelpCircle, MessageCircle, Calculator, Users, ArrowRight, GraduationCap, Wrench } from 'lucide-react';
+import { TrainIcon, LicenseCardIcon } from '../components/Icons';
 
 export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
   const tuktuk = SITE_DATA.fleet.find((f) => f.id === 'tuktuk-bajaj');
@@ -120,7 +121,9 @@ export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
         {/* 4 Feature Pillars Grid */}
         <div className="tuktuk-pillars-grid">
           <div className="ios-card tuktuk-pillar-card">
-            <div className="pillar-icon">🎓</div>
+            <div className="pillar-icon pillar-theme-orange">
+              <GraduationCap size={28} />
+            </div>
             <h3 className="pillar-title">Free 1-on-1 Driving Training</h3>
             <p className="pillar-desc">
               Never driven a manual 3-wheeler before? No problem. Our expert instructors spend as much time as you need in quiet Negombo streets until you are 100% confident.
@@ -128,7 +131,9 @@ export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
           </div>
 
           <div className="ios-card tuktuk-pillar-card">
-            <div className="pillar-icon">🪪</div>
+            <div className="pillar-icon pillar-theme-blue">
+              <LicenseCardIcon size={28} />
+            </div>
             <h3 className="pillar-title">Legal Sri Lankan Driving Permit</h3>
             <p className="pillar-desc">
               Foreign licenses require official endorsement by the Automobile Association of Ceylon (AAC). Send us your documents in advance ($40 fee) and arrive with your legal permit ready.
@@ -136,7 +141,9 @@ export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
           </div>
 
           <div className="ios-card tuktuk-pillar-card">
-            <div className="pillar-icon">🚂</div>
+            <div className="pillar-icon pillar-theme-purple">
+              <TrainIcon size={28} />
+            </div>
             <h3 className="pillar-title">Kandy to Ella Train Transfer</h3>
             <p className="pillar-desc">
               Don’t miss Sri Lanka’s world-famous scenic blue train! Enjoy the ride from Kandy to Ella with your luggage, and Pick &amp; Go will drive your Tuk Tuk to Ella station waiting for you.
@@ -144,7 +151,9 @@ export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
           </div>
 
           <div className="ios-card tuktuk-pillar-card">
-            <div className="pillar-icon">🛠️</div>
+            <div className="pillar-icon pillar-theme-emerald">
+              <Wrench size={28} />
+            </div>
             <h3 className="pillar-title">24/7 Island Breakdown Support</h3>
             <p className="pillar-desc">
               Every vehicle includes a spare tire, jack, and roadside kit. If you ever need mechanical help, our nationwide network of trusted mechanics is always on call.

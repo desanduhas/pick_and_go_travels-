@@ -7,7 +7,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Negombo HQ Handover',
     desc: 'Thumbs up for an epic self-drive tuk-tuk journey',
     category: 'Tuk-Tuk Rental',
-    badge: '🛺 Self Drive'
+    badge: 'Self-Drive Tuk Tuk'
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Bajaj RE Departure',
     desc: 'Ready to hit the coastal roads and misty tea hills',
     category: 'Tuk-Tuk Rental',
-    badge: '🛺 Negombo'
+    badge: 'Negombo Beach HQ'
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Backpacker Explorer Squad',
     desc: 'Big smiles and ready backpacks with Rocky at depot',
     category: 'Group Tour',
-    badge: '👥 Group Travel'
+    badge: 'Group Convoy'
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Twin Tuk-Tuk Convoy',
     desc: 'Adventure friends celebrating atop red Pick & Go tuk-tuks',
     category: 'Tuk-Tuk Rental',
-    badge: '🎉 Convoy Fun'
+    badge: 'Convoy Freedom'
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Motorbike Tour Kickoff',
     desc: 'Helmets on, engines warm, ready for island trails',
     category: 'Motorbike Tour',
-    badge: '🏍️ Bike Tour'
+    badge: 'Dual-Sport Trail'
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Pick & Go Custom Tuk-Tuk',
     desc: 'Roadside pitstop along scenic tropical highway',
     category: 'Tuk-Tuk Rental',
-    badge: '🌴 Highway Stop'
+    badge: 'Coastal Route'
   },
   {
     id: 7,
@@ -55,7 +55,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Ella Gap Panorama',
     desc: 'Exploring lush green mountains in the central highlands',
     category: 'Highland Tour',
-    badge: '⛰️ Ella Highlands'
+    badge: 'Ella Highlands'
   },
   {
     id: 8,
@@ -63,7 +63,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Ancient Stupa Expedition',
     desc: 'Off-road motorcycle riders before historic UNESCO heritage',
     category: 'Off-Road Tour',
-    badge: '🏛️ Ancient Cities'
+    badge: 'UNESCO Heritage'
   },
   {
     id: 9,
@@ -71,7 +71,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Wild Village Trail',
     desc: 'Rugged Honda dual-sport adventure bikes in rural trail',
     category: 'Off-Road Tour',
-    badge: '🌾 Village Trail'
+    badge: 'Wilderness Pass'
   },
   {
     id: 10,
@@ -79,7 +79,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Chauffeured Car Service',
     desc: 'Safe, air-conditioned vehicle handover with driver',
     category: 'Car with Driver',
-    badge: '🚗 Chauffeured'
+    badge: 'Private Chauffeur'
   },
   {
     id: 11,
@@ -87,7 +87,7 @@ export const BACKGROUND_MOMENTS = [
     title: 'Pick & Go Flag of Freedom',
     desc: 'Travelers celebrating memories made across Sri Lanka',
     category: 'Customer Moments',
-    badge: '⭐ 5-Star Experience'
+    badge: '5-Star Experience'
   }
 ];
 

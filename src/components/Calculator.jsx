@@ -9,16 +9,18 @@ import {
   ChevronLeft,
   ChevronRight,
   Check,
-  RotateCcw
+  RotateCcw,
+  Gauge,
+  CreditCard
 } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
 const CATEGORY_NAMES = {
-  'tuktuk': '🛺 Tuk Tuk (Self Drive)',
-  'motorbike': '🏍️ Adventure Motorbike',
-  'scooter': '🛵 Automatic Scooter',
-  'car-with-driver': '🚗 Rent-A-Car (Automatic)',
-  'bicycle': '🚲 Foot Bicycle'
+  'tuktuk': 'Tuk Tuk (Self Drive - Bajaj 205cc)',
+  'motorbike': 'Adventure Motorbike (Honda Dual-Sport)',
+  'scooter': 'Automatic Scooter',
+  'car-with-driver': 'Rent-A-Car (Automatic Sedan / Hatchback)',
+  'bicycle': 'Foot Bicycle (City Touring)'
 };
 
 const MONTH_NAMES = [
@@ -409,7 +411,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                     fontSize: '0.85rem',
                     color: '#92400e'
                   }}>
-                    <span style={{ fontSize: '1.1rem' }}>🛣️</span>
+                    <Gauge size={18} color="#b45309" />
                     <div>
                       <strong>120 km/day Included</strong> • Additional 1 km extra charge: <strong>$0.35 (35¢)</strong>
                     </div>
@@ -905,7 +907,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
               </div>
 
               <div className="calc-payment-notice">
-                <span className="calc-payment-icon">💳</span>
+                <span className="calc-payment-icon"><CreditCard size={18} color="var(--accent-orange)" /></span>
                 <span className="calc-payment-text">
                   <strong>Payment Methods:</strong> Cash (USD, EUR, GBP, LKR) or Card • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>
                 </span>

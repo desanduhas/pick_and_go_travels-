@@ -19,8 +19,12 @@ import {
   Calculator,
   Sparkles,
   Award,
-  Navigation
+  Navigation,
+  BedDouble,
+  Lightbulb,
+  Gauge
 } from 'lucide-react';
+import { DriverCapIcon } from '../components/Icons';
 import { SITE_DATA } from '../data/siteData';
 
 const MONTH_NAMES = [
@@ -296,7 +300,9 @@ export default function CarWithDriverPage({ onNavigate }) {
         {/* Feature Highlights Grid */}
         <div className="driver-highlights-grid">
           <div className="driver-highlight-card">
-            <div className="driver-highlight-icon">👨‍✈️</div>
+            <div className="driver-highlight-icon highlight-icon-driver">
+              <DriverCapIcon size={26} />
+            </div>
             <div className="driver-highlight-content">
               <h4>Expert Chauffeur &amp; Guide</h4>
               <p>English-speaking, certified tour drivers who know the best routes, safe roads, and hidden island gems.</p>
@@ -304,7 +310,9 @@ export default function CarWithDriverPage({ onNavigate }) {
           </div>
 
           <div className="driver-highlight-card highlight-featured">
-            <div className="driver-highlight-icon">🛏️</div>
+            <div className="driver-highlight-icon highlight-icon-bed">
+              <BedDouble size={26} />
+            </div>
             <div className="driver-highlight-content">
               <h4>Driver Stay &amp; Meals Included</h4>
               <p>You never have to find rooms or pay meal allowances for your driver. It's completely covered by us!</p>
@@ -312,7 +320,9 @@ export default function CarWithDriverPage({ onNavigate }) {
           </div>
 
           <div className="driver-highlight-card">
-            <div className="driver-highlight-icon">🛡️</div>
+            <div className="driver-highlight-icon highlight-icon-shield">
+              <ShieldCheck size={26} />
+            </div>
             <div className="driver-highlight-content">
               <h4>Full Vehicle Insurance</h4>
               <p>Zero worries on the road. All vehicles carry comprehensive commercial insurance for total safety.</p>
@@ -320,7 +330,9 @@ export default function CarWithDriverPage({ onNavigate }) {
           </div>
 
           <div className="driver-highlight-card">
-            <div className="driver-highlight-icon">🛣️</div>
+            <div className="driver-highlight-icon highlight-icon-gauge">
+              <Gauge size={26} />
+            </div>
             <div className="driver-highlight-content">
               <h4>130 KM Free Every Day</h4>
               <p>Generous 130 KM daily allowance included with fair and transparent extra mileage at only $0.40/km.</p>
@@ -422,7 +434,7 @@ export default function CarWithDriverPage({ onNavigate }) {
                               <span className="driver-rate-val">{p.priceDisplay}</span>
                               <span className="driver-rate-unit">/ day</span>
                             </div>
-                            <span className="driver-rate-sub">{p.daysMin >= 15 ? '🔥 Long Stay Deal' : 'Standard Rate'}</span>
+                            <span className="driver-rate-sub">{p.daysMin >= 15 ? 'Best Long Stay Rate' : 'Standard Rate'}</span>
                           </div>
                         ))}
                       </div>
@@ -435,8 +447,8 @@ export default function CarWithDriverPage({ onNavigate }) {
                       </h4>
                       <ul className="driver-feature-list">
                         {pkg.inclusions.map((item, i) => (
-                          <li key={i}>
-                            <span className="check-bullet">✓</span>
+                          <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Check size={14} color="var(--accent-emerald)" style={{ flexShrink: 0 }} />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -450,7 +462,8 @@ export default function CarWithDriverPage({ onNavigate }) {
                       </h4>
                       <ul className="driver-exclusion-list">
                         {pkg.exclusions.map((item, i) => (
-                          <li key={i}>
+                          <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <XCircle size={14} color="#f87171" style={{ flexShrink: 0 }} />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -776,7 +789,8 @@ export default function CarWithDriverPage({ onNavigate }) {
               </div>
 
               <div className="calc-helper-note">
-                💡 <strong>Tip:</strong> 130 KM per day is ideal for comfortable island touring (e.g. Negombo → Sigiriya → Kandy → Ella → South Coast).
+                <Lightbulb size={16} color="var(--accent-orange)" style={{ verticalAlign: 'text-bottom', marginRight: '5px' }} />
+                <strong>Tip:</strong> 130 KM per day is ideal for comfortable island touring (e.g. Negombo → Sigiriya → Kandy → Ella → South Coast).
               </div>
             </div>
 
