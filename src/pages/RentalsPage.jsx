@@ -16,7 +16,6 @@ export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle
     { id: 'car-with-driver', label: 'Rent-A-Car' },
     { id: 'motorbike', label: 'Motorbikes' },
     { id: 'scooter', label: 'Scooters' },
-    { id: 'atv', label: 'Beach ATVs' },
     { id: 'bicycle', label: 'Foot Bicycles' },
     { id: 'tuktuk', label: 'Tuk Tuks' }
   ];
@@ -33,7 +32,7 @@ export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle
           <span className="page-pill">Explore Our Complete Fleet</span>
           <h1 className="page-title">Vehicle Rentals in Sri Lanka</h1>
           <p className="page-subtitle">
-            Reliable automatic rental cars, motorbikes, scooters, beach quad buggies, and touring bicycles with transparent pricing and zero hidden fees.
+            Reliable automatic rental cars, motorbikes, scooters, and touring bicycles with transparent pricing and zero hidden fees.
           </p>
         </div>
 

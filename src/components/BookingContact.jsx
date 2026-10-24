@@ -212,7 +212,6 @@ export default function BookingContact({ initialService, initialMessage, initial
                     <option value="Rent-A-Car">Rent-A-Car &amp; Van (Wagon R / Spacia / Toyota KDH Auto)</option>
                     <option value="Motorbike Rental">Motorbike / Scooter Rental</option>
                     <option value="Car with Driver">Private Car / Van with Driver</option>
-                    <option value="Beach ATV">Beach Quad ATV Ride</option>
                     <option value="Foot Bicycle">Foot Bicycle Rental</option>
                     <option value="TukTuk Group Tour">TukTuk Group Tour</option>
                     <option value="Motorbike Tour">Motorbike Off-Road Tour (6/7/12 Days)</option>

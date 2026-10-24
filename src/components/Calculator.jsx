@@ -18,7 +18,6 @@ const CATEGORY_NAMES = {
   'motorbike': '🏍️ Adventure Motorbike',
   'scooter': '🛵 Automatic Scooter',
   'car-with-driver': '🚗 Rent-A-Car (Automatic)',
-  'atv': '🏎️ Quad Bike / Beach ATV',
   'bicycle': '🚲 Foot Bicycle'
 };
 
@@ -274,9 +273,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   // Calculate daily price based on duration tiers
   let dailyRate = 16;
   if (vehicle.prices && vehicle.prices.length > 0) {
-    if (vehicle.category === 'atv') {
-      dailyRate = 40;
-    } else if (isCar) {
+    if (isCar) {
       if (vehicle.prices && vehicle.prices.length >= 3) {
         if (days <= 10) {
           dailyRate = parseInt(vehicle.prices[0].price.replace(/[^0-9]/g, ''), 10) || 30;

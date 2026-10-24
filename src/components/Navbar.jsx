@@ -71,9 +71,6 @@ export default function Navbar({ currentPage, onNavigate }) {
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'car-with-driver')}>
                   🚗 Rent-A-Car (Self Drive)
                 </div>
-                <div className="dropdown-item" onClick={() => handleNav('rentals', 'atv')}>
-                  🏖️ Beach Quad ATVs
-                </div>
                 <div className="dropdown-item" onClick={() => handleNav('rentals', 'bicycle')}>
                   🚲 Foot Bicycles
                 </div>
@@ -211,7 +208,7 @@ export default function Navbar({ currentPage, onNavigate }) {
               style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', font: 'inherit', color: currentPage === 'rentals' ? 'var(--accent-blue)' : 'inherit', cursor: 'pointer' }}
               onClick={() => handleNav('rentals', 'all')}
             >
-              🏍️ All Rental Vehicles (Bikes, Cars, ATVs)
+              🏍️ All Rental Vehicles (Bikes, Cars, Scooters)
             </button>
           </li>
           <li className="mobile-nav-item">

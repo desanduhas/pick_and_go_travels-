@@ -284,36 +284,6 @@ export const SITE_DATA = {
       ]
     },
     {
-      id: 'atv-jaguar-5000',
-      category: 'atv',
-      name: 'Jaguar 5000cc Quad ATV',
-      tagline: 'High-Power Beach Quad for Adrenaline Seekers',
-      image: 'https://pickandgotravels.com/wp-content/uploads/2024/05/500cc-4X4-Petrol-Power-Ctuiser-off-Road-Dune-Buggy-Outdoor-Quad-ATV.jpg',
-      capacity: '2 Persons',
-      note: 'Beach rides in Negombo with fuel included',
-      prices: [
-        { range: '15 Minutes', price: '$20', period: 'total' },
-        { range: '30 Minutes', price: '$40', period: 'total' },
-        { range: '60 Minutes', price: '$70', period: 'total' }
-      ],
-      features: ['4x4 Off-Road Power', 'Negombo Sandy Beach Trails', 'Safety Briefing & Helmet Included']
-    },
-    {
-      id: 'atv-kawasaki-bayou',
-      category: 'atv',
-      name: 'Kawasaki Bayou Quad ATV',
-      tagline: 'Fun Beach Runner Quad Bike',
-      image: 'https://pickandgotravels.com/wp-content/uploads/2024/05/FE00000340E77FE008.jpg',
-      capacity: '2 Persons',
-      note: 'Beach rides in Negombo with fuel included',
-      prices: [
-        { range: '15 Minutes', price: '$10', period: 'total' },
-        { range: '30 Minutes', price: '$20', period: 'total' },
-        { range: '60 Minutes', price: '$35', period: 'total' }
-      ],
-      features: ['Smooth Riding', 'Beach Dunes', 'Great for Couples & Beginners']
-    },
-    {
       id: 'bicycle-touring',
       category: 'bicycle',
       name: 'Quality Foot-Bicycles (City & Coastal)',

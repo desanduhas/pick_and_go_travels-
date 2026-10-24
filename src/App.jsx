@@ -160,7 +160,6 @@ export default function App() {
     if (vehicle.category === 'tuktuk') service = 'TukTuk Self Drive';
     else if (vehicle.category === 'motorbike' || vehicle.category === 'scooter') service = 'Motorbike Rental';
     else if (vehicle.category === 'car-with-driver') service = 'Rent-A-Car';
-    else if (vehicle.category === 'atv') service = 'Beach ATV';
     else if (vehicle.category === 'bicycle') service = 'Foot Bicycle';
 
     setBookingService(service);
