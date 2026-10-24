@@ -4313,12 +4313,35 @@ textarea {
   margin: 0;
   color: var(--text-light);
   font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  line-height: 1.4;
 }
 
-.footer-dev-credit .dev-name {
-  font-weight: 600;
-  color: #ea580c;
-  font-size: 0.78rem;
+.dev-brand-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.dev-brand-link:hover {
+  transform: translateY(-1px);
+  opacity: 0.85;
+}
+
+.dev-brand-logo {
+  height: 15px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
 }
 
 /* ===================================================================

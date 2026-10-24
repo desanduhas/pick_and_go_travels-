@@ -119,7 +119,21 @@ export default function Footer({ onNavigate }) {
         <div className="footer-bottom">
           <p className="footer-copyright">&copy; {new Date().getFullYear()} Pick &amp; Go Travels. All Rights Reserved. {company.address}.</p>
           <p className="footer-dev-credit">
-            Designed &amp; Developed by <span className="dev-name">Morphic DevS</span>
+            Designed &amp; Developed by{' '}
+            <a
+              href="https://amluvodev.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dev-brand-link"
+              title="Amluvo Dev - Modern Web & Software Development"
+              aria-label="Amluvo Dev website"
+            >
+              <img
+                src="/images/amluvo-dev-logo.png"
+                alt="Amluvo Dev"
+                className="dev-brand-logo"
+              />
+            </a>
           </p>
           <p className="footer-license">Licensed &amp; Registered Sri Lanka Vehicle Rental &amp; Tourism Service Provider.</p>
         </div>

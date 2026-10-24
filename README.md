@@ -172,6 +172,6 @@ npm run preview
 
 ## 👨‍💻 Developer & Design Credit
 
-* **Redesigned & Developed by:** **Morphic DevS**
+* **Redesigned & Developed by:** [**Amluvo Dev**](https://amluvodev.vercel.app/)
 * **Project Type:** Custom Tourism & Fleet Rental Web Application
 * **Year:** 2026
