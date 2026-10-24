@@ -55,8 +55,9 @@ const calculateDaysDiff = (startStr, endStr) => {
   const [y2, m2, d2] = endStr.split('-').map(Number);
   const t1 = new Date(y1, m1 - 1, d1).getTime();
   const t2 = new Date(y2, m2 - 1, d2).getTime();
-  const diff = Math.round((t2 - t1) / (1000 * 60 * 60 * 24));
-  return Math.max(1, diff);
+  const diffDays = Math.round((t2 - t1) / (1000 * 60 * 60 * 24));
+  // Rental days count both pick-up and drop-off calendar days (e.g. today to tomorrow = 2 days)
+  return Math.max(1, diffDays + 1);
 };
 
 const formatPrettyDate = (dateStr) => {
@@ -115,9 +116,9 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const [vehicleId, setVehicleId] = useState(selectedVehicleId || 'tuktuk-bajaj');
   const [vehicleQty, setVehicleQty] = useState(1);
 
-  // Booking.com style dates state
+  // Booking.com style dates state (inclusive calendar days)
   const [startDate, setStartDate] = useState(() => addDays(todayStr, 1));
-  const [endDate, setEndDate] = useState(() => addDays(todayStr, 8));
+  const [endDate, setEndDate] = useState(() => addDays(todayStr, 7));
   const [days, setDays] = useState(7);
 
   // Calendar popover & interactive state
@@ -202,13 +203,13 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
       setSelectingField('end');
     } else {
       // Selecting Drop-off date
-      if (dateStr <= startDate) {
+      if (dateStr < startDate) {
         // If user clicks a date earlier than pickup, reset pickup date to clicked date
         setStartDate(dateStr);
         setEndDate('');
         setSelectingField('end');
       } else {
-        // Valid drop-off date selected
+        // Valid drop-off date selected (inclusive of both start & end dates)
         setEndDate(dateStr);
         const newDays = calculateDaysDiff(startDate, dateStr);
         setDays(newDays);
@@ -223,7 +224,8 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const handleSelectPreset = (numDays) => {
     const baseStart = startDate || todayStr;
     setStartDate(baseStart);
-    const newEnd = addDays(baseStart, numDays);
+    // For numDays calendar rental days (both start & end counted), drop-off is (numDays - 1) days after pick-up
+    const newEnd = addDays(baseStart, numDays - 1);
     setEndDate(newEnd);
     setDays(numDays);
     setSelectingField('start');
@@ -235,7 +237,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
   const handleResetDates = (e) => {
     e.stopPropagation();
     const defaultStart = addDays(todayStr, 1);
-    const defaultEnd = addDays(todayStr, 8);
+    const defaultEnd = addDays(todayStr, 7);
     setStartDate(defaultStart);
     setEndDate(defaultEnd);
     setDays(7);
@@ -316,7 +318,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
     (isCar ? `• Included Mileage: 120 km/day (${120 * days} km total for ${days} days, Extra: $0.35 / 35¢ per km)\n` : '') +
     `• Pick-up Date: ${formatPrettyDate(startDate)}\n` +
     `• Drop-off Date: ${formatPrettyDate(endDate)}\n` +
-    `• Rental Duration: ${days} Day${days > 1 ? 's' : ''}${days > 1 ? ` (${days - 1} Night${days - 1 > 1 ? 's' : ''})` : ''} ($${dailyRate}/day per vehicle)\n` +
+    `• Rental Duration: ${days} Day${days > 1 ? 's' : ''} ($${dailyRate}/day per vehicle)\n` +
     `• Vehicle Rental Subtotal: $${baseRentalTotal}\n` +
     (isCar
       ? `• Refundable Security Deposit: $${depositTotal} ($${depositPerVehicle} × ${vehicleQty} - 100% Refundable upon vehicle return)\n`
@@ -460,7 +462,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                   </label>
                   <span className="booking-pill-duration">
                     <CalendarDays size={15} />
-                    {days} Day{days > 1 ? 's' : ''} ({dailyRate}/day)
+                    {days} Day{days > 1 ? 's' : ''} (${dailyRate}/day)
                   </span>
                 </div>
 
@@ -493,7 +495,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                   <div className="booking-divider-col">
                     <div className="booking-divider-line" />
                     <span className="booking-divider-badge">
-                      {days > 1 ? `${days - 1} Night${days - 1 > 1 ? 's' : ''} / ${days} Days` : '1 Day Rental'}
+                      {days} Day{days > 1 ? 's' : ''} Rental
                     </span>
                     <div className="booking-divider-line" />
                   </div>
@@ -655,7 +657,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                     {/* Calendar Footer Controls */}
                     <div className="calendar-popup-footer">
                       <div className="calendar-summary-text">
-                        <strong>{days} Days selected:</strong> {formatPrettyDate(startDate)} → {endDate ? formatPrettyDate(endDate) : '...'}
+                        <strong>{days} Day{days > 1 ? 's' : ''} selected:</strong> {formatPrettyDate(startDate)} → {endDate ? formatPrettyDate(endDate) : '...'}
                         <span className="calendar-tier-badge">
                           Rate Tier: ${dailyRate}/day
                         </span>
@@ -865,7 +867,7 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
               </div>
               <div className="summary-row">
                 <span>Rental Duration</span>
-                <span>{days} Day{days > 1 ? 's' : ''}{days > 1 ? ` (${days - 1} Night${days - 1 > 1 ? 's' : ''})` : ''}</span>
+                <span>{days} Day{days > 1 ? 's' : ''}</span>
               </div>
               {isCar && (
                 <div className="summary-row">
