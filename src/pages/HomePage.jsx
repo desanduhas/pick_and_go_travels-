@@ -2,13 +2,66 @@ import React from 'react';
 import Hero from '../components/Hero';
 import FeatureStrip from '../components/FeatureStrip';
 import { SITE_DATA } from '../data/siteData';
-import { ArrowRight, Compass, ShieldCheck, Star, Award, Check } from 'lucide-react';
+import { ArrowRight, Compass, ShieldCheck, Star, Award, Check, Clock } from 'lucide-react';
 
 export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
-  const { fleet, tours, reviews, company } = SITE_DATA;
+  const { fleet, reviews, company } = SITE_DATA;
   const tuktuk = fleet.find((f) => f.id === 'tuktuk-bajaj');
-  const featuredTours = tours.slice(0, 3);
   const topReviews = reviews.slice(0, 3);
+
+  const signaturePackages = [
+    {
+      id: 'pkg-tuktuk',
+      badge: '🛺 Most Popular Travel',
+      title: 'Self-Drive Tuk Tuk Adventure',
+      image: '/images/background/moment-04.jpg',
+      duration: 'Flexible (1 to 30+ Days)',
+      price: 'From $14 / day',
+      desc: 'Experience total freedom exploring Sri Lanka’s beaches, waterfalls, and tea country behind the handlebars of your own tuk tuk.',
+      features: [
+        '1-on-1 Driving Lesson & Local License',
+        '100% Unlimited Kilometers',
+        '24/7 Breakdown & Mechanic Support',
+        'Kandy-to-Ella Train Luggage Delivery'
+      ],
+      ctaText: 'Explore Tuk Tuk Rental',
+      target: 'tuktuk'
+    },
+    {
+      id: 'pkg-driver',
+      badge: '🚗 Private Chauffeur & Guide',
+      title: 'Rent A Car with Driver (Chauffeured Tour)',
+      image: '/images/honda-shuttle.jpg',
+      duration: 'Custom Itinerary (1 to 30 Days)',
+      price: 'From $44 / day (Car + Driver)',
+      desc: 'Travel in air-conditioned comfort with a friendly, professional English-speaking chauffeur who handles all driving, parking, and navigation.',
+      features: [
+        'Driver Meals & Hotel 100% Included',
+        '130 Free Kilometers Per Day',
+        'Comprehensive Vehicle Insurance',
+        'CMB Airport Pickup & Hotel Drop'
+      ],
+      ctaText: 'View Driver Packages',
+      target: 'driver'
+    },
+    {
+      id: 'pkg-motorbike',
+      badge: '🏍️ Guided Off-Road Tour',
+      title: '12-Day Off Road Classic Motorcycle Tour',
+      image: '/images/background/moment-05.jpg',
+      duration: '12 Days / 11 Nights',
+      price: 'All-Inclusive Guided Tour',
+      desc: 'An adrenaline-fueled off-road motorbike journey across ancient kingdoms, tea highlands, rainforest switchbacks, and wildlife national parks.',
+      features: [
+        'Honda NC 700X / XR Baja Adventure Bikes',
+        'Support Van with Luggage & Spares',
+        'Expert Local Lead Rider & Mechanic',
+        'Scenic Mountain & Wildlife Trails'
+      ],
+      ctaText: 'View Motorcycle Itinerary',
+      target: 'tours'
+    }
+  ];
 
   const categories = [
     { id: 'tuktuk', title: 'Self Drive Tuk Tuks', desc: 'Bajaj 205cc from $14/day', icon: '🛺', target: 'tuktuk' },
@@ -142,34 +195,69 @@ export default function HomePage({ onNavigate, onSelectCalculatorVehicle }) {
         </section>
       )}
 
-      {/* Featured Tours Teaser */}
+      {/* Featured Travel Packages: Tuk Tuk, Car with Driver, Motorbike Tour */}
       <section className="home-tours-section">
         <div className="container">
           <div className="home-section-header-row">
             <div>
-              <span className="page-pill">Curated Adventures</span>
-              <h2 className="page-title">Popular Island Expeditions</h2>
-              <p className="page-subtitle">Expertly planned routes across ancient cities, misty tea country, and southern coastlines.</p>
+              <span className="page-pill">Signature Travel Styles</span>
+              <h2 className="page-title">Top Sri Lanka Travel Packages</h2>
+              <p className="page-subtitle">
+                Choose how you want to experience paradise: drive an iconic tuk tuk, tour in comfort with a private chauffeur, or conquer mountain trails on a motorbike.
+              </p>
             </div>
             <button className="btn btn-outline btn-sm" onClick={() => onNavigate('tours')}>
-              View All Tours <ArrowRight size={14} />
+              View All Tours &amp; Rentals <ArrowRight size={14} />
             </button>
           </div>
 
           <div className="home-tours-grid">
-            {featuredTours.map((t) => (
-              <div key={t.id} className="ios-card home-tour-card">
-                <span className="tour-badge">{t.badge}</span>
-                <h3 className="home-tour-title">{t.title}</h3>
-                <div className="home-tour-duration">⏱️ {t.duration}</div>
-                <p className="home-tour-desc">{t.overview}</p>
-                <button
-                  className="btn btn-outline btn-sm"
-                  style={{ width: '100%', marginTop: 'auto' }}
-                  onClick={() => onNavigate('tours')}
+            {signaturePackages.map((pkg) => (
+              <div key={pkg.id} className="ios-card home-tour-card">
+                <div
+                  className="home-tour-img-box"
+                  onClick={() => onNavigate(pkg.target)}
+                  style={{ cursor: 'pointer' }}
+                  title={`View ${pkg.title}`}
                 >
-                  View Itinerary &amp; Details
-                </button>
+                  <img
+                    src={pkg.image}
+                    alt={pkg.title}
+                    className="home-tour-img"
+                    loading="lazy"
+                  />
+                  <span className="home-tour-badge">{pkg.badge}</span>
+                  <span className="home-tour-price-pill">{pkg.price}</span>
+                </div>
+                <div className="home-tour-body">
+                  <h3
+                    className="home-tour-title"
+                    onClick={() => onNavigate(pkg.target)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {pkg.title}
+                  </h3>
+                  <div className="home-tour-duration">
+                    <Clock size={14} style={{ color: 'var(--accent-gold)' }} />
+                    <span>{pkg.duration}</span>
+                  </div>
+                  <p className="home-tour-desc">{pkg.desc}</p>
+                  <ul className="home-tour-features-list">
+                    {pkg.features.map((f, i) => (
+                      <li key={i}>
+                        <Check size={14} color="var(--accent-emerald)" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    className="btn btn-primary btn-sm"
+                    style={{ width: '100%', marginTop: 'auto', gap: '0.4rem', justifyContent: 'center' }}
+                    onClick={() => onNavigate(pkg.target)}
+                  >
+                    {pkg.ctaText} <ArrowRight size={14} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
