@@ -40,7 +40,7 @@ export default function ToursPage({ initialCategory, onNavigate }) {
   }, [initialCategory]);
 
   const categories = [
-    { id: 'all', label: 'All Tours' },
+    { id: 'all', label: 'All Tours', icon: <Compass size={15} /> },
     { id: 'group-tour', label: 'TukTuk Group Tour', icon: <TukTukIcon size={15} /> },
     { id: 'motorcycle-tour', label: 'Off-Road Classic (6-12 Days)', icon: <MotorbikeIcon size={15} /> },
     { id: 'day-tour', label: 'Day Excursions', icon: <MapPin size={15} /> },
@@ -111,20 +111,18 @@ export default function ToursPage({ initialCategory, onNavigate }) {
           </p>
         </div>
 
-        {/* Segmented Control Bar */}
-        <div className="segmented-wrapper">
-          <div className="segmented-control">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`segmented-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat.id)}
-              >
-                {cat.icon && <span className="segmented-btn-icon">{cat.icon}</span>}
-                <span>{cat.label}</span>
-              </button>
-            ))}
-          </div>
+        {/* Apple Pill Category Filter Tabs */}
+        <div className="filter-tabs-wrapper">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`filter-tab ${selectedCategory === cat.id ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(cat.id)}
+            >
+              {cat.icon && <span className="filter-tab-icon">{cat.icon}</span>}
+              <span className="filter-tab-text">{cat.label}</span>
+            </button>
+          ))}
         </div>
 
         {/* DEDICATED TUK TUK GROUP TOUR SHOWCASE VIEW */}

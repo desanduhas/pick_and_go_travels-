@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SITE_DATA } from '../data/siteData';
-import { Check, MessageCircle, Calculator, Users, Gauge, Settings, Fuel } from 'lucide-react';
+import { Check, MessageCircle, Calculator, Users, Gauge, Settings, Fuel, Layers } from 'lucide-react';
+import { TukTukIcon, ChauffeurCarIcon, MotorbikeIcon, BicycleIcon } from '../components/Icons';
 
 export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle, onNavigate }) {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || 'all');
@@ -12,12 +13,12 @@ export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle
   }, [initialCategory]);
 
   const categories = [
-    { id: 'all', label: 'All Vehicles' },
-    { id: 'car-with-driver', label: 'Rent-A-Car' },
-    { id: 'motorbike', label: 'Motorbikes' },
-    { id: 'scooter', label: 'Scooters' },
-    { id: 'bicycle', label: 'Foot Bicycles' },
-    { id: 'tuktuk', label: 'Tuk Tuks' }
+    { id: 'all', label: 'All Vehicles', icon: <Layers size={15} /> },
+    { id: 'car-with-driver', label: 'Rent-A-Car', icon: <ChauffeurCarIcon size={15} /> },
+    { id: 'motorbike', label: 'Motorbikes', icon: <MotorbikeIcon size={15} /> },
+    { id: 'scooter', label: 'Scooters', icon: <MotorbikeIcon size={15} /> },
+    { id: 'bicycle', label: 'Foot Bicycles', icon: <BicycleIcon size={15} /> },
+    { id: 'tuktuk', label: 'Tuk Tuks', icon: <TukTukIcon size={15} /> }
   ];
 
   const filteredFleet = selectedCategory === 'all'
@@ -36,19 +37,18 @@ export default function RentalsPage({ initialCategory, onSelectCalculatorVehicle
           </p>
         </div>
 
-        {/* Apple iOS Segmented Control Bar */}
-        <div className="segmented-wrapper">
-          <div className="segmented-control">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`segmented-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+        {/* Apple Pill Category Filter Tabs */}
+        <div className="filter-tabs-wrapper">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`filter-tab ${selectedCategory === cat.id ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(cat.id)}
+            >
+              {cat.icon && <span className="filter-tab-icon">{cat.icon}</span>}
+              <span className="filter-tab-text">{cat.label}</span>
+            </button>
+          ))}
         </div>
 
         {/* Vehicle Grid */}
