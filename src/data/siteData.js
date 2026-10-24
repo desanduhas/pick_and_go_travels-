@@ -18,7 +18,7 @@ export const SITE_DATA = {
     logoDark: '/images/logo-d.png',
     favicon: 'https://pickandgotravels.com/wp-content/uploads/2024/05/Icon-N-150x150.png',
     social: {
-      facebook: 'https://facebook.com/pickandgotravels',
+      facebook: 'https://www.facebook.com/share/19i4r9RzSu/?mibextid=wwXIfr',
       instagram: 'https://instagram.com/pickandgotravels',
       whatsapp: 'https://wa.me/94776464346'
     },
