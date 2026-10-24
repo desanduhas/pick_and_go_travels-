@@ -366,19 +366,23 @@ export const SITE_DATA = {
     {
       id: 'tour-tuktuk-group',
       category: 'group-tour',
-      badge: 'Ultimate Group Fun',
+      badge: 'Popular Group Adventure',
       title: 'Sri Lanka Tuk Tuk Group Tour Adventure',
-      duration: '07 to 10 Days Options',
-      pricing: 'Starting at $146 per person (07 Days, 05 Tuk-Tuks, 10-12 Persons)',
-      overview: 'Experience an unforgettable Sri Lanka tuk tuk group tour and explore the island with friends or fellow travelers. This exciting adventure combines scenic drives, cultural sites, and breathtaking landscapes with full mechanical backup and a dedicated road captain.',
+      image: '/images/background/moment-04.jpg',
+      duration: '07 to 14 Days (Standard & Premium)',
+      pricing: 'Starts at $20 / day per person',
+      route: 'Negombo → Sigiriya → Kandy → Nuwara Eliya → Ella → Yala → Mirissa → Galle → Negombo (Customizable Route)',
+      overview: 'Experience an unforgettable Sri Lanka tuk tuk group tour and explore the island with friends or fellow travelers. This exciting adventure combines scenic drives, cultural landmarks, lush mountains, and beaches while following a carefully planned Sri Lanka tuk tuk itinerary. Available in 10-12 person Standard convoys and 20-22 person Premium tours with dedicated luggage backup vans, mobile mechanics, and free adventure activities.',
       features: [
-        'Fleet of 5+ Modern Bajaj TukTuks',
-        'Accompanying Support Vehicle for Heavy Luggage',
-        'Full-time Mechanic & Breakdown Road Assistant',
-        'Train Transport Service Kandy to Ella (We drive your TukTuk while you enjoy the train!)',
-        'Valid Sri Lankan Driving License arranged for all drivers',
-        'Phone chargers & Bluetooth speakers in every TukTuk',
-        'Airport Pickup & Dropoff included'
+        'Fleet of Reliable Bajaj RE 205cc Tuk Tuks',
+        'Starts at $20 Per Day Per Person',
+        'Dedicated Backup Support Van with Driver for Luggage (Included in Premium)',
+        'Full-Time Road Assistant & Accompanying Mechanic',
+        'Scenic Train Transport Service Kandy to Ella',
+        'Valid Sri Lankan AAC Driving Licenses Arranged',
+        'VIP Full Comprehensive Insurance (Zero Stress)',
+        'Free 1-on-1 Driving Lesson in Negombo',
+        'Free Activities: Lagoon Boat Trip, Countryside Cycling & Adventure Folk Games'
       ]
     },
     {
@@ -441,6 +445,134 @@ export const SITE_DATA = {
       overview: 'Create your own dream vacation. Tell us where you want to go, your preferred vehicle (Tuk Tuk, Motorbike, or Car with Driver), and our travel experts will build a customized day-by-day itinerary with hotels, permits, and experiences.'
     }
   ],
+
+  tuktukGroupTour: {
+    badge: 'Popular Group Adventure',
+    title: 'Sri Lanka Tuk Tuk Group Tour Adventure',
+    subtitle: '7–14 Day Sri Lanka Tuk Tuk Group Tour | Ultimate Tuk Tuk Road Trip Sri Lanka',
+    image: '/images/background/moment-04.jpg',
+    secondaryImages: [
+      '/images/background/moment-04.jpg',
+      '/images/background/moment-03.jpg',
+      '/images/background/moment-01.jpg',
+      '/images/toyota-kdh.jpg'
+    ],
+    startingPrice: '$20',
+    pricePeriod: 'per day / person',
+    tagline: 'Explore paradise behind the wheel of your own Tuk Tuk with your friends, backed by a dedicated support van and expert team.',
+    overview: 'Experience an unforgettable Sri Lanka tuk tuk group tour and explore the island with friends or fellow travelers. This exciting adventure combines scenic drives, cultural sites, wildlife parks, and breathtaking landscapes while following a carefully planned Sri Lanka tuk tuk itinerary. Travel more while spending less with our flexible durations and group-friendly pricing, backed by full nationwide road support and luggage transfers.',
+    whyChoose: [
+      { icon: '💰', title: 'Starts at $20 / Day', desc: 'Our group packages start at just $20 per day per person with unmatched inclusions.' },
+      { icon: '🛬', title: 'Airport Pickup Service', desc: 'Complimentary on-arrival greeting and pickup service directly from CMB Bandaranaike International Airport.' },
+      { icon: '🛠️', title: '24/7 Breakdown Assistant', desc: 'Nationwide roadside mechanic network and rapid breakdown recovery anywhere on the island.' },
+      { icon: '🛺', title: 'Reliable Modern Tuk Tuks', desc: 'Top-tier, regularly inspected and fully serviced Bajaj RE 205cc three-wheelers.' },
+      { icon: '🪪', title: 'Valid Sri Lankan Permits', desc: 'Official Automobile Association of Ceylon (AAC) driving licenses arranged in advance for all drivers.' },
+      { icon: '🛡️', title: 'VIP Comprehensive Insurance', desc: 'Full collision damage waiver and third-party protection included with zero stress.' },
+      { icon: '🚂', title: 'Kandy to Ella Train Transit', desc: 'Ride the world’s most scenic blue train while our drivers safely transport your tuk-tuks over the mountain pass.' },
+      { icon: '📱', title: 'Chargers, USB & Speakers', desc: 'Equipped with dual USB fast chargers, phone mounts, and portable Bluetooth speakers for your tunes.' },
+      { icon: '⚡', title: 'Easy & Fast Booking', desc: 'Instant WhatsApp communication with owner Rocky, clear upfront pricing, and zero hidden costs.' },
+      { icon: '🎉', title: 'Attractive Group Discounts', desc: 'Special discounted group tiers for large squads of 10 to 22+ people.' }
+    ],
+    standardPackages: {
+      title: 'Standard Group Tour Packages',
+      groupSize: '10 - 12 Persons (5 - 6 Tuk Tuks)',
+      badge: '10 - 12 Persons',
+      rateNotice: 'From $20 / day per person',
+      description: 'Ideal for medium-sized groups of friends or families traveling together in a fun tuk-tuk convoy.',
+      inclusions: [
+        '10 - 12 Persons (5 - 6 Tuk Tuks)',
+        '24/7 Breakdown Road Assistant & Mechanic Support',
+        'Train Transit Service - Kandy To Ella',
+        'Sri Lankan Driving Licenses (AAC endorsed) for all drivers',
+        'VIP Full Comprehensive Insurance',
+        'Free 1-on-1 Driving Training Session in Negombo',
+        'Spare Tire, Emergency Toolkit & Phone Mounts',
+        'No Any Hidden Fees'
+      ],
+      durations: [
+        { days: '07 DAYS', pricePerPerson: '$140', perDay: '$20/day', popular: true, desc: 'Negombo, Sigiriya, Kandy, Nuwara Eliya & Ella' },
+        { days: '08 DAYS', pricePerPerson: '$160', perDay: '$20/day', popular: false, desc: 'Central Highlands, Tea Country & Southern Coast' },
+        { days: '10 DAYS', pricePerPerson: '$200', perDay: '$20/day', popular: false, desc: 'Cultural Triangle, Mountain Passes & Yala Safari' },
+        { days: '12 DAYS', pricePerPerson: '$240', perDay: '$20/day', popular: false, desc: 'Comprehensive Island Loop across beaches & hills' },
+        { days: '14 DAYS', pricePerPerson: '$280', perDay: '$20/day', popular: false, desc: 'The Ultimate 2-Week Grand Road Trip of Sri Lanka' }
+      ]
+    },
+    premiumPackages: {
+      title: 'Premium Group Tour Packages',
+      groupSize: '20 - 22 Persons (10 - 11 Tuk Tuks)',
+      badge: '20 - 22 Persons + Backup Van & Free Activities',
+      rateNotice: 'All-Inclusive VIP Group Experience',
+      description: 'The ultimate VIP road trip experience with an accompanying support van, personal mechanic, and free adventure activities.',
+      inclusions: [
+        '20 - 22 Persons (10 - 11 Tuk Tuks)',
+        'Dedicated Backup Support Vehicle (Toyota KDH Van) with Driver for Luggage',
+        'Full-Time Accompanying Mechanic & Supporting Road Assistant',
+        'Free Activities Included: Scenic Lagoon Boat Trip, Countryside Cycling & Traditional Adventure Folk Games',
+        'Train Transit Service - Kandy To Ella (Luggage & tuk-tuk handling included)',
+        'Sri Lankan Driving Licenses (AAC endorsed) for all drivers',
+        'VIP Full Comprehensive Insurance (Zero Stress)',
+        '24/7 Nationwide Roadside Breakdown Support',
+        'Free 1-on-1 Driving Lesson & Practice Session in Negombo',
+        'No Any Hidden Fees'
+      ],
+      durations: [
+        { days: '10 DAYS Premium', popular: true, desc: 'Includes Dedicated Luggage Van, On-Road Mechanic & Free Activities' },
+        { days: '12 DAYS Premium', popular: false, desc: 'Complete Highland & Coastal Expedition with Full Support Crew' },
+        { days: '14 DAYS Premium', popular: false, desc: 'The Grand VIP Tuk Tuk Odyssey across the Entire Island' }
+      ]
+    },
+    backupVehicle: {
+      title: 'Our Dedicated Backup Vehicles & Luggage Vans',
+      subtitle: 'Lightweight Tuk Tuks, Zero Luggage Hassle',
+      description: 'Planning a group road trip with 10 to 22+ people means heavy suitcases, backpacks, and surfboards! For our Premium group tours, we provide a dedicated air-conditioned support van (Toyota KDH / HiAce) driven by a professional support driver. The backup van carries everyone’s luggage so your tuk tuks remain lightweight, nimble, and easy to handle on mountain climbs. It also carries mobile tools, spare parts, and offers a comfortable seat if any rider wants to rest.',
+      features: [
+        'Transports all heavy luggage between daily hotel stops',
+        'Carries mobile tools, spare tires, and replacement parts',
+        'Provides comfortable air-conditioned seats for tired travelers',
+        'Complimentary on Premium Tours; optional add-on for Standard Tours'
+      ],
+      image: '/images/toyota-kdh.jpg'
+    },
+    guidelines: [
+      {
+        q: 'Can we customize our group size or tour duration?',
+        a: 'Absolutely! If the number of days or group members you prefer does not match the packages above, there is no need to worry. We can easily customize the Sri Lanka tuk tuk group tour to match your travel plans, flight schedules, and exact squad size.'
+      },
+      {
+        q: 'Will you help us organize our full Sri Lanka travel route?',
+        a: 'Yes! Regardless of the package you choose, our team will assist you in organizing your full Sri Lanka tuk tuk itinerary, including secret viewpoints, elephant safari corridors, mountain passes, and hotel stays across the island.'
+      },
+      {
+        q: 'What do the package prices cover and what is extra?',
+        a: 'Package prices cover the tuk tuk rental, AAC legal driving permits, VIP insurance, training, and selected perks for the specified period. Additional personal expenses such as petrol/fuel and personal sightseeing tickets are paid as you travel.'
+      },
+      {
+        q: 'How does the backup vehicle and luggage support work?',
+        a: 'A backup vehicle with a driver is 100% included in all Premium Packages (20-22 persons), carrying all luggage from hotel to hotel and assisting in emergencies. This service is also available as an optional upgrade for Standard Packages (10-12 persons).'
+      },
+      {
+        q: 'What free activities are included in Premium Packages?',
+        a: 'Premium packages include exciting free group experiences such as a scenic Negombo lagoon boat cruise, countryside cycling, and traditional Sri Lankan adventure folk games!'
+      }
+    ],
+    rentingProcess: [
+      {
+        step: '01',
+        title: 'Book Your Tuk Tuk Tour',
+        desc: 'Reserve your group package by contacting Rocky via WhatsApp or our booking form. Share your dates, group size, and any special requests.'
+      },
+      {
+        step: '02',
+        title: 'Free Driving Lesson & Local License',
+        desc: 'We arrange official Sri Lankan driving licenses in advance and provide a thorough 1-on-1 driving lesson in Negombo until your entire squad is ready.'
+      },
+      {
+        step: '03',
+        title: 'Hit the Road with Full Support',
+        desc: 'Start your island adventure with peace of mind! Enjoy 24/7 mechanical backup, train transit service, and dedicated support all the way.'
+      }
+    ]
+  },
 
   stay: {
     title: 'Stay in Negombo – Pick & Go Whitehouse / Tuk Tuk Rooms',

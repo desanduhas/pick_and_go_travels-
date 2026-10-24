@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SITE_DATA } from '../data/siteData';
-import { Check, ShieldCheck, Award, Train, HelpCircle, MessageCircle, Calculator } from 'lucide-react';
+import { Check, ShieldCheck, Award, Train, HelpCircle, MessageCircle, Calculator, Users, ArrowRight } from 'lucide-react';
 
 export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
   const tuktuk = SITE_DATA.fleet.find((f) => f.id === 'tuktuk-bajaj');
@@ -165,6 +165,26 @@ export default function TuktukPage({ onNavigate, onSelectCalculatorVehicle }) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Group Tour Callout Banner */}
+        <div className="ios-card tuktuk-group-banner-card">
+          <div>
+            <div className="tuktuk-group-banner-title">
+              <Users size={22} color="var(--accent-orange)" />
+              Traveling as a Group of Friends or Family?
+            </div>
+            <p className="tuktuk-group-banner-desc">
+              Check out our <strong>7–14 Day Sri Lanka Tuk Tuk Group Tours</strong> (10 to 22+ Persons) with dedicated luggage backup vans, mobile on-road mechanics, train luggage delivery, and free adventure activities!
+            </p>
+          </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => onNavigate('tours', 'group-tour')}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            Explore Group Tours <ArrowRight size={16} />
+          </button>
         </div>
 
         {/* Common Tuk Tuk Questions */}
