@@ -104,6 +104,15 @@ export default function Footer({ onNavigate }) {
           </div>
         </div>
 
+        <div className="footer-payment-strip">
+          <div className="footer-payment-inner">
+            <span className="footer-payment-title">💳 Accepted Payment Methods:</span>
+            <span className="footer-payment-desc">
+              Cash (USD, EUR, GBP, LKR) &amp; Card Payments • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>
+            </span>
+          </div>
+        </div>
+
         <div className="footer-bottom">
           <p className="footer-copyright">&copy; {new Date().getFullYear()} Pick &amp; Go Travels. All Rights Reserved. {company.address}.</p>
           <p className="footer-dev-credit">

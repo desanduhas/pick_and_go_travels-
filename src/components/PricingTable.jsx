@@ -61,6 +61,18 @@ export default function PricingTable() {
           </table>
         </div>
 
+        <div className="pricing-payment-banner">
+          <div className="pricing-payment-banner-content">
+            <span className="pricing-payment-icon">💳</span>
+            <div>
+              <strong style={{ color: 'var(--text-primary)' }}>Accepted Payment Methods: </strong>
+              <span style={{ color: 'var(--text-secondary)' }}>
+                Cash (USD, EUR, GBP, LKR) and Card payments • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+
         <div style={{
           background: 'var(--bg-secondary)',
           border: '1px solid var(--border-light)',

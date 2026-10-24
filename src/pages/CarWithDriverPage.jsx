@@ -927,6 +927,11 @@ export default function CarWithDriverPage({ onNavigate }) {
             </div>
 
             <div className="driver-faq-item">
+              <h5>What payment methods do you accept for the car &amp; chauffeur?</h5>
+              <p>We accept Cash payments in multiple currencies (USD, EUR, GBP, or LKR). Card payments are also accepted: <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong> and Mastercard.</p>
+            </div>
+
+            <div className="driver-faq-item">
               <h5>How does the 130 KM free allowance work?</h5>
               <p>The 130 KM is cumulative across your entire trip! For example, for a 10-day trip, you have a generous 1,300 KM total allowance. If you exceed the cumulative limit, each additional kilometer is just $0.40 cent.</p>
             </div>

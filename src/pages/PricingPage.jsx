@@ -56,6 +56,15 @@ export default function PricingPage({ selectedVehicleId, onBookPackage }) {
               We legally endorse your international license with the Automobile Association of Ceylon (AAC) before you land, keeping you fully compliant with Sri Lankan traffic police.
             </p>
           </div>
+
+          <div className="ios-card pricing-inclusion-card">
+            <h3 className="inclusion-title">
+              Accepted Payment Methods
+            </h3>
+            <p className="inclusion-desc">
+              We accept Cash payments in multiple currencies (USD, EUR, GBP, LKR) and Card payments. <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>.
+            </p>
+          </div>
         </div>
       </div>
     </div>

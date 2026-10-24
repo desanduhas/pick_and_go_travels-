@@ -148,6 +148,21 @@ export default function BookingContact({ initialService, initialMessage, initial
                 We are located just 15 minutes from Bandaranaike International Airport (CMB). Airport pick-up and vehicle delivery is readily available.
               </p>
             </div>
+
+            <div style={{
+              marginTop: '1rem',
+              padding: '1.25rem',
+              background: 'var(--bg-subtle)',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border-light)'
+            }}>
+              <h5 style={{ color: 'var(--accent-orange)', marginBottom: '0.25rem', fontWeight: 700 }}>
+                💳 Accepted Payment Methods
+              </h5>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                Payment upon vehicle delivery: Cash (USD, EUR, GBP, LKR) or Card payments • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>.
+              </p>
+            </div>
           </div>
 
           {/* Interactive Booking Form */}

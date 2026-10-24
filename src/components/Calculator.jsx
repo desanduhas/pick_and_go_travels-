@@ -904,6 +904,13 @@ export default function Calculator({ selectedVehicleId, onBookPackage }) {
                 <span className="summary-total-price">${grandTotal}</span>
               </div>
 
+              <div className="calc-payment-notice">
+                <span className="calc-payment-icon">💳</span>
+                <span className="calc-payment-text">
+                  <strong>Payment Methods:</strong> Cash (USD, EUR, GBP, LKR) or Card • <strong>Visa acceptable (+3.5% additional charge for Central Bank)</strong>
+                </span>
+              </div>
+
               <div className="calc-actions">
                 <button
                   className="btn btn-primary"

@@ -21,6 +21,11 @@ export const SITE_DATA = {
       facebook: 'https://facebook.com/pickandgotravels',
       instagram: 'https://instagram.com/pickandgotravels',
       whatsapp: 'https://wa.me/94776464346'
+    },
+    paymentMethods: {
+      accepted: 'Cash (USD, EUR, GBP, LKR) & Card Payments',
+      visaNotice: 'Visa acceptable (+3.5% additional charge for Central Bank)',
+      note: 'We accept Cash in USD, EUR, GBP, LKR and Card payments. Visa acceptable (+3.5% additional charge for Central Bank).'
     }
   },
 
@@ -876,6 +881,10 @@ export const SITE_DATA = {
     {
       q: 'Where can I pick up and drop off the vehicle?',
       a: 'Our main office is located in Ettukala, Negombo—just 15 minutes from Bandaranaike International Airport (CMB). We offer airport pickup and drop-off, or customized drop-offs across popular tourist hubs upon request.'
+    },
+    {
+      q: 'What payment methods do you accept?',
+      a: 'We accept cash payments in major currencies including USD, EUR, GBP, and Sri Lankan Rupees (LKR). Card payments are also accepted: Visa acceptable (+3.5% additional charge for Central Bank) and Mastercard.'
     }
   ]
 };
