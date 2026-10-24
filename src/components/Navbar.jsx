@@ -11,7 +11,10 @@ import {
   Layers,
   Sparkles,
   MapPin,
-  Palmtree
+  Palmtree,
+  ChevronRight,
+  Award,
+  CreditCard
 } from 'lucide-react';
 import {
   TukTukIcon,
@@ -43,6 +46,99 @@ export default function Navbar({ currentPage, onNavigate }) {
     }
     setDrawerOpen(false);
   };
+
+  const mobileNavSections = [
+    {
+      sectionLabel: 'VEHICLES & FLEET',
+      items: [
+        {
+          id: 'home',
+          title: 'Home',
+          subtitle: 'Overview & Signature Travel Styles',
+          icon: <Home size={19} />,
+          theme: 'nav-theme-home',
+          onClick: () => handleNav('home')
+        },
+        {
+          id: 'tuktuk',
+          title: 'Rent a TukTuk (Self Drive)',
+          subtitle: 'Bajaj 205cc • Unlimited KMs • From $14/day',
+          badge: 'TOP PICK',
+          icon: <TukTukIcon size={19} />,
+          theme: 'nav-theme-tuktuk',
+          onClick: () => handleNav('tuktuk')
+        },
+        {
+          id: 'driver',
+          title: 'Rent A Car with Driver',
+          subtitle: 'Private Chauffeur, Fuel & Free Hotel/Meals',
+          badge: 'CHAUFFEUR',
+          icon: <ChauffeurCarIcon size={19} />,
+          theme: 'nav-theme-driver',
+          onClick: () => handleNav('driver')
+        },
+        {
+          id: 'rentals',
+          title: 'All Rental Vehicles',
+          subtitle: 'Adventure Motorbikes, Scooters & Bicycles',
+          icon: <MotorbikeIcon size={19} />,
+          theme: 'nav-theme-bike',
+          onClick: () => handleNav('rentals', 'all')
+        }
+      ]
+    },
+    {
+      sectionLabel: 'EXPEDITIONS & STAYS',
+      items: [
+        {
+          id: 'tours',
+          title: 'Island Tours & Safaris',
+          subtitle: 'Group TukTuk Road Trips & Day Tours',
+          badge: 'POPULAR',
+          icon: <ExpeditionMapIcon size={19} />,
+          theme: 'nav-theme-tours',
+          onClick: () => handleNav('tours', 'all')
+        },
+        {
+          id: 'stay',
+          title: 'Pick & Go Whitehouse',
+          subtitle: 'Negombo Beach Stay from $18/night',
+          icon: <VillaStayIcon size={19} />,
+          theme: 'nav-theme-stay',
+          onClick: () => handleNav('stay')
+        }
+      ]
+    },
+    {
+      sectionLabel: 'RATES & SUPPORT',
+      items: [
+        {
+          id: 'pricing',
+          title: 'Live Price Calculator & Rates',
+          subtitle: 'Instant accurate quotes with discounts',
+          icon: <Calculator size={19} />,
+          theme: 'nav-theme-calc',
+          onClick: () => handleNav('pricing')
+        },
+        {
+          id: 'about',
+          title: 'About Rocky & Reviews',
+          subtitle: '5.0 ★ Google Verified (120+ Reviews)',
+          icon: <Star size={19} />,
+          theme: 'nav-theme-about',
+          onClick: () => handleNav('about')
+        },
+        {
+          id: 'contact',
+          title: 'Contact & Bookings',
+          subtitle: 'Direct reservation & airport pickup setup',
+          icon: <Phone size={19} />,
+          theme: 'nav-theme-contact',
+          onClick: () => handleNav('contact')
+        }
+      ]
+    }
+  ];
 
   return (
     <>
@@ -193,132 +289,90 @@ export default function Navbar({ currentPage, onNavigate }) {
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu (Luxury iOS Sheet Style) */}
       <div
         className={`mobile-drawer-overlay ${drawerOpen ? 'open' : ''}`}
         onClick={() => setDrawerOpen(false)}
       />
-      <aside className={`mobile-drawer ${drawerOpen ? 'open' : ''}`} aria-label="Mobile Menu">
+      <aside className={`mobile-drawer ${drawerOpen ? 'open' : ''}`} aria-label="Mobile Navigation Menu">
+        {/* Subtle Warm Ambient Glow */}
+        <div className="drawer-ambient-glow" />
+
+        {/* Drawer Header */}
         <div className="drawer-header">
-          <div className="brand-logo" style={{ cursor: 'default' }}>
-            <img src={company.logoDark} alt="Pick and Go Travels" />
+          <div className="drawer-brand-block" onClick={() => handleNav('home')}>
+            <img src={company.logoDark} alt="Pick and Go Travels" className="drawer-logo" />
+            <div className="drawer-badge-pill">
+              <Award size={11} color="var(--accent-orange)" />
+              <span>Official Fleet Hub</span>
+            </div>
           </div>
           <button
             className="drawer-close-btn"
             onClick={() => setDrawerOpen(false)}
             aria-label="Close Navigation Menu"
           >
-            <X size={26} />
+            <X size={18} />
           </button>
         </div>
-        <ul className="mobile-nav-list">
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'home' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('home')}
-            >
-              <span className="mobile-nav-icon"><Home size={18} /></span>
-              <span>Home</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'tuktuk' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('tuktuk')}
-            >
-              <span className="mobile-nav-icon"><TukTukIcon size={18} /></span>
-              <span>Rent a TukTuk (Self Drive)</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'driver' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('driver')}
-            >
-              <span className="mobile-nav-icon"><ChauffeurCarIcon size={18} /></span>
-              <span>Rent A Car with Driver (Chauffeur)</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'rentals' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('rentals', 'all')}
-            >
-              <span className="mobile-nav-icon"><MotorbikeIcon size={18} /></span>
-              <span>All Rental Vehicles (Bikes, Cars, Scooters)</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'tours' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('tours', 'all')}
-            >
-              <span className="mobile-nav-icon"><ExpeditionMapIcon size={18} /></span>
-              <span>Island Tours &amp; Expeditions</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'pricing' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('pricing')}
-            >
-              <span className="mobile-nav-icon"><Calculator size={18} /></span>
-              <span>Live Price Calculator &amp; Rates</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'stay' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('stay')}
-            >
-              <span className="mobile-nav-icon"><VillaStayIcon size={18} /></span>
-              <span>Pick &amp; Go Whitehouse (Negombo Stay)</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'about' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('about')}
-            >
-              <span className="mobile-nav-icon"><Star size={18} /></span>
-              <span>About Rocky &amp; Reviews</span>
-            </button>
-          </li>
-          <li className="mobile-nav-item">
-            <button
-              className="mobile-nav-btn"
-              style={{ color: currentPage === 'contact' ? 'var(--accent-blue)' : 'inherit' }}
-              onClick={() => handleNav('contact')}
-            >
-              <span className="mobile-nav-icon"><Phone size={18} /></span>
-              <span>Contact &amp; Bookings</span>
-            </button>
-          </li>
-        </ul>
-        <div style={{ marginTop: 'auto', paddingTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+
+        {/* Navigation Sections */}
+        <div className="drawer-scroll-body">
+          {mobileNavSections.map((sec, sIdx) => (
+            <div key={sIdx} className="drawer-section">
+              <div className="drawer-section-label">{sec.sectionLabel}</div>
+              <div className="drawer-items-group">
+                {sec.items.map((item) => {
+                  const isActive = currentPage === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      className={`drawer-nav-row ${isActive ? 'active' : ''}`}
+                      onClick={item.onClick}
+                    >
+                      <div className={`drawer-row-icon ${item.theme}`}>
+                        {item.icon}
+                      </div>
+                      <div className="drawer-row-content">
+                        <div className="drawer-row-title-line">
+                          <span className="drawer-row-title">{item.title}</span>
+                          {item.badge && (
+                            <span className="drawer-row-badge">{item.badge}</span>
+                          )}
+                        </div>
+                        <span className="drawer-row-sub">{item.subtitle}</span>
+                      </div>
+                      <ChevronRight size={15} className="drawer-row-arrow" />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Drawer Footer Actions */}
+        <div className="drawer-footer">
           <a
             href={`https://wa.me/${company.whatsapp}`}
-            className="btn btn-whatsapp"
+            className="btn btn-whatsapp drawer-whatsapp-btn"
             target="_blank"
             rel="noopener noreferrer"
           >
             <MessageCircle size={18} />
-            WhatsApp Direct (+94 77 6464 346)
+            <span>Chat with Rocky on WhatsApp</span>
           </a>
-          <button
-            className="btn btn-primary"
-            onClick={() => handleNav('contact')}
-          >
-            Book Now
-          </button>
+
+          <div className="drawer-footer-badges">
+            <div className="drawer-footer-chip">
+              <Star size={11} fill="#f59e0b" color="#f59e0b" />
+              <span>5.0 Google Verified</span>
+            </div>
+            <div className="drawer-footer-chip">
+              <CreditCard size={11} color="var(--accent-orange)" />
+              <span>Visa Accepted (+3.5%)</span>
+            </div>
+          </div>
         </div>
       </aside>
     </>
