@@ -477,35 +477,55 @@ export const SITE_DATA = {
     subtitle: 'A Home Away from Home Near Negombo Beach & CMB Airport',
     description: 'Enjoy a relaxing stay in Negombo Sri Lanka at our comfortable and affordable guest house located just minutes from the beach and Bandaranaike International Airport. Whether you need a place to rest before starting your Tuk Tuk road trip, a late checkout after an adventurous tour, or safe luggage storage, Pick & Go Whitehouse provides warm hospitality and clean modern comfort.',
     location: 'No 79, St. Joseph Street, Ettukala, Negombo, Sri Lanka (Minutes to beach & restaurants, 15 min to airport)',
+    heroImage: '/images/rooms/optimized/whitehouse-exterior.jpg',
     images: [
-      'https://pickandgotravels.com/wp-content/uploads/2025/06/Tuk-Tuk-Rooms-1.jpeg',
-      'https://pickandgotravels.com/wp-content/uploads/2025/06/Tuk-Tuk-Rooms-2.jpeg',
-      'https://pickandgotravels.com/wp-content/uploads/2025/06/Tuk-Tuk-Rooms-3.jpeg',
-      'https://pickandgotravels.com/wp-content/uploads/2025/06/Tuk-Tuk-Rooms-4.jpeg',
-      'https://pickandgotravels.com/wp-content/uploads/2025/06/Tuk-Tuk-Rooms-5.jpeg',
-      'https://pickandgotravels.com/wp-content/uploads/2025/06/Tuk-Tuk-Rooms-6.jpeg'
+      '/images/rooms/optimized/whitehouse-exterior.jpg',
+      '/images/rooms/optimized/room-double.jpg',
+      '/images/rooms/optimized/room-triple.jpg',
+      '/images/rooms/optimized/room-single.jpg',
+      '/images/rooms/optimized/room-double-front.jpg',
+      '/images/rooms/optimized/bathroom-luxury.jpg'
+    ],
+    gallery: [
+      { url: '/images/rooms/optimized/whitehouse-exterior.jpg', title: 'Pick & Go Whitehouse Villa' },
+      { url: '/images/rooms/optimized/room-double.jpg', title: 'Double Bedroom with Balcony' },
+      { url: '/images/rooms/optimized/room-triple.jpg', title: 'Triple Bedroom (1 Double + 1 Single Bed)' },
+      { url: '/images/rooms/optimized/room-triple-suite.jpg', title: 'Triple Suite with Balcony & TV' },
+      { url: '/images/rooms/optimized/room-double-front.jpg', title: 'King Double Bed with Fresh Linens' },
+      { url: '/images/rooms/optimized/bathroom-luxury.jpg', title: 'Modern Marble Tiled Bathroom' },
+      { url: '/images/rooms/optimized/gallery-07.jpg', title: 'Sunny Bedroom with Tropical Balcony' },
+      { url: '/images/rooms/optimized/bathroom-modern.jpg', title: 'En-suite Bathroom with Hot Water' }
     ],
     rooms: [
       {
+        id: 'room-single',
         name: 'Single Bedroom',
         tagline: 'Ideal for solo adventurers & backpackers',
         price: '$18',
         period: 'per night',
+        badge: 'Solo Explorer',
+        image: '/images/rooms/optimized/room-single.jpg',
         features: ['Cozy Single Bed', 'Air Conditioning & Ceiling Fan', 'Private Bathroom with Hot Shower', 'High-Speed Free Wi-Fi', 'Complimentary Drinking Water']
       },
       {
+        id: 'room-double',
         name: 'Double Bedroom',
         tagline: 'Spacious & comfortable for couples & pairs',
         price: '$28',
         period: 'per night',
+        badge: 'Most Popular',
+        image: '/images/rooms/optimized/room-double.jpg',
         features: ['King / Queen Sized Bed', 'Air Conditioning', 'Private Balcony / Garden View', 'En-suite Bathroom with Hot Water', 'Work Desk & Fast Wi-Fi']
       },
       {
+        id: 'room-triple',
         name: 'Triple Bedroom',
         tagline: 'Spacious family room for 3 guests',
         price: '$38',
         period: 'per night',
-        features: ['1 Double Bed + 1 Single Bed', 'Air Conditioning', 'Large En-suite Bathroom', 'Seating Area', 'Fast Free Wi-Fi']
+        badge: 'Family & Groups',
+        image: '/images/rooms/optimized/room-triple.jpg',
+        features: ['1 Double Bed + 1 Single Bed', 'Air Conditioning', 'Large En-suite Bathroom', 'Balcony & Seating Area', 'Fast Free Wi-Fi']
       }
     ],
     amenities: [
