@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Check,
   XCircle,
@@ -8,10 +8,13 @@ import {
   ShieldCheck,
   MapPin,
   Calendar,
+  CalendarDays,
   MessageCircle,
   HelpCircle,
   Car,
   ChevronRight,
+  ChevronLeft,
+  RotateCcw,
   ArrowRight,
   Calculator,
   Sparkles,
@@ -20,12 +23,119 @@ import {
 } from 'lucide-react';
 import { SITE_DATA } from '../data/siteData';
 
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const WEEKDAY_NAMES = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
+const getTodayStr = () => {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+};
+
+const addDays = (dateStr, daysCount) => {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  date.setDate(date.getDate() + daysCount);
+  const ry = date.getFullYear();
+  const rm = String(date.getMonth() + 1).padStart(2, '0');
+  const rd = String(date.getDate()).padStart(2, '0');
+  return `${ry}-${rm}-${rd}`;
+};
+
+const calculateDaysDiff = (startStr, endStr) => {
+  if (!startStr || !endStr) return 1;
+  const [y1, m1, d1] = startStr.split('-').map(Number);
+  const [y2, m2, d2] = endStr.split('-').map(Number);
+  const t1 = new Date(y1, m1 - 1, d1).getTime();
+  const t2 = new Date(y2, m2 - 1, d2).getTime();
+  const diffDays = Math.round((t2 - t1) / (1000 * 60 * 60 * 24));
+  // Rental days count both pick-up and drop-off calendar days (e.g. today to tomorrow = 2 days)
+  return Math.max(1, diffDays + 1);
+};
+
+const formatPrettyDate = (dateStr) => {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+};
+
+const formatSummaryDate = (dateStr) => {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
+
+const getMonthCalendarDays = (year, month) => {
+  const firstDayOfWeek = new Date(year, month, 1).getDay(); // 0 = Sun, 1 = Mon ...
+  const startOffset = (firstDayOfWeek + 6) % 7; // Monday = 0
+  const totalDays = new Date(year, month + 1, 0).getDate();
+
+  const days = [];
+  for (let i = 0; i < startOffset; i++) {
+    days.push(null);
+  }
+  for (let d = 1; d <= totalDays; d++) {
+    const mStr = String(month + 1).padStart(2, '0');
+    const dStr = String(d).padStart(2, '0');
+    days.push(`${year}-${mStr}-${dStr}`);
+  }
+  return days;
+};
+
 export default function CarWithDriverPage({ onNavigate }) {
   const { carWithDriverPackages, company } = SITE_DATA;
+  const todayStr = getTodayStr();
+
   const [selectedVehicleId, setSelectedVehicleId] = useState(carWithDriverPackages[0].id);
+  const [startDate, setStartDate] = useState(() => addDays(todayStr, 1));
+  const [endDate, setEndDate] = useState(() => addDays(todayStr, 7));
   const [calcDays, setCalcDays] = useState(7);
   const [calcDailyKm, setCalcDailyKm] = useState(130);
   const [activePhoto, setActivePhoto] = useState({});
+
+  // Calendar popover & interactive state
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectingField, setSelectingField] = useState('start'); // 'start' | 'end'
+  const [hoverDate, setHoverDate] = useState(null);
+
+  const initialDateObj = new Date();
+  const [viewYear, setViewYear] = useState(initialDateObj.getFullYear());
+  const [viewMonth, setViewMonth] = useState(initialDateObj.getMonth());
+  const calendarRef = useRef(null);
+
+  // Close calendar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (calendarRef.current && !calendarRef.current.contains(e.target)) {
+        setCalendarOpen(false);
+        setHoverDate(null);
+      }
+    };
+    if (calendarOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [calendarOpen]);
 
   const selectedPkg = carWithDriverPackages.find((p) => p.id === selectedVehicleId) || carWithDriverPackages[0];
 
@@ -43,11 +153,106 @@ export default function CarWithDriverPage({ onNavigate }) {
   const extraKmCost = extraKm * selectedPkg.extraKmRate;
   const grandTotalEstimate = baseRentalCost + extraKmCost;
 
+  // Month navigation in calendar
+  const handlePrevMonth = (e) => {
+    e.stopPropagation();
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear(viewYear - 1);
+    } else {
+      setViewMonth(viewMonth - 1);
+    }
+  };
+
+  const handleNextMonth = (e) => {
+    e.stopPropagation();
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear(viewYear + 1);
+    } else {
+      setViewMonth(viewMonth + 1);
+    }
+  };
+
+  // Clicking a date in the calendar (Booking.com style flow)
+  const handleDateClick = (dateStr) => {
+    if (!dateStr || dateStr < todayStr) return;
+
+    if (selectingField === 'start') {
+      setStartDate(dateStr);
+      setEndDate('');
+      setSelectingField('end');
+    } else {
+      // Selecting Drop-off date
+      if (dateStr < startDate) {
+        setStartDate(dateStr);
+        setEndDate('');
+        setSelectingField('end');
+      } else {
+        setEndDate(dateStr);
+        const newDays = calculateDaysDiff(startDate, dateStr);
+        setCalcDays(newDays);
+        setSelectingField('start');
+        setCalendarOpen(false);
+        setHoverDate(null);
+      }
+    }
+  };
+
+  // Quick Preset Selection (3 Days, 7 Days, 10 Days, etc.)
+  const handleSelectPreset = (numDays) => {
+    const baseStart = startDate || todayStr;
+    setStartDate(baseStart);
+    const newEnd = addDays(baseStart, numDays - 1);
+    setEndDate(newEnd);
+    setCalcDays(numDays);
+    setSelectingField('start');
+    setCalendarOpen(false);
+    setHoverDate(null);
+  };
+
+  // Reset dates
+  const handleResetDates = (e) => {
+    e.stopPropagation();
+    const defaultStart = addDays(todayStr, 1);
+    const defaultEnd = addDays(todayStr, 7);
+    setStartDate(defaultStart);
+    setEndDate(defaultEnd);
+    setCalcDays(7);
+    setSelectingField('start');
+    setHoverDate(null);
+  };
+
+  // Helper to determine day highlighting state
+  const getDayStatus = (dStr) => {
+    if (!dStr) return 'empty';
+    if (dStr < todayStr) return 'disabled';
+
+    const activeEnd = endDate || hoverDate;
+
+    if (dStr === startDate && dStr === activeEnd) return 'single-selected';
+    if (dStr === startDate) return 'range-start';
+    if (dStr === activeEnd) return 'range-end';
+
+    if (startDate && activeEnd && dStr > startDate && dStr < activeEnd) {
+      return 'in-range';
+    }
+
+    return 'selectable';
+  };
+
+  const nextMonth = viewMonth === 11 ? 0 : viewMonth + 1;
+  const nextYear = viewMonth === 11 ? viewYear + 1 : viewYear;
+
+  const month1Days = getMonthCalendarDays(viewYear, viewMonth);
+  const month2Days = getMonthCalendarDays(nextYear, nextMonth);
+
   const handleBookVehicle = (pkg, customDays = null) => {
     const days = customDays || calcDays;
     const rate = getRateForDays(pkg, days);
     const total = rate * days;
-    const message = `Hi Rocky! I want to book the "${pkg.name}" (Rent A Car with Driver) for ${days} days (Rate: $${rate}/day, Base: $${total}). Please confirm availability!`;
+    const dateRangeStr = startDate ? `from ${formatPrettyDate(startDate)} to ${endDate ? formatPrettyDate(endDate) : '...'}` : '';
+    const message = `Hi Rocky! I want to book the "${pkg.name}" (Rent A Car with Driver) ${dateRangeStr} for ${days} days (Rate: $${rate}/day, Base: $${total}). Please confirm availability!`;
 
     if (onNavigate) {
       onNavigate('contact', null, 'Car with Driver', message);
@@ -61,7 +266,9 @@ export default function CarWithDriverPage({ onNavigate }) {
     const text = encodeURIComponent(
       `Hello Rocky! I am interested in booking:\n\n` +
       `🚗 Vehicle: ${pkg.name}\n` +
-      `⏱️ Duration: ${calcDays} Days\n` +
+      `📅 Pick-up Date: ${formatPrettyDate(startDate)}\n` +
+      `📅 Drop-off Date: ${endDate ? formatPrettyDate(endDate) : '...'}\n` +
+      `⏱️ Duration: ${calcDays} Day${calcDays > 1 ? 's' : ''}\n` +
       `💵 Rate: $${rate}/day (Est. Base: $${rate * calcDays})\n` +
       `📍 Free Mileage: ${calcDays * 130} KM included (Extra $0.40/km)\n` +
       `✅ Inclusions: Driver, Guiding, Driver Accommodation & Meals, Full Insurance\n` +
@@ -312,25 +519,238 @@ export default function CarWithDriverPage({ onNavigate }) {
                 </div>
               </div>
 
-              {/* Days Slider */}
-              <div className="calc-group">
-                <div className="calc-label-row">
-                  <label className="calc-label">2. Trip Duration (Days)</label>
-                  <span className="calc-val-pill">{calcDays} Days</span>
+              {/* Step 2: Pick-up Date & Drop-off Date Interactive Calendar */}
+              <div className="calc-group booking-calendar-wrapper" ref={calendarRef}>
+                <div className="booking-section-header">
+                  <label className="calc-label" style={{ margin: 0 }}>
+                    2. Pick-up Date &amp; Drop-off Date
+                  </label>
+                  <span className="booking-pill-duration">
+                    <CalendarDays size={15} />
+                    {calcDays} Day{calcDays > 1 ? 's' : ''} (${currentDailyRate}/day)
+                  </span>
                 </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="30"
-                  value={calcDays}
-                  onChange={(e) => setCalcDays(Number(e.target.value))}
-                  className="calc-range-slider"
-                />
-                <div className="calc-range-labels">
-                  <span>1 Day</span>
-                  <span>14 Days</span>
-                  <span>30 Days</span>
+
+                {/* Dual Date Input Box */}
+                <div className={`booking-search-bar ${calendarOpen ? 'is-focused' : ''}`}>
+                  {/* Pick-up Date Box */}
+                  <div
+                    className={`booking-date-box ${calendarOpen && selectingField === 'start' ? 'active-field' : ''}`}
+                    onClick={() => {
+                      setSelectingField('start');
+                      setCalendarOpen(true);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Select Pick-up Date"
+                  >
+                    <div className="booking-box-header">
+                      <Calendar size={15} className="booking-field-icon" />
+                      <span className="booking-box-label">Pick-up date</span>
+                    </div>
+                    <div className="booking-box-date">
+                      {formatPrettyDate(startDate)}
+                    </div>
+                    <div className="booking-box-sub">
+                      Pickup at Airport or Hotel
+                    </div>
+                  </div>
+
+                  {/* Center Divider / Days Indicator */}
+                  <div className="booking-divider-col">
+                    <div className="booking-divider-line" />
+                    <span className="booking-divider-badge">
+                      {calcDays} Day{calcDays > 1 ? 's' : ''} Rental
+                    </span>
+                    <div className="booking-divider-line" />
+                  </div>
+
+                  {/* Drop-off Date Box */}
+                  <div
+                    className={`booking-date-box ${calendarOpen && selectingField === 'end' ? 'active-field' : ''}`}
+                    onClick={() => {
+                      setSelectingField('end');
+                      setCalendarOpen(true);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Select Drop-off Date"
+                  >
+                    <div className="booking-box-header">
+                      <Calendar size={15} className="booking-field-icon" />
+                      <span className="booking-box-label">Drop-off date</span>
+                    </div>
+                    <div className="booking-box-date">
+                      {endDate ? formatPrettyDate(endDate) : 'Choose date'}
+                    </div>
+                    <div className="booking-box-sub">
+                      End of tour handover
+                    </div>
+                  </div>
                 </div>
+
+                {/* Quick Presets Strip */}
+                <div className="booking-presets-strip">
+                  <span className="booking-presets-title">Popular Trips:</span>
+                  <div className="booking-presets-buttons">
+                    {[
+                      { label: '3 Days', count: 3 },
+                      { label: '7 Days (1 Wk)', count: 7 },
+                      { label: '10 Days', count: 10 },
+                      { label: '14 Days (2 Wks)', count: 14 },
+                      { label: '21 Days (3 Wks)', count: 21 },
+                      { label: '30 Days (1 Mo)', count: 30 }
+                    ].map((preset) => (
+                      <button
+                        key={preset.count}
+                        type="button"
+                        className={`booking-preset-chip ${calcDays === preset.count ? 'is-selected' : ''}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSelectPreset(preset.count);
+                        }}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Interactive Calendar Dropdown Modal */}
+                {calendarOpen && (
+                  <div className="booking-calendar-popup">
+                    <div className="calendar-popup-header">
+                      <div className="calendar-instruct-text">
+                        {selectingField === 'start' ? (
+                          <span>Select your <strong>Pick-up date</strong></span>
+                        ) : (
+                          <span>Select your <strong>Drop-off date</strong></span>
+                        )}
+                      </div>
+
+                      <div className="calendar-nav-controls">
+                        <button
+                          type="button"
+                          className="calendar-nav-btn"
+                          onClick={handlePrevMonth}
+                          aria-label="Previous month"
+                        >
+                          <ChevronLeft size={18} />
+                        </button>
+                        <button
+                          type="button"
+                          className="calendar-nav-btn"
+                          onClick={handleNextMonth}
+                          aria-label="Next month"
+                        >
+                          <ChevronRight size={18} />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Dual Month Calendar Display */}
+                    <div className="calendar-months-grid">
+                      {/* Month 1 */}
+                      <div className="calendar-month-pane">
+                        <h4 className="calendar-month-title">
+                          {MONTH_NAMES[viewMonth]} {viewYear}
+                        </h4>
+                        <div className="calendar-weekdays-row">
+                          {WEEKDAY_NAMES.map((wd) => (
+                            <span key={wd} className="weekday-col">{wd}</span>
+                          ))}
+                        </div>
+                        <div className="calendar-days-grid">
+                          {month1Days.map((dStr, idx) => {
+                            if (!dStr) {
+                              return <span key={`empty-1-${idx}`} className="calendar-day-empty" />;
+                            }
+                            const status = getDayStatus(dStr);
+                            const dayNum = parseInt(dStr.split('-')[2], 10);
+                            return (
+                              <button
+                                key={dStr}
+                                type="button"
+                                className={`calendar-day-cell ${status}`}
+                                disabled={status === 'disabled'}
+                                onClick={() => handleDateClick(dStr)}
+                                onMouseEnter={() => selectingField === 'end' && setHoverDate(dStr)}
+                                onMouseLeave={() => setHoverDate(null)}
+                              >
+                                <span>{dayNum}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Month 2 */}
+                      <div className="calendar-month-pane month-pane-secondary">
+                        <h4 className="calendar-month-title">
+                          {MONTH_NAMES[nextMonth]} {nextYear}
+                        </h4>
+                        <div className="calendar-weekdays-row">
+                          {WEEKDAY_NAMES.map((wd) => (
+                            <span key={wd} className="weekday-col">{wd}</span>
+                          ))}
+                        </div>
+                        <div className="calendar-days-grid">
+                          {month2Days.map((dStr, idx) => {
+                            if (!dStr) {
+                              return <span key={`empty-2-${idx}`} className="calendar-day-empty" />;
+                            }
+                            const status = getDayStatus(dStr);
+                            const dayNum = parseInt(dStr.split('-')[2], 10);
+                            return (
+                              <button
+                                key={dStr}
+                                type="button"
+                                className={`calendar-day-cell ${status}`}
+                                disabled={status === 'disabled'}
+                                onClick={() => handleDateClick(dStr)}
+                                onMouseEnter={() => selectingField === 'end' && setHoverDate(dStr)}
+                                onMouseLeave={() => setHoverDate(null)}
+                              >
+                                <span>{dayNum}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Calendar Footer Controls */}
+                    <div className="calendar-popup-footer">
+                      <div className="calendar-summary-text">
+                        <strong>{calcDays} Day{calcDays > 1 ? 's' : ''} selected:</strong> {formatPrettyDate(startDate)} → {endDate ? formatPrettyDate(endDate) : '...'}
+                        <span className="calendar-tier-badge">
+                          Chauffeur Tier: ${currentDailyRate}/day
+                        </span>
+                      </div>
+                      <div className="calendar-footer-actions">
+                        <button
+                          type="button"
+                          className="calendar-reset-btn"
+                          onClick={handleResetDates}
+                        >
+                          <RotateCcw size={14} />
+                          Reset
+                        </button>
+                        <button
+                          type="button"
+                          className="calendar-done-btn"
+                          onClick={() => {
+                            setCalendarOpen(false);
+                            setHoverDate(null);
+                          }}
+                        >
+                          <Check size={16} />
+                          Done
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Daily Distance */}
@@ -370,8 +790,16 @@ export default function CarWithDriverPage({ onNavigate }) {
 
               <div className="summary-rows">
                 <div className="summary-row">
+                  <span>Pick-up Date</span>
+                  <strong style={{ color: 'var(--text-primary)' }}>{formatSummaryDate(startDate)}</strong>
+                </div>
+                <div className="summary-row">
+                  <span>Drop-off Date</span>
+                  <strong style={{ color: 'var(--text-primary)' }}>{endDate ? formatSummaryDate(endDate) : '—'}</strong>
+                </div>
+                <div className="summary-row">
                   <span>Duration</span>
-                  <strong>{calcDays} Days</strong>
+                  <strong>{calcDays} Day{calcDays > 1 ? 's' : ''}</strong>
                 </div>
                 <div className="summary-row">
                   <span>Applied Daily Rate</span>
